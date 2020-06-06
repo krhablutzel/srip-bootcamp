@@ -1,2 +1,3 @@
 # srip-bootcamp
-Creating a website to introduce some rising high school seniors to RStudio and the Tidyverse!
+
+This summer, I'm running a Data Science bootcamp for rising high school seniors in NCSSM's Summer Research & Innovation Program. This website will host my instructional material.
