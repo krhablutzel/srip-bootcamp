@@ -21,6 +21,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -246,6 +247,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -288,6 +292,14 @@ $(document).ready(function () {
 
 <div class="fluid-row" id="header">
 
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Welcome to SRIP Data Science Bootcamp!</h1>
@@ -327,7 +339,7 @@ $(document).ready(function () {
 </ul>
 <p>Now, go into RStudio. In the console at the bottom, install the Tidyverse packages:</p>
 <pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
-<p>If you can run the following code successfully, you’re ready to go!</p>
+<p>If you can run the following code successfully (in the console is fine), you’re ready to go!</p>
 <pre class="r"><code>library(tidyverse)
 ggplot(data = mtcars, aes(x = wt, y = mpg)) +
   geom_point()</code></pre>
@@ -341,6 +353,11 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) +
 </ol>
 </div>
 
+<div id="footer">
+  <hr>
+  <p>Website created by Kathleen Hablutzel, NCSSM '19, Smith College SDS+CS '23.</p>
+  <p>See the <a href="https://github.com/krhablutzel/srip-bootcamp">GitHub repo</a>.</p>
+</div>
 
 
 
@@ -374,6 +391,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

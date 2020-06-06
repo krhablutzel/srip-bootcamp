@@ -10,3 +10,6 @@ navbar:
 output:
   html_document:
     theme: yeti
+    code_folding: hide
+    include:
+      after_body: _footer.html

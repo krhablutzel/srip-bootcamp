@@ -1,10 +1,7 @@
 ---
-title: "Day 1"
+title: "Day 1: Introduction to RStudio & the Tidyverse"
 author: "Kathleen Hablutzel"
 date: "6/6/2020"
-output:
-  html_document:
-    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
@@ -14,11 +11,10 @@ library(tidyverse)
 
 ## R Markdown
 
-Here's the first day of text
 
-```{r}
-ggplot(data = mtcars, aes(x = wt, y = mpg)) +
-  geom_point()
-```
+## Data Visualization
 
-And that should be a test plot!
+## Visual Cues
+
+Ranking visual cues, from position (strongest) to color hue (weakest): docs/day-1_files/figure-html/visual-cues.png (link not  working rn)
+Source: Nathan Yau, *Data Points*, 2013
