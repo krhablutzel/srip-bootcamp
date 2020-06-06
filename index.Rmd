@@ -5,7 +5,7 @@ date: "6/6/2020"
 output: 
   html_document:
     fig_width: 9
-    fig_height: 3
+    fig_height: 2
 ---
 
 ```{r setup, include=FALSE}
@@ -60,14 +60,20 @@ Please take these steps before our first day:
 - [Download and install RStudio](https://rstudio.com/products/rstudio/download/)[^chrome]
 - [Create a GitHub account](https://github.com/)
 
-Go into RStudio and install the Tidyverse packages with the following code in your console:
+Now, go into RStudio. In the console at the bottom, install the Tidyverse packages:
 
-```{r Install-Example, eval = FALSE}
+```{r Install-Packages, eval = FALSE}
 install.packages("tidyverse")
 ```
 
+If you can run the following code successfully (in the console is fine), you're ready to go!
+
+```{r Example_Code, fig.width = 4, fig.height = 3}
+library(tidyverse)
+ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point()
+```
+
 If you run into any problems, send me a direct message on Slack and we'll troubleshoot.
-
-
 
 [^chrome]: If you have a Chromebook, you'll have to work from an RStudio server. Slack me and we'll get you up and running.
