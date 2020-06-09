@@ -1,7 +1,7 @@
 ---
 title: "Day 1: Introduction to RStudio & the Tidyverse"
 author: "Kathleen Hablutzel"
-date: "6/6/2020"
+date: "6/8/2020"
 ---
 
 ```{r setup, include=FALSE}
@@ -9,12 +9,41 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
-## R Markdown
+## Welcome!!!
 
+#### Getting Started
 
-## Data Visualization
+If you haven't already, start downloading R and R Studio. See the instructions [here](index.html) under "Getting Started."
+
+Today's complete code is linked [here]().
+
+#### Creating an RMarkdown Document
+
+* Write text, embed code chunks
+* R is the language (in console and code chunks)
+* RStudio is the programming environment
+* RMarkdown is a markup language for combining text with code
+    + Produce reproducible reports where the code is right there
+    + Export to HTML, PDF, MS Word (how I created website)
+    
+```{r}
+summary(cars)
+```
+
+See the RMarkdown [reference guide](https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf).
+
+## Data Visualizations with ggplot2
+
+* Make a plot
+* Plot elements
+* Add colors (colorbrewer)
+* Add theme -> point to documentation
+* Extension: copy the master examples (a couple graphs for students to copy, then I'll post the code next week and they can see how close they got)
 
 ## Visual Cues
+
+* Strongest/weakest cues
+* Why stacked bar charts >>>>>>>> pie charts
 
 Ranking visual cues, from position (strongest) to color hue (weakest): docs/day-1_files/figure-html/visual-cues.png (link not  working rn)
 Source: Nathan Yau, *Data Points*, 2013

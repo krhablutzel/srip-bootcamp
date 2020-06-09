@@ -304,19 +304,57 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Day 1: Introduction to RStudio &amp; the Tidyverse</h1>
 <h4 class="author">Kathleen Hablutzel</h4>
-<h4 class="date">6/6/2020</h4>
+<h4 class="date">6/8/2020</h4>
 
 </div>
 
 
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
+<div id="welcome" class="section level2">
+<h2>Welcome!!!</h2>
+<div id="getting-started" class="section level4">
+<h4>Getting Started</h4>
+<p>If you haven’t already, start downloading R and R Studio. See the instructions <a href="index.html">here</a> under “Getting Started.”</p>
+<p>Today’s complete code is linked <a href="">here</a>.</p>
 </div>
-<div id="data-visualization" class="section level2">
-<h2>Data Visualization</h2>
+<div id="creating-an-rmarkdown-document" class="section level4">
+<h4>Creating an RMarkdown Document</h4>
+<ul>
+<li>Write text, embed code chunks</li>
+<li>R is the language (in console and code chunks)</li>
+<li>RStudio is the programming environment</li>
+<li>RMarkdown is a markup language for combining text with code
+<ul>
+<li>Produce reproducible reports where the code is right there</li>
+<li>Export to HTML, PDF, MS Word (how I created website)</li>
+</ul></li>
+</ul>
+<pre class="r"><code>summary(cars)</code></pre>
+<pre><code>##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00</code></pre>
+<p>See the RMarkdown <a href="https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">reference guide</a>.</p>
+</div>
+</div>
+<div id="data-visualizations-with-ggplot2" class="section level2">
+<h2>Data Visualizations with ggplot2</h2>
+<ul>
+<li>Make a plot</li>
+<li>Plot elements</li>
+<li>Add colors (colorbrewer)</li>
+<li>Add theme -&gt; point to documentation</li>
+<li>Extension: copy the master examples (a couple graphs for students to copy, then I’ll post the code next week and they can see how close they got)</li>
+</ul>
 </div>
 <div id="visual-cues" class="section level2">
 <h2>Visual Cues</h2>
+<ul>
+<li>Strongest/weakest cues</li>
+<li>Why stacked bar charts &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; pie charts</li>
+</ul>
 <p>Ranking visual cues, from position (strongest) to color hue (weakest): docs/day-1_files/figure-html/visual-cues.png (link not working rn) Source: Nathan Yau, <em>Data Points</em>, 2013</p>
 </div>
 
