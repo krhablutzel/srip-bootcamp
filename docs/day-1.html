@@ -341,13 +341,46 @@ $(document).ready(function () {
 </div>
 <div id="data-visualizations-with-ggplot2" class="section level2">
 <h2>Data Visualizations with ggplot2</h2>
-<ul>
-<li>Make a plot</li>
-<li>Plot elements</li>
-<li>Add colors (colorbrewer)</li>
-<li>Add theme -&gt; point to documentation</li>
-<li>Extension: copy the master examples (a couple graphs for students to copy, then I’ll post the code next week and they can see how close they got)</li>
-</ul>
+<p>We will: * Make a plot * Add basic plot elements * Add colors (colorbrewer) * Add a theme -&gt; point to documentation * Extension: copy the master examples (a couple graphs for students to copy, then I’ll post the code next week and they can see how close they got)</p>
+<div id="introducing-the-tidyverse" class="section level4">
+<h4>Introducing… the Tidyverse</h4>
+<p>Plotting with base R is… not super fun.</p>
+<pre class="r"><code>plot(pressure)</code></pre>
+<p><img src="day-1_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Instead, we plot with <code>ggplot2</code>, a popular open-source package. <code>ggplot2</code> is an implementation of Wilkinson’s <em>Grammar of Graphics</em>, which means that you combine plot building blocks to create your visualization.</p>
+<p><code>ggplot2</code> is part of the Tidyverse, a series of open-source R packages that “share an underlying design philosophy, grammar, and data structures”. (See the <a href="https://www.tidyverse.org/">website</a> and <a href="https://github.com/tidyverse/tidyverse">GitHub repository</a>.)</p>
+<p>The main packages are <code>ggplot2</code>, <code>dplyr</code>, <code>tidyr</code>, <code>readr</code>, <code>purrr</code>, <code>tibble</code>, <code>stringr</code>, and <code>forcats</code>, but we will mostly focus on <strong>ggplot2</strong> (for data visualization) and <strong>dplyr</strong> (for data wrangling).</p>
+<p>Let’s load the tidyverse:</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<p>In the bottom right panel, under the Packages tab, the <code>tidyverse</code> packages should now be checked. In each file, you need to load packages before you use them.</p>
+</div>
+<div id="your-first-plot" class="section level4">
+<h4>Your First Plot</h4>
+<p>We are going to work with the built-in <code>mtcars</code> data set.</p>
+<pre class="r"><code># a basic plot
+my_plot &lt;- ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point()
+
+# adding color
+my_plot &lt;- ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = &quot;blue&quot;)
+
+# mapping a variable to color
+my_plot &lt;- ggplot(data = mtcars, aes(x = wt, y = mpg, color = cyl)) +
+  geom_point()
+
+my_plot</code></pre>
+<p><img src="day-1_files/figure-html/Scatterplot-1.png" width="672" /></p>
+<div id="available-data-sets" class="section level6">
+<h6>Available Data Sets</h6>
+<p>The <code>data()</code> function will show you all your available data sets:</p>
+<pre class="r"><code>data()</code></pre>
+<p>The <code>iris</code> data set is a famous data set used in machine learning classes. Let’s take a look at the documentation:</p>
+<pre class="r"><code>?iris</code></pre>
+<p>Now, look at the sources. This data comes from the work of a famous eugenicist, statistician, and geneticist, R.A. Fisher, and was published in a journal on eugenics. Many statisticians are currently pushing to use alternate data sets in their classrooms and <a href="https://www.change.org/p/american-statistical-association-rename-the-fisher-lecture-after-david-blackwell">remove Fisher’s name</a> from the prestigious <a href="https://en.wikipedia.org/wiki/R._A._Fisher_Lectureship">Fisher Lectureship</a>.</p>
+<p>Data is more than numbers.</p>
+</div>
+</div>
 </div>
 <div id="visual-cues" class="section level2">
 <h2>Visual Cues</h2>

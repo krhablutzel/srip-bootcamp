@@ -34,11 +34,72 @@ See the RMarkdown [reference guide](https://rstudio.com/wp-content/uploads/2015/
 
 ## Data Visualizations with ggplot2
 
+We will:
 * Make a plot
-* Plot elements
+* Add basic plot elements
 * Add colors (colorbrewer)
-* Add theme -> point to documentation
+* Add a theme -> point to documentation
 * Extension: copy the master examples (a couple graphs for students to copy, then I'll post the code next week and they can see how close they got)
+
+#### Introducing... the Tidyverse
+
+Plotting with base R is… not super fun. 
+
+```{r}
+plot(pressure)
+```
+
+Instead, we plot with `ggplot2`, a popular open-source package. `ggplot2` is an implementation of Wilkinson's *Grammar of Graphics*, which means that you combine plot building blocks to create your visualization.
+
+`ggplot2` is part of the Tidyverse, a series of open-source R packages that “share an underlying design philosophy, grammar, and data structures”. (See the [website](https://www.tidyverse.org/) and [GitHub repository](https://github.com/tidyverse/tidyverse).)
+
+The main packages are `ggplot2`, `dplyr`, `tidyr`, `readr`, `purrr`, `tibble`, `stringr`, and `forcats`, but we will mostly focus on **ggplot2** (for data visualization) and **dplyr** (for data wrangling).
+
+Let's load the tidyverse:
+
+```{r}
+library(tidyverse)
+```
+
+In the bottom right panel, under the Packages tab, the `tidyverse` packages should now be checked. In each file, you need to load packages before you use them.
+
+#### Your First Plot
+
+We are going to work with the built-in `mtcars` data set.
+
+```{r Scatterplot}
+# a basic plot
+my_plot <- ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point()
+
+# adding color
+my_plot <- ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = "blue")
+
+# mapping a variable to color
+my_plot <- ggplot(data = mtcars, aes(x = wt, y = mpg, color = cyl)) +
+  geom_point()
+
+my_plot
+```
+
+###### Available Data Sets
+
+The `data()` function will show you all your available data sets:
+
+```{r}
+data()
+```
+
+The `iris` data set is a famous data set used in machine learning classes. Let's take a look at the documentation:
+
+```{r}
+?iris
+```
+
+Now, look at the sources. This data comes from the work of a famous eugenicist, statistician, and geneticist, R.A. Fisher, and was published in a journal on eugenics. Many statisticians are currently pushing to use alternate data sets in their classrooms and [remove Fisher's name](https://www.change.org/p/american-statistical-association-rename-the-fisher-lecture-after-david-blackwell) from the prestigious [Fisher Lectureship](https://en.wikipedia.org/wiki/R._A._Fisher_Lectureship).
+
+Data is more than numbers.
 
 ## Visual Cues
 
