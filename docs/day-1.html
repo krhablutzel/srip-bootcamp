@@ -304,7 +304,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Day 1: Introduction to RStudio &amp; the Tidyverse</h1>
 <h4 class="author">Kathleen Hablutzel</h4>
-<h4 class="date">6/8/2020</h4>
+<h4 class="date">6/11/2020</h4>
 
 </div>
 
@@ -341,7 +341,12 @@ $(document).ready(function () {
 </div>
 <div id="data-visualizations-with-ggplot2" class="section level2">
 <h2>Data Visualizations with ggplot2</h2>
-<p>We will: * Make a plot * Add basic plot elements * Add colors (colorbrewer) * Add a theme -&gt; point to documentation * Extension: copy the master examples (a couple graphs for students to copy, then I’ll post the code next week and they can see how close they got)</p>
+<p>Today we will:</p>
+<ul>
+<li>Make a plot</li>
+<li>Add basic plot elements</li>
+<li>Look ahead at what’s next</li>
+</ul>
 <div id="introducing-the-tidyverse" class="section level4">
 <h4>Introducing… the Tidyverse</h4>
 <p>Plotting with base R is… not super fun.</p>
@@ -356,23 +361,65 @@ $(document).ready(function () {
 </div>
 <div id="your-first-plot" class="section level4">
 <h4>Your First Plot</h4>
-<p>We are going to work with the built-in <code>mtcars</code> data set.</p>
-<pre class="r"><code># a basic plot
-my_plot &lt;- ggplot(data = mtcars, aes(x = wt, y = mpg)) +
-  geom_point()
-
-# adding color
-my_plot &lt;- ggplot(data = mtcars, aes(x = wt, y = mpg)) +
-  geom_point(color = &quot;blue&quot;)
-
-# mapping a variable to color
-my_plot &lt;- ggplot(data = mtcars, aes(x = wt, y = mpg, color = cyl)) +
-  geom_point()
-
-my_plot</code></pre>
+<p>We are going to work with the <code>mtcars</code> data set. Let’s take a look:</p>
+<pre class="r"><code>glimpse(mtcars)</code></pre>
+<pre><code>## Observations: 32
+## Variables: 11
+## $ mpg  [3m[38;5;246m&lt;dbl&gt;[39m[23m 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4…
+## $ cyl  [3m[38;5;246m&lt;dbl&gt;[39m[23m 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8…
+## $ disp [3m[38;5;246m&lt;dbl&gt;[39m[23m 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140.8, 167.6, …
+## $ hp   [3m[38;5;246m&lt;dbl&gt;[39m[23m 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205…
+## $ drat [3m[38;5;246m&lt;dbl&gt;[39m[23m 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92, 3.07…
+## $ wt   [3m[38;5;246m&lt;dbl&gt;[39m[23m 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.150, 3.440, …
+## $ qsec [3m[38;5;246m&lt;dbl&gt;[39m[23m 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.90, 18.30, …
+## $ vs   [3m[38;5;246m&lt;dbl&gt;[39m[23m 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0…
+## $ am   [3m[38;5;246m&lt;dbl&gt;[39m[23m 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0…
+## $ gear [3m[38;5;246m&lt;dbl&gt;[39m[23m 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3…
+## $ carb [3m[38;5;246m&lt;dbl&gt;[39m[23m 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2, 2, 4…</code></pre>
+<pre class="r"><code># View(mtcars)</code></pre>
+</div>
+<div id="example-1-a-scatterplot" class="section level4">
+<h4>Example 1: A Scatterplot</h4>
+<pre class="r"><code># a basic scatterplot
+ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point()</code></pre>
 <p><img src="day-1_files/figure-html/Scatterplot-1.png" width="672" /></p>
-<div id="available-data-sets" class="section level6">
-<h6>Available Data Sets</h6>
+<p>Note: You map variables to aesthetics within <code>aes()</code> and set fixed visual cues outside <code>aes()</code>. If I want all my points to be blue, I use the color parameter outside <code>aes()</code>:</p>
+<pre class="r"><code># adding color
+ggplot(data = mtcars, aes(x = wt, y = mpg), color = &quot;blue&quot;) +
+  geom_point()</code></pre>
+<p><img src="day-1_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>If I want to map color to a variable, I use the color parameter inside <code>aes()</code>:</p>
+<pre class="r"><code># mapping a variable to color
+ggplot(data = mtcars, aes(x = wt, y = mpg, color = cyl)) +
+  geom_point()</code></pre>
+<p><img src="day-1_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="example-2-a-box-plot" class="section level4">
+<h4>Example 2: A Box Plot</h4>
+<p>If we look at the data again, we notice that it’s all numbers:</p>
+<pre class="r"><code>glimpse(mtcars)</code></pre>
+<pre><code>## Observations: 32
+## Variables: 11
+## $ mpg  [3m[38;5;246m&lt;dbl&gt;[39m[23m 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4…
+## $ cyl  [3m[38;5;246m&lt;dbl&gt;[39m[23m 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8…
+## $ disp [3m[38;5;246m&lt;dbl&gt;[39m[23m 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140.8, 167.6, …
+## $ hp   [3m[38;5;246m&lt;dbl&gt;[39m[23m 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205…
+## $ drat [3m[38;5;246m&lt;dbl&gt;[39m[23m 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92, 3.07…
+## $ wt   [3m[38;5;246m&lt;dbl&gt;[39m[23m 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.150, 3.440, …
+## $ qsec [3m[38;5;246m&lt;dbl&gt;[39m[23m 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.90, 18.30, …
+## $ vs   [3m[38;5;246m&lt;dbl&gt;[39m[23m 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0…
+## $ am   [3m[38;5;246m&lt;dbl&gt;[39m[23m 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0…
+## $ gear [3m[38;5;246m&lt;dbl&gt;[39m[23m 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3…
+## $ carb [3m[38;5;246m&lt;dbl&gt;[39m[23m 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2, 2, 4…</code></pre>
+<p>However, the number of cylinders in the car is always 4, 6, or 8. Let’s use the <code>factor()</code> function to turn this into categorical data, so that we can make a boxplot.</p>
+<pre class="r"><code># a basic boxplot
+ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot()</code></pre>
+<p><img src="day-1_files/figure-html/Bar_Chart-1.png" width="672" /></p>
+</div>
+<div id="about-available-data-sets" class="section level4">
+<h4>About Available Data Sets</h4>
 <p>The <code>data()</code> function will show you all your available data sets:</p>
 <pre class="r"><code>data()</code></pre>
 <p>The <code>iris</code> data set is a famous data set used in machine learning classes. Let’s take a look at the documentation:</p>
@@ -381,20 +428,33 @@ my_plot</code></pre>
 <p>Data is more than numbers.</p>
 </div>
 </div>
-</div>
-<div id="visual-cues" class="section level2">
-<h2>Visual Cues</h2>
+<div id="where-are-we-going" class="section level2">
+<h2>Where are we going?</h2>
 <ul>
-<li>Strongest/weakest cues</li>
-<li>Why stacked bar charts &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; pie charts</li>
+<li>Adding Color and Themes
+<ul>
+<li>Make those plots look awesome</li>
+</ul></li>
+<li>Data Wrangling
+<ul>
+<li>Find cool patterns</li>
+<li>Sort your data</li>
+</ul></li>
 </ul>
-<p>Ranking visual cues, from position (strongest) to color hue (weakest): docs/day-1_files/figure-html/visual-cues.png (link not working rn) Source: Nathan Yau, <em>Data Points</em>, 2013</p>
+<p>examples……..</p>
+<div id="can-i-practice-more" class="section level4">
+<h4>Can I practice more?</h4>
+<p>Yes! So glad you asked. An awesome way to learn data visualization is through “copy the master” experiments, where you try to recreate an existing graph as closely as possible.</p>
+<p>You’ll need to dig into the <code>ggplot2</code> documentation. I recommend starting by looking at <code>labs()</code> and <code>theme()</code>.</p>
+<p>Graphs to copy:</p>
+</div>
 </div>
 
 <div id="footer">
   <hr>
   <p>Website created by Kathleen Hablutzel, NCSSM '19, Smith College SDS+CS '23.</p>
   <p>See the <a href="https://github.com/krhablutzel/srip-bootcamp">GitHub repo</a>.</p>
+  <p><b>Credit:</b>Content adapted from work by <a href="http://www.science.smith.edu/~bbaumer/w/">Ben Baumer</a> and <a href="http://www.science.smith.edu/~jcrouser/">R. Jordan Crouser</a> for Smith College's SDS 192 Introduction to Data Science course.</p>
 </div>
 
 

@@ -1,7 +1,7 @@
 ---
 title: "Day 1: Introduction to RStudio & the Tidyverse"
 author: "Kathleen Hablutzel"
-date: "6/8/2020"
+date: "6/11/2020"
 ---
 
 ```{r setup, include=FALSE}
@@ -34,12 +34,11 @@ See the RMarkdown [reference guide](https://rstudio.com/wp-content/uploads/2015/
 
 ## Data Visualizations with ggplot2
 
-We will:
+Today we will:
+
 * Make a plot
 * Add basic plot elements
-* Add colors (colorbrewer)
-* Add a theme -> point to documentation
-* Extension: copy the master examples (a couple graphs for students to copy, then I'll post the code next week and they can see how close they got)
+* Look ahead at what's next
 
 #### Introducing... the Tidyverse
 
@@ -65,25 +64,55 @@ In the bottom right panel, under the Packages tab, the `tidyverse` packages shou
 
 #### Your First Plot
 
-We are going to work with the built-in `mtcars` data set.
+We are going to work with the `mtcars` data set. Let's take a look:
 
-```{r Scatterplot}
-# a basic plot
-my_plot <- ggplot(data = mtcars, aes(x = wt, y = mpg)) +
-  geom_point()
-
-# adding color
-my_plot <- ggplot(data = mtcars, aes(x = wt, y = mpg)) +
-  geom_point(color = "blue")
-
-# mapping a variable to color
-my_plot <- ggplot(data = mtcars, aes(x = wt, y = mpg, color = cyl)) +
-  geom_point()
-
-my_plot
+```{r}
+glimpse(mtcars)
+# View(mtcars)
 ```
 
-###### Available Data Sets
+
+#### Example 1: A Scatterplot
+
+```{r Scatterplot}
+# a basic scatterplot
+ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point()
+```
+
+Note: You map variables to aesthetics within `aes()` and set fixed visual cues outside `aes()`. If I want all my points to be blue, I use the color parameter outside `aes()`:
+
+```{r}
+# adding color
+ggplot(data = mtcars, aes(x = wt, y = mpg), color = "blue") +
+  geom_point()
+```
+
+If I want to map color to a variable, I use the color parameter inside `aes()`:
+
+```{r}
+# mapping a variable to color
+ggplot(data = mtcars, aes(x = wt, y = mpg, color = cyl)) +
+  geom_point()
+```
+
+#### Example 2: A Box Plot
+
+If we look at the data again, we notice that it's all numbers:
+
+```{r}
+glimpse(mtcars)
+```
+
+However, the number of cylinders in the car is always 4, 6, or 8. Let's use the `factor()` function to turn this into categorical data, so that we can make a boxplot.
+
+```{r Bar_Chart}
+# a basic boxplot
+ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot()
+```
+
+#### About Available Data Sets
 
 The `data()` function will show you all your available data sets:
 
@@ -101,10 +130,20 @@ Now, look at the sources. This data comes from the work of a famous eugenicist, 
 
 Data is more than numbers.
 
-## Visual Cues
+## Where are we going?
 
-* Strongest/weakest cues
-* Why stacked bar charts >>>>>>>> pie charts
+* Adding Color and Themes
+    + Make those plots look awesome
+* Data Wrangling
+    + Find cool patterns
+    + Sort your data
+    
+examples........
+    
+#### Can I practice more?
 
-Ranking visual cues, from position (strongest) to color hue (weakest): docs/day-1_files/figure-html/visual-cues.png (link not  working rn)
-Source: Nathan Yau, *Data Points*, 2013
+Yes! So glad you asked. An awesome way to learn data visualization is through "copy the master" experiments, where you try to recreate an existing graph as closely as possible.
+
+You'll need to dig into the `ggplot2` documentation. I recommend starting by looking at `labs()` and `theme()`.
+
+Graphs to copy:
