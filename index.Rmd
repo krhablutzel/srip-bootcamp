@@ -6,7 +6,6 @@ output:
   html_document:
     fig_width: 9
     fig_height: 1.5
-    code_folding: show
 ---
 
 ```{r setup, include=FALSE}

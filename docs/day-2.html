@@ -12,7 +12,7 @@
 <meta name="author" content="Kathleen Hablutzel" />
 
 
-<title>Welcome to SRIP Data Science Bootcamp!</title>
+<title>Day 2: Adding Color in ggplot2</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -302,55 +302,49 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Welcome to SRIP Data Science Bootcamp!</h1>
+<h1 class="title toc-ignore">Day 2: Adding Color in ggplot2</h1>
 <h4 class="author">Kathleen Hablutzel</h4>
-<h4 class="date">6/6/2020</h4>
+<h4 class="date">6/11/2020</h4>
 
 </div>
 
 
-<p><img src="index_files/figure-html/Example_Plot-1.png" width="864" /></p>
-<div id="what-youll-learn" class="section level2">
-<h2>What You’ll Learn</h2>
-<div id="skills" class="section level4">
-<h4>Skills</h4>
-<ul>
-<li>Data Visualization</li>
-<li>Data Wrangling</li>
-</ul>
-</div>
-<div id="tools" class="section level4">
-<h4>Tools</h4>
-<ul>
-<li>R, RStudio, Tidyverse Packages</li>
-<li>GitHub</li>
-</ul>
-<p>My goal is to expose you to the first half of a college-level Introduction to Data Science course. We’ll meet once a week to code together (tentatively Thursday nights at 8), and then I will provide additional resources if you’d like to delve deeper on each topic.</p>
-<p><em>Note: You are welcome at all five weeks of SRIP social activities even if your program is shorter than 5 weeks. I will have content for all 5 weeks of SRIP, but I will also provide a reasonable conclusion for those who want to stop after 3 weeks.</em></p>
-</div>
+<div id="page-under-construction" class="section level2">
+<h2>Page Under Construction</h2>
 </div>
 <div id="getting-started" class="section level2">
 <h2>Getting Started</h2>
-<p>Please take these steps before our first day:</p>
+<p>Today we will:</p>
 <ul>
-<li><a href="https://cloud.r-project.org/">Download and install R</a></li>
-<li><a href="https://rstudio.com/products/rstudio/download/">Download and install RStudio</a><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></li>
-<li><a href="https://github.com/">Create a GitHub account</a></li>
+<li>Add colors (colorbrewer)</li>
+<li>Add a theme -&gt; point to documentation</li>
+<li>Learn about visual cues</li>
+<li>Make our R Markdown documents more pretty (chunk options and YAML headers)</li>
+<li>Extension: copy the master examples (a couple graphs for students to copy, then I’ll post the code next week and they can see how close they got)</li>
 </ul>
-<p>Now, go into RStudio. In the console at the bottom, install the Tidyverse packages:</p>
-<pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
-<p>If you can run the following code successfully (in the console is fine), you’re ready to go!</p>
-<pre class="r"><code>library(tidyverse)
-ggplot(data = mtcars, aes(x = wt, y = mpg)) +
-  geom_point()</code></pre>
-<p><img src="index_files/figure-html/Example_Code-1.png" width="384" /></p>
-<p>If you run into any problems, send me a direct message on Slack and we’ll troubleshoot.</p>
 </div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>If you have a Chromebook, you’ll have to work from an RStudio server. Slack me and we’ll get you up and running.<a href="#fnref1">↩</a></p></li>
-</ol>
+<div id="adding-colors-and-themes" class="section level2">
+<h2>Adding Colors and Themes</h2>
+<p>Now that we’ve learned how to create chart elements with <code>geom_*()</code> (where * could be any element), let’s add some color to our visualizations. We added elements using the <code>+</code> operator, and we can add color and themes using <code>+</code> as well!</p>
+<div id="adding-themes" class="section level4">
+<h4>Adding Themes</h4>
+<p>Themes are a quick way to get a great-looking plot. Download the <code>ggthemes</code> package, load it, and just add them on!</p>
+<pre class="r"><code>library(ggthemes)
+
+ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  theme_fivethirtyeight()</code></pre>
+<p><img src="day-2_files/figure-html/Adding_Themes-1.png" width="576" /></p>
+<p><a href="https://jrnold.github.io/ggthemes/reference/index.html">See the documentation</a> for a list of available themes.</p>
+</div>
+</div>
+<div id="visual-cues" class="section level2">
+<h2>Visual Cues</h2>
+<ul>
+<li>Strongest/weakest cues</li>
+<li>Why stacked bar charts &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; pie charts</li>
+</ul>
+<p>Ranking visual cues, from position (strongest) to color hue (weakest): docs/day-1_files/figure-html/visual-cues.png (link not working rn) Source: Nathan Yau, <em>Data Points</em>, 2013</p>
 </div>
 
 <div id="footer">

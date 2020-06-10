@@ -5,7 +5,9 @@ date: "6/11/2020"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  message = FALSE,
+  echo = TRUE)
 library(tidyverse)
 ```
 
@@ -15,14 +17,14 @@ library(tidyverse)
 
 If you haven't already, start downloading R and R Studio. See the instructions [here](index.html) under "Getting Started."
 
-Today's complete code is linked [here]().
+After today's lesson, I'll post my code here. You can also follow along below.
 
 #### Creating an RMarkdown Document
 
-* Write text, embed code chunks
-* R is the language (in console and code chunks)
-* RStudio is the programming environment
-* RMarkdown is a markup language for combining text with code
+* Write text and embed code chunks
+* R is the *language* (in the console and in code chunks)
+* RStudio is the *programming environment*
+* RMarkdown is a *markup language* for combining text with code
     + Produce reproducible reports where the code is right there
     + Export to HTML, PDF, MS Word (how I created website)
     
@@ -84,16 +86,16 @@ Note: You map variables to aesthetics within `aes()` and set fixed visual cues o
 
 ```{r}
 # adding color
-ggplot(data = mtcars, aes(x = wt, y = mpg), color = "blue") +
-  geom_point()
+ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = "blue")
 ```
 
 If I want to map color to a variable, I use the color parameter inside `aes()`:
 
 ```{r}
 # mapping a variable to color
-ggplot(data = mtcars, aes(x = wt, y = mpg, color = cyl)) +
-  geom_point()
+ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point(aes(color = cyl))
 ```
 
 #### Example 2: A Box Plot
@@ -130,6 +132,9 @@ Now, look at the sources. This data comes from the work of a famous eugenicist, 
 
 Data is more than numbers.
 
+
+
+
 ## Where are we going?
 
 * Adding Color and Themes
@@ -138,8 +143,27 @@ Data is more than numbers.
     + Find cool patterns
     + Sort your data
     
-examples........
-    
+For example:
+
+```{r June_Weather}
+library(ggthemes)
+
+june_weather <- airquality %>%
+  filter(Month == 6) %>% # only June weather
+  select(Day, Temp) # only columns we need
+
+june_plot <- ggplot(data = june_weather, aes(x = Day, y =  Temp)) +
+  geom_point() + # make our points purple
+  geom_line() + # add a line
+  labs(title = "Temperatures in NY, June 1973",
+       x = "Day",
+       y = "Temperature (°F)") +
+  theme_wsj() +
+  theme(plot.title = element_text(size = 18))
+
+june_plot
+```
+
 #### Can I practice more?
 
 Yes! So glad you asked. An awesome way to learn data visualization is through "copy the master" experiments, where you try to recreate an existing graph as closely as possible.
@@ -147,3 +171,5 @@ Yes! So glad you asked. An awesome way to learn data visualization is through "c
 You'll need to dig into the `ggplot2` documentation. I recommend starting by looking at `labs()` and `theme()`.
 
 Graphs to copy:
+
+I'll reveal the code next week!
