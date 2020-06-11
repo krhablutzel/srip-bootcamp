@@ -172,8 +172,6 @@ You'll need to dig into the `ggplot2` documentation, as well as the `storms` dat
 
 Graph to copy:
 
-![Hurricane Graph](day-1_files/figure-html/Wind_Graph.PNG)
-
 ```{r Wind_Graph, echo = FALSE}
 storm_plot <- ggplot(data = storms, aes(x = wind, y = pressure)) +
   geom_point(aes(color = status)) +
