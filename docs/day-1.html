@@ -464,29 +464,11 @@ june_plot</code></pre>
 <p>Yes! So glad you asked. An awesome way to learn data visualization is through “copy the master” experiments, where you try to recreate an existing graph as closely as possible.</p>
 <p>You’ll need to dig into the <code>ggplot2</code> documentation, as well as the <code>storms</code> dataset. I recommend starting by looking at <code>labs()</code> and <code>theme()</code>, though we’ll cover themes more next week.</p>
 <p>Graph to copy:</p>
-<pre class="r"><code>storm_plot &lt;- ggplot(data = storms, aes(x = wind, y = pressure)) +
-  geom_point(aes(color = status)) +
-  labs(
-    title = &quot;Pressure vs. Wind Speed of Atlantic Storms&quot;,
-    caption = &quot;Source: NOAA&quot;,
-    x = &quot;Maximum Sustained Wind Speed (knots)&quot;,
-    y = &quot;Air Pressure at Storm Center (millibars)&quot;,
-    color = &quot;Status&quot;
-  ) +
-  scale_color_manual(
-    labels = c(&quot;Hurricane&quot;,  &quot;Tropical Depression&quot;, &quot;Tropical Storm&quot;),
-    values = c(&quot;#6f18ad&quot;, &quot;#f051bb&quot;, &quot;#faf600&quot;)
-  ) +
-  theme(
-    text = element_text(family = &quot;Arial&quot;),
-    rect = element_blank(),
-    axis.line = element_line(color = &quot;gray40&quot;),
-    panel.grid = element_line(color = &quot;gray90&quot;),
-    legend.position = &quot;bottom&quot;
-  )
-
-storm_plot</code></pre>
-<p><img src="day-1_files/figure-html/unnamed-chunk-10-1.png" width="576" /></p>
+<div class="figure">
+<img src="day-1_files/figure-html/Wind_Graph.PNG" alt="Hurricane Graph" />
+<p class="caption">Hurricane Graph</p>
+</div>
+<p><img src="day-1_files/figure-html/Wind_Graph-1.png" width="576" /></p>
 <p>I’ll reveal the code next week!</p>
 </div>
 </div>
