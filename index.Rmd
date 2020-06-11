@@ -48,7 +48,7 @@ home_plot
 - R, RStudio, Tidyverse Packages
 - GitHub
 
-My goal is to expose you to the first half of a college-level Introduction to Data Science course. We'll meet once a week to code together (tentatively Thursday nights at 8), and then I will provide additional resources if you'd like to delve deeper on each topic.
+My goal is to expose you to the first half of a college-level Introduction to Data Science course. We'll meet once a week to code together (Thursday nights at 8), and then I will provide additional resources if you'd like to delve deeper on each topic.
 
 *Note: You are welcome at all five weeks of SRIP social activities even if your program is shorter than 5 weeks. I will have content for all 5 weeks of SRIP, but I will also provide a reasonable conclusion for those who want to stop after 3 weeks.*
 

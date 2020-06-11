@@ -132,9 +132,6 @@ Now, look at the sources. This data comes from the work of a famous eugenicist, 
 
 Data is more than numbers.
 
-
-
-
 ## Where are we going?
 
 * Adding Color and Themes
