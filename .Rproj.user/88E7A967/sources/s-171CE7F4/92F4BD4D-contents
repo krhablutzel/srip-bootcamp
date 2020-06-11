@@ -1,0 +1,49 @@
+---
+title: 'Day 2: Adding Color in ggplot2'
+author: "Kathleen Hablutzel"
+date: "6/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+## Page Under Construction
+
+## Getting Started
+
+Today we will:
+
+* Add colors (colorbrewer)
+* Add a theme -> point to documentation
+* Learn about visual cues
+* Make our R Markdown documents more pretty (chunk options and YAML headers)
+* Extension: copy the master examples (a couple graphs for students to copy, then I'll post the code next week and they can see how close they got)
+
+## Adding Colors and Themes
+
+Now that we've learned how to create chart elements with `geom_*()` (where * could be any element), let's add some color to our visualizations. We added elements using the `+` operator, and we can add color and themes using `+` as well!
+
+#### Adding Themes
+
+Themes are a quick way to get a great-looking plot. Download the `ggthemes` package, load it, and just add them on!
+
+```{r Adding_Themes}
+library(ggthemes)
+
+ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  theme_fivethirtyeight()
+```
+
+[See the documentation](https://jrnold.github.io/ggthemes/reference/index.html) for a list of available themes.
+
+## Visual Cues
+
+* Strongest/weakest cues
+* Why stacked bar charts >>>>>>>> pie charts
+
+Ranking visual cues, from position (strongest) to color hue (weakest): docs/day-1_files/figure-html/visual-cues.png (link not  working rn)
+Source: Nathan Yau, *Data Points*, 2013

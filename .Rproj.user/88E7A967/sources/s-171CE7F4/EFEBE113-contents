@@ -1,0 +1,145 @@
+---
+title: "Lab6: Single-Table Analysis with dplyr"
+subtitle: "SDS 192"
+author: "Kathleen Hablutzel"
+date: "`r format(Sys.Date(), '%B %e, %Y')`"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  echo = TRUE
+)
+library(tidyverse)
+library(sds192)
+```
+
+## Section 1
+
+```{r load_data}
+library(babynames)
+head(babynames)
+```
+
+Filter and select
+
+```{r select}
+babynames %>%
+  select(year, name, n) %>%
+  head()
+```
+
+```{r filter}
+babynames %>%
+  filter(name == "Bella") %>%
+  head()
+```
+
+```{r rilter_and_select}
+bella <- babynames %>%
+  filter(name == "Bella") %>%
+  select(year, name, sex, n)
+```
+
+See dimensions of object
+
+```{r dimensions}
+dim(bella)
+head(bella) # top bit of data frame
+class(bella)
+```
+
+Plot popularity of Bella over time
+```{r Bella_plot}
+library(ggplot2)
+ggplot(data = bella, aes(x = year, y = n)) +
+  geom_line(aes(color = sex))
+```
+
+Mutate to create new variables
+```{r popular}
+babynames <- babynames %>%
+  mutate(popular = prop > 0.01)
+```
+
+Rename a variable
+```{r rename}
+babynames <- babynames %>%
+  rename(is_popular = popular)
+```
+
+New variable and subset
+```{r}
+popular <- babynames %>%
+  filter(is_popular)
+nrow(popular)
+head(popular)
+```
+
+Single most popular names of all time: arrange table in descending order of the proportion of babies who got that name
+
+```{r arrange}
+popular %>%
+  arrange(desc(prop))
+```
+
+Exercise 1: value of prop column in first line of output above means John name was given to 8.15% of boys born in 1880.
+
+Exercise 2: when was Kathleen used most frequently?
+```{r Kathleen}
+kathleen <- babynames %>%
+  filter(name == "Kathleen") %>%
+  arrange(desc(prop)) %>%
+  head()
+
+```
+
+Exercise 3: most popular name that year (1949)?
+
+```{r Popular}
+year <- babynames %>%
+  filter(year == "1949") %>%
+  arrange(desc(prop)) %>%
+  head()
+```
+
+Find greatest number Kathleens born in a single year:
+```{r most}
+bella %>%
+  summarize(most_bellas = max(n))
+```
+
+Count num of rows collapsed with summarize using the n() function (in this case, number of years there's data on the name Bella)
+
+```{r}
+bella %>%
+  summarize(most_bellas = max(n), num_rows = n())
+```
+
+Pipe operator
+Alludes to | in UNIX
+```{r example}
+babynames %>%
+  filter(name == "Jordan") %>%
+  select(-name) %>% 
+  arrange(desc(prop))
+
+```
+
+-name selects all BUT name (excludes column)
+
+## Word count
+
+```{r word_count, message=FALSE, echo=FALSE}
+sds192::text_stats()
+```
+

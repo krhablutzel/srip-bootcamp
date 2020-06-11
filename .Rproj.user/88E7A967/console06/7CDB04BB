@@ -1,0 +1,404 @@
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+]0;~/Desktop/SRIP/srip-bootcamp[?1034hKathleens-MBP:srip-bootcamp krh$ [KKathleens-MBP:srip-bootcamp krh$ gir[Kt branck[Kh day-1[K2
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git checkout day-2
+Switched to branch 'day-2'
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git status
+On branch day-2
+nothing to commit, working tree clean
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git status
+On branch day-2
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   day-1.Rmd[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ mkdir c[Kdocs
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ ls
+README.md		docs
+day-1.Rmd		srip-bootcamp.Rproj
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git status
+On branch day-2
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   day-1.Rmd[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31mdocs/[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git add .
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git status
+On branch day-2
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	[32mmodified:   day-1.Rmd[m
+	[32mnew file:   docs/index.html[m
+
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ it comm[K[K[K[K[K[K[Kgit commit -m :[K"Knit outputs to a doc folder"
+[day-2 c16b8ca] Knit outputs to a doc folder
+ Committer: Kathleen Rae Hablutzel <krh@kathleens-mbp.attlocal.net>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 247 insertions(+)
+ create mode 100644 docs/index.html
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git log -oneline
+fatal: unrecognized argument: -oneline
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git log --oneline
+[?1h=[33mc16b8ca[m[33m ([m[1;36mHEAD -> [m[1;32mday-2[m[33m)[m Knit outputs to a doc folder[m
+[33mfc2c9bf[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m Add page for day 1[m
+[33md5e2c3e[m Initial commit[m
+[K[?1l>]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git diff -st[K[K-stat --summary master..day-2
+[?1h= day-1.Rmd       |   5 [32m++[m[m
+ docs/index.html | 242 [32m+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++[m[m
+ 2 files changed, 247 insertions(+)[m
+ create mode 100644 docs/index.html[m
+[K[?1l>]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git push -u origin day-2
+Enumerating objects: 7, done.
+Counting objects:  14% (1/7)   Counting objects:  28% (2/7)   Counting objects:  42% (3/7)   Counting objects:  57% (4/7)   Counting objects:  71% (5/7)   Counting objects:  85% (6/7)   Counting objects: 100% (7/7)   Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects:  25% (1/4)   Compressing objects:  50% (2/4)   Compressing objects:  75% (3/4)   Compressing objects: 100% (4/4)   Compressing objects: 100% (4/4), done.
+Writing objects:  20% (1/5)   Writing objects:  40% (2/5)   Writing objects:  60% (3/5)   Writing objects:  80% (4/5)   Writing objects: 100% (5/5)   Writing objects: 100% (5/5), 271.55 KiB | 9.36 MiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/2)[Kremote: Resolving deltas:  50% (1/2)[Kremote: Resolving deltas: 100% (2/2)[Kremote: Resolving deltas: 100% (2/2), completed with 2 local objects.[K
+remote: 
+remote: Create a pull request for 'day-2' on GitHub by visiting:[K
+remote:      https://github.com/krhablutzel/srip-bootcamp/pull/new/day-2[K
+remote: 
+To https://github.com/krhablutzel/srip-bootcamp.git
+ * [new branch]      day-2 -> day-2
+Branch 'day-2' set up to track remote branch 'day-2' from 'origin'.
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git pull
+remote: Enumerating objects: 1, done.[K
+remote: Counting objects: 100% (1/1)[Kremote: Counting objects: 100% (1/1), done.[K
+remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0[K
+Unpacking objects: 100% (1/1)   Unpacking objects: 100% (1/1), done.
+From https://github.com/krhablutzel/srip-bootcamp
+   fc2c9bf..202c765  master     -> origin/master
+Updating fc2c9bf..202c765
+Fast-forward
+ day-1.Rmd       |   5 [32m++[m
+ docs/index.html | 242 [32m+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++[m
+ 2 files changed, 247 insertions(+)
+ create mode 100644 docs/index.html
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git branch -D g[Kday-2
+Deleted branch day-2 (was c16b8ca).
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git log --oneline --graph --all
+[?1h=*   [33m202c765[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge pull request #1 from krhab[m [33m[m[33m[m[1;36m[m[1;32m[m[33m[m[1;31m[m[33m[m[1;31m[m[33m[mlutzel/day-2[m
+[31m|[m[32m\[m  [m
+[31m|[m * [33mc16b8ca[m[33m ([m[1;31morigin/day-2[m[33m)[m Knit outputs to a doc folder[m
+[31m|[m[31m/[m  [m
+* [33mfc2c9bf[m Add page for day 1[m
+* [33md5e2c3e[m Initial commit[m
+[K[?1l>]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ c[Kgit checkout -b add-theme0[K-and-navbar
+Switched to a new branch 'add-theme-and-navbar'
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git status
+On branch add-theme-and-navbar
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   day-1.Rmd[m
+	[31mmodified:   docs/index.html[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31m_site.yml[m
+	[31mdocs/day-1.html[m
+	[31mdocs/day-1_files/[m
+	[31mdocs/index_files/[m
+	[31mdocs/site_libs/[m
+	[31mindex.Rmd[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git add .
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git commit -m "Add home page, navic[Kgation, and theme"
+[add-theme-and-navbar 6c00726] Add home page, navigation, and theme
+ Committer: Kathleen Rae Hablutzel <krh@kathleens-mbp.attlocal.net>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 65 files changed, 11481 insertions(+), 250 deletions(-)
+ create mode 100644 _site.yml
+ create mode 100644 docs/day-1.html
+ create mode 100644 docs/day-1_files/figure-html/unnamed-chunk-1-1.png
+ rewrite docs/index.html (99%)
+ create mode 100644 docs/index_files/figure-html/pressure-1.png
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/bootstrap-theme.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/bootstrap-theme.css.map
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/bootstrap-theme.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/bootstrap.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/bootstrap.css.map
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/bootstrap.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/cerulean.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/cosmo.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/darkly.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/flatly.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/Lato.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/LatoBold.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/LatoItalic.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/NewsCycle.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/NewsCycleBold.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/OpenSans.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/OpenSansBold.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/OpenSansBoldItalic.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/OpenSansItalic.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/OpenSansLight.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/OpenSansLightItalic.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/Raleway.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/RalewayBold.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/Roboto.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/RobotoBold.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/RobotoLight.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/RobotoMedium.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/SourceSansPro.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/SourceSansProBold.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/SourceSansProItalic.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/SourceSansProLight.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/Ubuntu.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/journal.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/lumen.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/paper.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/readable.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/sandstone.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/simplex.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/spacelab.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/united.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/yeti.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/fonts/glyphicons-halflings-regular.eot
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/fonts/glyphicons-halflings-regular.svg
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/fonts/glyphicons-halflings-regular.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/fonts/glyphicons-halflings-regular.woff
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/fonts/glyphicons-halflings-regular.woff2
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/js/bootstrap.js
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/js/bootstrap.min.js
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/js/npm.js
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/shim/html5shiv.min.js
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/shim/respond.min.js
+ create mode 100644 docs/site_libs/highlightjs-9.12.0/default.css
+ create mode 100644 docs/site_libs/highlightjs-9.12.0/highlight.js
+ create mode 100644 docs/site_libs/highlightjs-9.12.0/textmate.css
+ create mode 100644 docs/site_libs/jquery-1.11.3/jquery.min.js
+ create mode 100644 docs/site_libs/navigation-1.1/codefolding.js
+ create mode 100644 docs/site_libs/navigation-1.1/sourceembed.js
+ create mode 100644 docs/site_libs/navigation-1.1/tabsets.js
+ create mode 100644 index.Rmd
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git push -u origin add-theme-and-navbar
+Enumerating objects: 86, done.
+Counting objects:   1% (1/86)   Counting objects:   2% (2/86)   Counting objects:   3% (3/86)   Counting objects:   4% (4/86)   Counting objects:   5% (5/86)   Counting objects:   6% (6/86)   Counting objects:   8% (7/86)   Counting objects:   9% (8/86)   Counting objects:  10% (9/86)   Counting objects:  11% (10/86)   Counting objects:  12% (11/86)   Counting objects:  13% (12/86)   Counting objects:  15% (13/86)   Counting objects:  16% (14/86)   Counting objects:  17% (15/86)   Counting objects:  18% (16/86)   Counting objects:  19% (17/86)   Counting objects:  20% (18/86)   Counting objects:  22% (19/86)   Counting objects:  23% (20/86)   Counting objects:  24% (21/86)   Counting objects:  25% (22/86)   Counting objects:  26% (23/86)   Counting objects:  27% (24/86)   Counting objects:  29% (25/86)   Counting objects:  30% (26/86)   Counting objects:  31% (27/86)   Counting objects:  32% (28/86)   Counting objects:  33% (29/86)   Counting objects:  34% (30/86)   Counting objects:  36% (31/86)   Counting objects:  37% (32/86)   Counting objects:  38% (33/86)   Counting objects:  39% (34/86)   Counting objects:  40% (35/86)   Counting objects:  41% (36/86)   Counting objects:  43% (37/86)   Counting objects:  44% (38/86)   Counting objects:  45% (39/86)   Counting objects:  46% (40/86)   Counting objects:  47% (41/86)   Counting objects:  48% (42/86)   Counting objects:  50% (43/86)   Counting objects:  51% (44/86)   Counting objects:  52% (45/86)   Counting objects:  53% (46/86)   Counting objects:  54% (47/86)   Counting objects:  55% (48/86)   Counting objects:  56% (49/86)   Counting objects:  58% (50/86)   Counting objects:  59% (51/86)   Counting objects:  60% (52/86)   Counting objects:  61% (53/86)   Counting objects:  62% (54/86)   Counting objects:  63% (55/86)   Counting objects:  65% (56/86)   Counting objects:  66% (57/86)   Counting objects:  67% (58/86)   Counting objects:  68% (59/86)   Counting objects:  69% (60/86)   Counting objects:  70% (61/86)   Counting objects:  72% (62/86)   Counting objects:  73% (63/86)   Counting objects:  74% (64/86)   Counting objects:  75% (65/86)   Counting objects:  76% (66/86)   Counting objects:  77% (67/86)   Counting objects:  79% (68/86)   Counting objects:  80% (69/86)   Counting objects:  81% (70/86)   Counting objects:  82% (71/86)   Counting objects:  83% (72/86)   Counting objects:  84% (73/86)   Counting objects:  86% (74/86)   Counting objects:  87% (75/86)   Counting objects:  88% (76/86)   Counting objects:  89% (77/86)   Counting objects:  90% (78/86)   Counting objects:  91% (79/86)   Counting objects:  93% (80/86)   Counting objects:  94% (81/86)   Counting objects:  95% (82/86)   Counting objects:  96% (83/86)   Counting objects:  97% (84/86)   Counting objects:  98% (85/86)   Counting objects: 100% (86/86)   Counting objects: 100% (86/86), done.
+Delta compression using up to 8 threads
+Compressing objects:   1% (1/77)   Compressing objects:   2% (2/77)   Compressing objects:   3% (3/77)   Compressing objects:   5% (4/77)   Compressing objects:   6% (5/77)   Compressing objects:   7% (6/77)   Compressing objects:   9% (7/77)   Compressing objects:  10% (8/77)   Compressing objects:  11% (9/77)   Compressing objects:  12% (10/77)   Compressing objects:  14% (11/77)   Compressing objects:  15% (12/77)   Compressing objects:  16% (13/77)   Compressing objects:  18% (14/77)   Compressing objects:  19% (15/77)   Compressing objects:  20% (16/77)   Compressing objects:  22% (17/77)   Compressing objects:  23% (18/77)   Compressing objects:  24% (19/77)   Compressing objects:  25% (20/77)   Compressing objects:  27% (21/77)   Compressing objects:  28% (22/77)   Compressing objects:  29% (23/77)   Compressing objects:  31% (24/77)   Compressing objects:  32% (25/77)   Compressing objects:  33% (26/77)   Compressing objects:  35% (27/77)   Compressing objects:  36% (28/77)   Compressing objects:  37% (29/77)   Compressing objects:  38% (30/77)   Compressing objects:  40% (31/77)   Compressing objects:  41% (32/77)   Compressing objects:  42% (33/77)   Compressing objects:  44% (34/77)   Compressing objects:  45% (35/77)   Compressing objects:  46% (36/77)   Compressing objects:  48% (37/77)   Compressing objects:  49% (38/77)   Compressing objects:  50% (39/77)   Compressing objects:  51% (40/77)   Compressing objects:  53% (41/77)   Compressing objects:  54% (42/77)   Compressing objects:  55% (43/77)   Compressing objects:  57% (44/77)   Compressing objects:  58% (45/77)   Compressing objects:  59% (46/77)   Compressing objects:  61% (47/77)   Compressing objects:  62% (48/77)   Compressing objects:  63% (49/77)   Compressing objects:  64% (50/77)   Compressing objects:  66% (51/77)   Compressing objects:  67% (52/77)   Compressing objects:  68% (53/77)   Compressing objects:  70% (54/77)   Compressing objects:  71% (55/77)   Compressing objects:  72% (56/77)   Compressing objects:  74% (57/77)   Compressing objects:  75% (58/77)   Compressing objects:  76% (59/77)   Compressing objects:  77% (60/77)   Compressing objects:  79% (61/77)   Compressing objects:  80% (62/77)   Compressing objects:  81% (63/77)   Compressing objects:  83% (64/77)   Compressing objects:  84% (65/77)   Compressing objects:  85% (66/77)   Compressing objects:  87% (67/77)   Compressing objects:  88% (68/77)   Compressing objects:  89% (69/77)   Compressing objects:  90% (70/77)   Compressing objects:  92% (71/77)   Compressing objects:  93% (72/77)   Compressing objects:  94% (73/77)   Compressing objects:  96% (74/77)   Compressing objects:  97% (75/77)   Compressing objects:  98% (76/77)   Compressing objects: 100% (77/77)   Compressing objects: 100% (77/77), done.
+Writing objects:   1% (1/82)   Writing objects:   2% (2/82)   Writing objects:   3% (3/82)   Writing objects:   4% (4/82)   Writing objects:   6% (5/82)   Writing objects:   8% (7/82)   Writing objects:   9% (8/82)   Writing objects:  10% (9/82)   Writing objects:  12% (10/82)   Writing objects:  13% (11/82)   Writing objects:  14% (12/82)   Writing objects:  15% (13/82)   Writing objects:  17% (14/82)   Writing objects:  18% (15/82)   Writing objects:  19% (16/82)   Writing objects:  20% (17/82)   Writing objects:  23% (19/82)   Writing objects:  28% (23/82)   Writing objects:  29% (24/82)   Writing objects:  30% (25/82)   Writing objects:  31% (26/82)   Writing objects:  32% (27/82)   Writing objects:  34% (28/82)   Writing objects:  35% (29/82)   Writing objects:  36% (30/82)   Writing objects:  37% (31/82)   Writing objects:  39% (32/82)   Writing objects:  40% (33/82)   Writing objects:  41% (34/82)   Writing objects:  42% (35/82)   Writing objects:  43% (36/82)   Writing objects:  45% (37/82)   Writing objects:  46% (38/82)   Writing objects:  47% (39/82)   Writing objects:  48% (40/82)   Writing objects:  50% (41/82)   Writing objects:  51% (42/82)   Writing objects:  52% (43/82)   Writing objects:  53% (44/82)   Writing objects:  54% (45/82)   Writing objects:  56% (46/82)   Writing objects:  57% (47/82)   Writing objects:  58% (48/82)   Writing objects:  59% (49/82)   Writing objects:  60% (50/82)   Writing objects:  62% (51/82)   Writing objects:  63% (52/82)   Writing objects:  64% (53/82)   Writing objects:  65% (54/82)   Writing objects:  67% (55/82)   Writing objects:  68% (56/82)   Writing objects:  69% (57/82)   Writing objects:  70% (58/82)   Writing objects:  71% (59/82)   Writing objects:  73% (60/82)   Writing objects:  74% (61/82)   Writing objects:  75% (62/82)   Writing objects:  76% (63/82)   Writing objects:  78% (64/82)   Writing objects:  79% (65/82)   Writing objects:  80% (66/82)   Writing objects:  81% (67/82)   Writing objects:  82% (68/82)   Writing objects:  84% (69/82)   Writing objects:  85% (70/82)   Writing objects:  86% (71/82)   Writing objects:  87% (72/82)   Writing objects:  89% (73/82)   Writing objects:  90% (74/82)   Writing objects:  91% (75/82)   Writing objects:  92% (76/82)   Writing objects:  93% (77/82)   Writing objects:  95% (78/82)   Writing objects:  96% (79/82)   Writing objects:  97% (80/82)   Writing objects:  98% (81/82)   Writing objects: 100% (82/82)   Writing objects: 100% (82/82), 980.32 KiB | 8.83 MiB/s, done.
+Total 82 (delta 17), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/17)[Kremote: Resolving deltas:   5% (1/17)[Kremote: Resolving deltas:  11% (2/17)[Kremote: Resolving deltas:  94% (16/17)[Kremote: Resolving deltas: 100% (17/17)[Kremote: Resolving deltas: 100% (17/17), completed with 1 local object.[K
+remote: 
+remote: Create a pull request for 'add-theme-and-navbar' on GitHub by visiting:[K
+remote:      https://github.com/krhablutzel/srip-bootcamp/pull/new/add-theme-and-navbar[K
+remote: 
+To https://github.com/krhablutzel/srip-bootcamp.git
+ * [new branch]      add-theme-and-navbar -> add-theme-and-navbar
+Branch 'add-theme-and-navbar' set up to track remote branch 'add-theme-and-navbar' from 'origin'.
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git che kout[K[K[K[K[Kckout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git pull
+remote: Enumerating objects: 1, done.[K
+remote: Counting objects: 100% (1/1)[Kremote: Counting objects: 100% (1/1), done.[K
+remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0[K
+Unpacking objects: 100% (1/1)   Unpacking objects: 100% (1/1), done.
+From https://github.com/krhablutzel/srip-bootcamp
+   202c765..a986c4d  master     -> origin/master
+Updating 202c765..a986c4d
+Fast-forward
+ _site.yml                                                |   12 [32m+[m
+ day-1.Rmd                                                |   10 [32m+[m[31m-[m
+ docs/day-1.html                                          |  355 [32m++[m
+ docs/day-1_files/figure-html/unnamed-chunk-1-1.png       |  Bin [31m0[m -> [32m52923[m bytes
+ docs/index.html                                          |  162 [32m+[m[31m-[m
+ docs/index_files/figure-html/pressure-1.png              |  Bin [31m0[m -> [32m62311[m bytes
+ docs/site_libs/bootstrap-3.3.5/css/bootstrap-theme.css   |  587 [32m++[m
+ .../bootstrap-3.3.5/css/bootstrap-theme.css.map          |    1 [32m+[m
+ .../bootstrap-3.3.5/css/bootstrap-theme.min.css          |    5 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/bootstrap.css         | 6799 [32m+++++++++++++++++++++++[m
+ docs/site_libs/bootstrap-3.3.5/css/bootstrap.css.map     |    1 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/bootstrap.min.css     |    5 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/cerulean.min.css      |   11 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/cosmo.min.css         |   30 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/darkly.min.css        |   30 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/flatly.min.css        |   30 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/fonts/Lato.ttf        |  Bin [31m0[m -> [32m81980[m bytes
+ docs/site_libs/bootstrap-3.3.5/css/fonts/LatoBold.ttf    |  Bin [31m0[m -> [32m82368[m bytes
+ docs/site_libs/bootstrap-3.3.5/css/fonts/LatoItalic.ttf  |  Bin [31m0[m -> [32m81332[m bytes
+ docs/site_libs/bootstrap-3.3.5/css/fonts/NewsCycle.ttf   |  Bin [31m0[m -> [32m28716[m bytes
+ .../bootstrap-3.3.5/css/fonts/NewsCycleBold.ttf          |  Bin [31m0[m -> [32m28724[m bytes
+ docs/site_libs/bootstrap-3.3.5/css/fonts/OpenSans.ttf    |  Bin [31m0[m -> [32m34112[m bytes
+ .../site_libs/bootstrap-3.3.5/css/fonts/OpenSansBold.ttf |  Bin [31m0[m -> [32m35760[m bytes
+ .../bootstrap-3.3.5/css/fonts/OpenSansBoldItalic.ttf     |  Bin [31m0[m -> [32m33064[m bytes
+ .../bootstrap-3.3.5/css/fonts/OpenSansItalic.ttf         |  Bin [31m0[m -> [32m32808[m bytes
+ .../bootstrap-3.3.5/css/fonts/OpenSansLight.ttf          |  Bin [31m0[m -> [32m35340[m bytes
+ .../bootstrap-3.3.5/css/fonts/OpenSansLightItalic.ttf    |  Bin [31m0[m -> [32m32680[m bytes
+ docs/site_libs/bootstrap-3.3.5/css/fonts/Raleway.ttf     |  Bin [31m0[m -> [32m63796[m bytes
+ docs/site_libs/bootstrap-3.3.5/css/fonts/RalewayBold.ttf |  Bin [31m0[m -> [32m62224[m bytes
+ docs/site_libs/bootstrap-3.3.5/css/fonts/Roboto.ttf      |  Bin [31m0[m -> [32m32652[m bytes
+ docs/site_libs/bootstrap-3.3.5/css/fonts/RobotoBold.ttf  |  Bin [31m0[m -> [32m32500[m bytes
+ docs/site_libs/bootstrap-3.3.5/css/fonts/RobotoLight.ttf |  Bin [31m0[m -> [32m32664[m bytes
+ .../site_libs/bootstrap-3.3.5/css/fonts/RobotoMedium.ttf |  Bin [31m0[m -> [32m32580[m bytes
+ .../bootstrap-3.3.5/css/fonts/SourceSansPro.ttf          |  Bin [31m0[m -> [32m35064[m bytes
+ .../bootstrap-3.3.5/css/fonts/SourceSansProBold.ttf      |  Bin [31m0[m -> [32m34908[m bytes
+ .../bootstrap-3.3.5/css/fonts/SourceSansProItalic.ttf    |  Bin [31m0[m -> [32m33864[m bytes
+ .../bootstrap-3.3.5/css/fonts/SourceSansProLight.ttf     |  Bin [31m0[m -> [32m35368[m bytes
+ docs/site_libs/bootstrap-3.3.5/css/fonts/Ubuntu.ttf      |  Bin [31m0[m -> [32m73608[m bytes
+ docs/site_libs/bootstrap-3.3.5/css/journal.min.css       |   24 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/lumen.min.css         |   37 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/paper.min.css         |   36 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/readable.min.css      |   24 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/sandstone.min.css     |   24 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/simplex.min.css       |   24 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/spacelab.min.css      |   36 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/united.min.css        |   18 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/css/yeti.min.css          |   50 [32m+[m
+ .../fonts/glyphicons-halflings-regular.eot               |  Bin [31m0[m -> [32m20127[m bytes
+ .../fonts/glyphicons-halflings-regular.svg               |  288 [32m+[m
+ .../fonts/glyphicons-halflings-regular.ttf               |  Bin [31m0[m -> [32m45404[m bytes
+ .../fonts/glyphicons-halflings-regular.woff              |  Bin [31m0[m -> [32m23424[m bytes
+ .../fonts/glyphicons-halflings-regular.woff2             |  Bin [31m0[m -> [32m18028[m bytes
+ docs/site_libs/bootstrap-3.3.5/js/bootstrap.js           | 2363 [32m++++++++[m
+ docs/site_libs/bootstrap-3.3.5/js/bootstrap.min.js       |    7 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/js/npm.js                 |   13 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/shim/html5shiv.min.js     |    7 [32m+[m
+ docs/site_libs/bootstrap-3.3.5/shim/respond.min.js       |    8 [32m+[m
+ docs/site_libs/highlightjs-9.12.0/default.css            |   21 [32m+[m
+ docs/site_libs/highlightjs-9.12.0/highlight.js           |    2 [32m+[m
+ docs/site_libs/highlightjs-9.12.0/textmate.css           |   19 [32m+[m
+ docs/site_libs/jquery-1.11.3/jquery.min.js               |    5 [32m+[m
+ docs/site_libs/navigation-1.1/codefolding.js             |   59 [32m+[m
+ docs/site_libs/navigation-1.1/sourceembed.js             |   12 [32m+[m
+ docs/site_libs/navigation-1.1/tabsets.js                 |  141 [32m+[m
+ index.Rmd                                                |   29 [32m+[m
+ 65 files changed, 11258 insertions(+), 27 deletions(-)
+ create mode 100644 _site.yml
+ create mode 100644 docs/day-1.html
+ create mode 100644 docs/day-1_files/figure-html/unnamed-chunk-1-1.png
+ create mode 100644 docs/index_files/figure-html/pressure-1.png
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/bootstrap-theme.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/bootstrap-theme.css.map
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/bootstrap-theme.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/bootstrap.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/bootstrap.css.map
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/bootstrap.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/cerulean.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/cosmo.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/darkly.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/flatly.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/Lato.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/LatoBold.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/LatoItalic.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/NewsCycle.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/NewsCycleBold.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/OpenSans.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/OpenSansBold.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/OpenSansBoldItalic.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/OpenSansItalic.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/OpenSansLight.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/OpenSansLightItalic.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/Raleway.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/RalewayBold.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/Roboto.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/RobotoBold.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/RobotoLight.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/RobotoMedium.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/SourceSansPro.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/SourceSansProBold.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/SourceSansProItalic.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/SourceSansProLight.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/fonts/Ubuntu.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/journal.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/lumen.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/paper.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/readable.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/sandstone.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/simplex.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/spacelab.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/united.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/css/yeti.min.css
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/fonts/glyphicons-halflings-regular.eot
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/fonts/glyphicons-halflings-regular.svg
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/fonts/glyphicons-halflings-regular.ttf
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/fonts/glyphicons-halflings-regular.woff
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/fonts/glyphicons-halflings-regular.woff2
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/js/bootstrap.js
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/js/bootstrap.min.js
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/js/npm.js
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/shim/html5shiv.min.js
+ create mode 100644 docs/site_libs/bootstrap-3.3.5/shim/respond.min.js
+ create mode 100644 docs/site_libs/highlightjs-9.12.0/default.css
+ create mode 100644 docs/site_libs/highlightjs-9.12.0/highlight.js
+ create mode 100644 docs/site_libs/highlightjs-9.12.0/textmate.css
+ create mode 100644 docs/site_libs/jquery-1.11.3/jquery.min.js
+ create mode 100644 docs/site_libs/navigation-1.1/codefolding.js
+ create mode 100644 docs/site_libs/navigation-1.1/sourceembed.js
+ create mode 100644 docs/site_libs/navigation-1.1/tabsets.js
+ create mode 100644 index.Rmd
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git branck -D add-theme0and[K[K[K[K-and-navbar
+git: 'branck' is not a git command. See 'git --help'.
+
+The most similar command is
+	branch
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git branck -D add-theme-and-navbar[Kr[C[1@h[1P[1P[1@h
+Deleted branch add-theme-and-navbar (was 6c00726).
+]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git log --online [K[K[K[K[Keline --graph --all
+[?1h=*   [33ma986c4d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge pull request #2 from krhab[m [33m[m[33m[m[1;36m[m[1;32m[m[33m[m[1;31m[m[33m[m[1;31m[m[33m[mlutzel/add-theme-and-navbar[m
+[31m|[m[32m\[m  [m
+[31m|[m * [33m6c00726[m[33m ([m[1;31morigin/add-theme-and-navbar[m[33m)[m Add home page, navigation, and theme[m
+[31m|[m[31m/[m  [m
+*   [33m202c765[m Merge pull request #1 from krhablutzel/day-2[m
+[33m|[m[34m\[m  [m
+[33m|[m * [33mc16b8ca[m[33m ([m[1;31morigin/day-2[m[33m)[m Knit outputs to a doc folder[m
+[33m|[m[33m/[m  [m
+* [33mfc2c9bf[m Add page for day 1[m
+* [33md5e2c3e[m Initial commit[m
+:[K[K[K[?1l>]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ git log com[K[K[K--oneline
+[?1h=[33ma986c4d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge pull request #2 from krhablutz[m [33m[m[33m[m[1;36m[m[1;32m[m[33m[m[1;31m[m[33m[m[1;31m[m[33m[mel/add-theme-and-navbar[m
+[33m6c00726[m[33m ([m[1;31morigin/add-theme-and-navbar[m[33m)[m Add home page, navigation, and theme[m
+[33m202c765[m Merge pull request #1 from krhablutzel/day-2[m
+[33mc16b8ca[m[33m ([m[1;31morigin/day-2[m[33m)[m Knit outputs to a doc folder[m
+[33mfc2c9bf[m Add page for day 1[m
+[33md5e2c3e[m Initial commit[m
+[K[?1l>]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ 

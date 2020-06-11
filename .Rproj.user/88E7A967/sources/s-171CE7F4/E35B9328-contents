@@ -1,0 +1,121 @@
+---
+title: "Lab 4"
+author: "Kathleen"
+date: "2/7/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(RColorBrewer)
+library(nasaweather)
+library(ggthemes)
+```
+
+This lab works with a guinea pig tooth growth dataset.
+
+```{r ToothGrowth}
+glimpse(ToothGrowth)
+summary(ToothGrowth)
+```
+
+Let's convert dosages to categories.
+
+```{r}
+ToothGrowth <- ToothGrowth %>%
+  mutate(dose = factor(dose))
+summary(ToothGrowth)
+```
+
+Boxplot of tooth growth data
+
+```{r}
+my_plot <- ggplot(data = ToothGrowth, aes(x = dose, y = len)) +
+  geom_boxplot(aes(fill = dose))
+
+my_plot
+```
+
+Smith college color palette!
+
+```{r}
+my_plot + 
+  scale_fill_manual(values = c("#004f71", "#465a01", "#981d97"))
+```
+
+View color brewer palettes
+
+```{r, eval = FALSE}
+display.brewer.all()
+```
+
+Use palettes:
+
+```{r}
+my_plot + 
+  scale_fill_brewer(palette = "Purples")
+```
+
+Import storms data form nasaweather package
+Only use 1995 data to make plot easier to read
+
+```{r}
+my_storms <- storms %>%
+  filter(year == 1995)
+```
+
+Plot storms
+
+```{r}
+storm_plot <- ggplot(data = my_storms, aes(x = long, y = lat)) +
+  geom_point(aes(color = wind)) +
+  facet_wrap(~name, ncol = 4)
+
+storm_plot
+```
+
+Probably a diverging color scheme would make most sense for wind speed? So you can see the highs and lows?
+
+ggthemes package - mimic common plot styles
+
+```{r}
+my_plot +
+  theme_economist() +
+  scale_fill_economist()
+```
+
+Let's see what other datasets are available:
+
+```{r}
+data()
+```
+
+There's a lot! And a little description of each! No zombie data :)
+
+Learn more about datasets by running ?<dataset>
+Let's try the msleep dataset - data on the sleep of mammals
+We'll compare diet to sleep length, but first let's clean the data a little
+
+```{r msleep}
+msleep <- msleep %>%
+  filter(!is.na(vore)) %>% # remove NA
+  mutate(vore = paste0(vore, "vore")) # add "vore" to the end
+  
+```
+
+
+```{r}
+sleep_plot <- ggplot(data = msleep, aes(x = vore, y = sleep_total)) +
+  geom_boxplot(aes(fill = vore)) + # fill not color!
+  theme_few() +
+  scale_fill_brewer(palette = "Set3", name = "Diet") +
+  scale_y_continuous(name = "Total Sleep (Hours)") +
+  scale_x_discrete(name = "Diet") +
+  labs(title = "Daily Hours of Sleep in Mammals by Diet")
+
+sleep_plot
+```
+
+Scatterplot
+
