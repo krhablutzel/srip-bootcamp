@@ -2,29 +2,81 @@
 title: 'Day 2: Adding Color in ggplot2'
 author: "Kathleen Hablutzel"
 date: "6/11/2020"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(ggthemes)
+library(RColorBrewer)
 ```
-
-## Page Under Construction
 
 ## Getting Started
 
 Today we will:
 
-* Add colors (colorbrewer)
-* Add a theme -> point to documentation
+* Add themes to plots (ggthemes)
+* Add color scales (RColorBrewer)
+* Add themes to R Markdown documents and specify chunk options
 * Learn about visual cues
-* Make our R Markdown documents more pretty (chunk options and YAML headers)
-* Extension: copy the master examples (a couple graphs for students to copy, then I'll post the code next week and they can see how close they got)
+
+Packages to install:
+
+* ggthemes
+* RColorBrewer
+
+#### Questions from Last Week
+
+*What editor theme am I using?* Under RStudio > Preferences > Appearance, you can explore different themes for your editor. I prefer the Cobalt theme for its inverted colors and slightly blue theme, but I encourage you to play around with different options and find a favorite! (Remember to click "Apply")
+
+*How do your graphs show up in the plot window?* We noticed last week that the default settings for chunk output are "Preview in Window" and "Chunk Output Inline." I find both clunky, so I have my settings on "Preview in Viewer Pane" and "Chunk Output in Console." You can change this under the gear at the top of your editor next to the Knit button, or you can go under RStudio > Preferences > RMarkdown, uncheck "Show chunk output inline for all R Markdown documents", and change "Show ouput preview in:" to "Viewer Pane." (Remember to click "Apply")
+
+#### Last Week's Challenge
+
+Last week, I challenged you to copy a graph. I don't expect you to have gotten everything, but here's the code:
+
+```{r Wind-Graph}
+storm_plot <- ggplot(data = storms, aes(x = wind, y = pressure)) +
+  geom_point(aes(color = status)) +
+  labs(
+    title = "Pressure vs. Wind Speed of Atlantic Storms",
+    caption = "Source: NOAA",
+    x = "Maximum Sustained Wind Speed (knots)",
+    y = "Air Pressure at Storm Center (millibars)",
+    color = "Status"
+  ) +
+  scale_color_manual(
+    labels = c("Hurricane",  "Tropical Depression", "Tropical Storm"),
+    values = c("#6f18ad", "#f051bb", "#faf600")
+  ) +
+  theme(
+    text = element_text(family = "Arial"),
+    rect = element_blank(),
+    axis.line = element_line(color = "gray40"),
+    panel.grid = element_line(color = "gray90"),
+    legend.position = "bottom"
+  )
+
+storm_plot
+```
 
 ## Adding Colors and Themes
 
 Now that we've learned how to create chart elements with `geom_*()` (where * could be any element), let's add some color to our visualizations. We added elements using the `+` operator, and we can add color and themes using `+` as well!
+
+Let's store a plot we can add various colors onto:
+
+```{r}
+myplot <- ggplot(data = storms, aes(x = wind, y = pressure)) +
+  geom_point(aes(color = status))
+
+myplot
+```
 
 #### Adding Themes
 
@@ -33,17 +85,269 @@ Themes are a quick way to get a great-looking plot. Download the `ggthemes` pack
 ```{r Adding_Themes}
 library(ggthemes)
 
-ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
-  geom_boxplot() +
+myplot +
   theme_fivethirtyeight()
 ```
 
 [See the documentation](https://jrnold.github.io/ggthemes/reference/index.html) for a list of available themes.
 
+#### Color Palettes
+
+Choosing colors can be hard. We use [ColorBrewer color palettes](colorbrewer2.org) from the `RColorBrewer` package for ready-made user-friendly color palettes. Let's see what palettes are available:
+
+```{r}
+library(RColorBrewer)
+
+display.brewer.all()
+```
+
+(The Zoom option near the Plots tab will let you zoom in on the color palettes in a larger window.)
+
+We can add colors to our plots using the `scale_color_brewer()` function:
+
+```{r}
+myplot +
+  scale_color_brewer(palette = "YlOrRd")
+```
+
+This one is hard to distinguish. Let's try a palette designed for qualitative data.
+
+```{r}
+myplot +
+  scale_color_brewer(palette = "Set1")
+```
+
+##### Types of Color Palettes
+
+If we go back to the [ColorBrewer website](colorbrewer2.org), we see that there are three types of palettes available: Sequential, Diverging, and Qualitative. Each type of color palette is designed for a specific kind of data.
+
+*Sequential Data:* Data with an order. The darkest color is perceived as the greatest. Using this scale continuously provides more detail, but the eye has trouble distinguishing more than 5-6 levels, so you can also use these scales discretely for more clear distinctions.
+
+*Diverging Data:* Data where both the low and high extremes are notable. Two colors indicate the extremes of the range with a neutral color in the middle. Be careful that your neutral color is distinguishable from your missing data! (Missing data is often gray or white.)
+
+*Qualitative Data:* Aka Categorical Data. Data in different categories. Choose colors that are perceptually different but have approximately the same saturation so that categories seem distinct.
+
+With all three types of palettes, beware colorblindness. (For example, Red-Green diverging is a bad choice, because both extremes will look similar to those with Red-Green colorblindness.)
+
+If we view the `RColorBrewer` palettes again, we see that the first section of palettes is sequential, the second is categorical, and the third is diverging.
+
+```{r}
+display.brewer.all()
+```
+
+##### Brewer vs. Distiller
+
+If we try to apply a color brewer scale to continuous data, we run into an error:
+
+```{r}
+car_plot <- ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point(aes(color = hp))
+```
+
+
+```{r, eval = FALSE}
+car_plot +
+  scale_color_brewer(palette = "YlOrBr")
+```
+
+"Error: Continuous value supplied to discrete scale"
+
+We're trying to use discrete colors on continuous data, and R doesn't know how to make those colors continuous. Luckily, we can change our color function slightly and distill these discrete colors into continuous colors. Instead of `scale_color_brewer()`, we use `scale_color_distiller()`.
+
+```{r}
+car_plot +
+  scale_color_distiller(palette = "YlOrBr")
+```
+
+Now, we have a continuous color scale for our continuous data.
+
+##### Color vs. Fill
+
+If we try to apply our color scales to a boxplot or barchart, it looks like almost nothing happens!
+
+```{r}
+teeth <- ggplot(data = ToothGrowth, aes(x = supp, y = len)) +
+  geom_boxplot(aes(color = supp))
+
+teeth +
+  scale_color_brewer(palette = "Set3")
+```
+
+Color works on points and lines. To fill in whole rectangles, we set the `fill` parameter instead, and we use `scale_fill_*()` instead of `scale_color_*()`.
+
+```{r}
+teeth <- ggplot(data = ToothGrowth, aes(x = supp, y = len)) +
+  geom_boxplot(aes(fill = supp))
+
+teeth +
+  scale_fill_brewer(palette = "Set3")
+```
+
+#### Other Graphing Adventures
+
+Now, you know how to apply themes from `ggthemes` using `theme_*()` and palettes from `RColorBrewer` using `scale_*_*()`. What else do you need to complete last week's challenge graph?
+
+```{r Wind-Graph2}
+storm_plot <- ggplot(data = storms, aes(x = wind, y = pressure)) +
+  geom_point(aes(color = status)) +
+  labs(
+    title = "Pressure vs. Wind Speed of Atlantic Storms",
+    caption = "Source: NOAA",
+    x = "Maximum Sustained Wind Speed (knots)",
+    y = "Air Pressure at Storm Center (millibars)",
+    color = "Status"
+  ) +
+  scale_color_manual(
+    labels = c("Hurricane",  "Tropical Depression", "Tropical Storm"),
+    values = c("#6f18ad", "#f051bb", "#faf600")
+  ) +
+  theme(
+    text = element_text(family = "Arial"),
+    rect = element_blank(),
+    axis.line = element_line(color = "gray40"),
+    panel.grid = element_line(color = "gray90"),
+    legend.position = "bottom"
+  )
+
+storm_plot
+```
+
+#### Manual color scales
+
+We can apply discrete color scales with `scale_color_brewer()` and continuous color scales with `scale_color_distiller()`. You can also design your own color scales manually with `scale_color_manual()`. You will need to specify a vector of color values to use:
+
+```{r}
+myplot + 
+  scale_color_manual(
+    values = c("#6f18ad", "#f051bb", "#faf600")
+  )
+
+myplot
+```
+
+I usually specify colors using the Hex format, which use pairs of two digits to specify how much red, green, and blue to use in a color, always preceeded by a hash and written as a string (in quotes). For example, all green with no red or blue would be "#00FF00". I encourage you all to [learn more about Hex colors](https://hackernoon.com/hex-colors-how-do-they-work-d8cb935ac0f), but for now let's use a [color picker tool](htmlcolorcodes.com/color-picker/) to choose fun colors. There are also a multitude of online [color palette generators](https://learnui.design/tools/data-color-picker.html) to help you get creative with your palettes.
+
+This `scale_color_manual()` function also lets you rename the colors of your color scale. Specify these labels in the `labels` parameter:
+
+```{r}
+myplot <- myplot + 
+  scale_color_manual(
+    values = c("#6f18ad", "#f051bb", "#faf600"),
+    labels = c("Hurricane",  "Tropical Depression", "Tropical Storm")
+  )
+
+myplot
+```
+
+#### Plot Labels
+
+While we're at it, let's fix up our other plot labels as well. We can change many of these with the `labs()` function.
+
+```{r}
+myplot <- myplot + 
+  labs(
+    title = "Pressure vs. Wind Speed of Atlantic Storms",
+    caption = "Source: NOAA",
+    x = "Maximum Sustained Wind Speed (knots)",
+    y = "Air Pressure at Storm Center (millibars)",
+    color = "Status"
+  )
+
+myplot
+```
+
+`title` gives a title, `caption` gives the citation at the bottom, and the `x`, `y`, and `color` parameters each rename a dimension/axis of data.
+
+#### Themes
+
+I changed a few different parameters of the `theme()` function in hopes that you would delve more into the theme documentation (`?theme`) and explore the many possibilities.
+
+```{r}
+myplot <- myplot +
+  theme(
+    text = element_text(family = "Arial"),
+    rect = element_blank(),
+    axis.line = element_line(color = "gray40"),
+    panel.grid = element_line(color = "gray90"),
+    legend.position = "bottom"
+  )
+
+myplot
+```
+
+And that's the plot!
+
+## RMarkdown Themes and Options
+
+Just like your plots are very customizable, your HTML outputs from knitting your RMarkdown file are customizable as well! All these options are specified in the YAML header at the top of the document. YAML is a recursive acronym which stands for "YAML Ain't Markup Language", and the YAML header at the very top of our RMarkdown document (between the three dashes ---) sets metadata about our file and HTML output.
+
+For example:
+
+```
+output:
+  html_document:
+    fig_width: 6
+    fig_height: 7
+```
+    
+This a standard figure width and height for all the figures in our HTML output. Try knitting your document to see.
+
+```
+output:
+  html_document:
+    theme: yeti
+```
+
+This sets a Bootstrap theme for the HTML page. My website uses the yeti theme. The full list is [here](https://bookdown.org/yihui/rmarkdown/html-document.html#appearance-and-style), so try playing with a few! (Knit again to see the new theme.)
+
+```
+output:
+  html_document:
+    code_folding: hide
+```
+    
+This hides the code that gets output above your figures, and then allows the reader show and hide the code. You can also specify `show` to have the code automatically show with the option to hide.
+
+#### Chunk Names and Options
+
+In the header of a code chunk (the `{r}` part), we can name chunks and specify chunk options. Naming a chunk looks like this:
+
+`{r Wind-Plot}`
+
+When you knit your document, you can see which named chunk is knitting, so you can quickly locate any errors.
+
+We can also set options about how we want our code chunks to be run or displayed when we knit our RMarkdown document to HTML. We can set these chunk options for the whole document within `knitr::opts_chunk$set()` in the `{r setup}` chunk at the top of our file:
+
+```{r Example-Options, echo = TRUE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  echo = TRUE
+)
+library(tidyverse)
+```
+
+We can also override those chunk options by specifying them locally for a chunk. For example, when I hide the code for Challenge Graphs, I specify `echo = FALSE`:
+
+`{r Challenge-2, echo = FALSE}`
+
+Here are some of the available chunk options:
+
+* With `message`, we turn on and off messages from the code (`message = TRUE` and `message = FALSE`). I almost always use `message = FALSE`.
+* With `echo`, we choose whether to display our code in the knit file (`echo = TRUE` and `echo = FALSE`). I usually enable code folding in the YAML header and choose `echo = TRUE`, but otherwise I would hide the code with `echo = FALSE`.
+* With `eval`, we choose whether to run the code at all when we knit.
+* With `include`, we run the code, but we choose whether to display it in the final document.
+
+There are a variety of available [chunk options](https://rmarkdown.rstudio.com/lesson-3.html). See the full table in the [RMarkdown reference](https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf).
+
 ## Visual Cues
 
-* Strongest/weakest cues
-* Why stacked bar charts >>>>>>>> pie charts
+Finally, I'd like to leave you with a note about strong and weak visual cues. Some cues, like position and length, are easy for the eye to interpret. Others, like color saturation and hue, are harder for distinguishing information.
 
-Ranking visual cues, from position (strongest) to color hue (weakest): docs/day-1_files/figure-html/visual-cues.png (link not  working rn)
-Source: Nathan Yau, *Data Points*, 2013
+See the cues ranked on page 95 of this absolutely stunning data visualization textbook, [Data Points](http://flowingdata.com/data-points/DataPoints-Ch3.pdf) by Nathan Yau (2013).
+
+Also note that angle is worse than length at conveying differences between proportions, so stacked bar charts are better than pie charts! Plenty of bloggers offer their [opinions on alternatives to pie charts](http://www.storytellingwithdata.com/blog/2014/06/alternatives-to-pies).
+
+## Challenges for Next Week
+
+Let's apply what we just learned! Here is a graph to try to copy for next week:
+

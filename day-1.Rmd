@@ -17,7 +17,7 @@ library(tidyverse)
 
 If you haven't already, start downloading R and R Studio. See the instructions [here](index.html) under "Getting Started."
 
-After today's lesson, I'll post my code here. You can also follow along below.
+After today's lesson, I'll post the video recording [here](https://ncssm.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=8bad9ba8-35c9-424d-a156-abd8000e0a2b). (This is only accessible within the NCSSM organization.) You can also follow along with the code below.
 
 #### Creating an RMarkdown Document
 

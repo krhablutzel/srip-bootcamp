@@ -7,6 +7,8 @@ navbar:
       href: index.html
     - text: "Day 1"
       href: day-1.html
+    - text: "Day 2"
+      href: day-2.html
 output:
   html_document:
     theme: yeti

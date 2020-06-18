@@ -20,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
@@ -253,6 +256,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -260,6 +326,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -281,6 +357,9 @@ $(document).ready(function () {
 </li>
 <li>
   <a href="day-1.html">Day 1</a>
+</li>
+<li>
+  <a href="day-2.html">Day 2</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -309,52 +388,273 @@ $(document).ready(function () {
 </div>
 
 
-<div id="page-under-construction" class="section level2">
-<h2>Page Under Construction</h2>
-</div>
 <div id="getting-started" class="section level2">
 <h2>Getting Started</h2>
 <p>Today we will:</p>
 <ul>
-<li>Add colors (colorbrewer)</li>
-<li>Add a theme -&gt; point to documentation</li>
+<li>Add themes to plots (ggthemes)</li>
+<li>Add color scales (RColorBrewer)</li>
+<li>Add themes to R Markdown documents and specify chunk options</li>
 <li>Learn about visual cues</li>
-<li>Make our R Markdown documents more pretty (chunk options and YAML headers)</li>
-<li>Extension: copy the master examples (a couple graphs for students to copy, then I’ll post the code next week and they can see how close they got)</li>
 </ul>
+<p>Packages to install:</p>
+<ul>
+<li>ggthemes</li>
+<li>RColorBrewer</li>
+</ul>
+<div id="questions-from-last-week" class="section level4">
+<h4>Questions from Last Week</h4>
+<p><em>What editor theme am I using?</em> Under RStudio &gt; Preferences &gt; Appearance, you can explore different themes for your editor. I prefer the Cobalt theme for its inverted colors and slightly blue theme, but I encourage you to play around with different options and find a favorite! (Remember to click “Apply”)</p>
+<p><em>How do your graphs show up in the plot window?</em> We noticed last week that the default settings for chunk output are “Preview in Window” and “Chunk Output Inline.” I find both clunky, so I have my settings on “Preview in Viewer Pane” and “Chunk Output in Console.” You can change this under the gear at the top of your editor next to the Knit button, or you can go under RStudio &gt; Preferences &gt; RMarkdown, uncheck “Show chunk output inline for all R Markdown documents”, and change “Show ouput preview in:” to “Viewer Pane.” (Remember to click “Apply”)</p>
+</div>
+<div id="last-weeks-challenge" class="section level4">
+<h4>Last Week’s Challenge</h4>
+<p>Last week, I challenged you to copy a graph. I don’t expect you to have gotten everything, but here’s the code:</p>
+<pre class="r"><code>storm_plot &lt;- ggplot(data = storms, aes(x = wind, y = pressure)) +
+  geom_point(aes(color = status)) +
+  labs(
+    title = &quot;Pressure vs. Wind Speed of Atlantic Storms&quot;,
+    caption = &quot;Source: NOAA&quot;,
+    x = &quot;Maximum Sustained Wind Speed (knots)&quot;,
+    y = &quot;Air Pressure at Storm Center (millibars)&quot;,
+    color = &quot;Status&quot;
+  ) +
+  scale_color_manual(
+    labels = c(&quot;Hurricane&quot;,  &quot;Tropical Depression&quot;, &quot;Tropical Storm&quot;),
+    values = c(&quot;#6f18ad&quot;, &quot;#f051bb&quot;, &quot;#faf600&quot;)
+  ) +
+  theme(
+    text = element_text(family = &quot;Arial&quot;),
+    rect = element_blank(),
+    axis.line = element_line(color = &quot;gray40&quot;),
+    panel.grid = element_line(color = &quot;gray90&quot;),
+    legend.position = &quot;bottom&quot;
+  )
+
+storm_plot</code></pre>
+<p><img src="day-2_files/figure-html/Wind-Graph-1.png" width="576" /></p>
+</div>
 </div>
 <div id="adding-colors-and-themes" class="section level2">
 <h2>Adding Colors and Themes</h2>
 <p>Now that we’ve learned how to create chart elements with <code>geom_*()</code> (where * could be any element), let’s add some color to our visualizations. We added elements using the <code>+</code> operator, and we can add color and themes using <code>+</code> as well!</p>
+<p>Let’s store a plot we can add various colors onto:</p>
+<pre class="r"><code>myplot &lt;- ggplot(data = storms, aes(x = wind, y = pressure)) +
+  geom_point(aes(color = status))
+
+myplot</code></pre>
+<p><img src="day-2_files/figure-html/unnamed-chunk-1-1.png" width="576" /></p>
 <div id="adding-themes" class="section level4">
 <h4>Adding Themes</h4>
 <p>Themes are a quick way to get a great-looking plot. Download the <code>ggthemes</code> package, load it, and just add them on!</p>
 <pre class="r"><code>library(ggthemes)
 
-ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
-  geom_boxplot() +
+myplot +
   theme_fivethirtyeight()</code></pre>
 <p><img src="day-2_files/figure-html/Adding_Themes-1.png" width="576" /></p>
 <p><a href="https://jrnold.github.io/ggthemes/reference/index.html">See the documentation</a> for a list of available themes.</p>
 </div>
+<div id="color-palettes" class="section level4">
+<h4>Color Palettes</h4>
+<p>Choosing colors can be hard. We use <a href="colorbrewer2.org">ColorBrewer color palettes</a> from the <code>RColorBrewer</code> package for ready-made user-friendly color palettes. Let’s see what palettes are available:</p>
+<pre class="r"><code>library(RColorBrewer)
+
+display.brewer.all()</code></pre>
+<p><img src="day-2_files/figure-html/unnamed-chunk-2-1.png" width="576" /></p>
+<p>(The Zoom option near the Plots tab will let you zoom in on the color palettes in a larger window.)</p>
+<p>We can add colors to our plots using the <code>scale_color_brewer()</code> function:</p>
+<pre class="r"><code>myplot +
+  scale_color_brewer(palette = &quot;YlOrRd&quot;)</code></pre>
+<p><img src="day-2_files/figure-html/unnamed-chunk-3-1.png" width="576" /></p>
+<p>This one is hard to distinguish. Let’s try a palette designed for qualitative data.</p>
+<pre class="r"><code>myplot +
+  scale_color_brewer(palette = &quot;Set1&quot;)</code></pre>
+<p><img src="day-2_files/figure-html/unnamed-chunk-4-1.png" width="576" /></p>
+<div id="types-of-color-palettes" class="section level5">
+<h5>Types of Color Palettes</h5>
+<p>If we go back to the <a href="colorbrewer2.org">ColorBrewer website</a>, we see that there are three types of palettes available: Sequential, Diverging, and Qualitative. Each type of color palette is designed for a specific kind of data.</p>
+<p>*Sequential <a href="Data:*" class="uri">Data:*</a> Data with an order. The darkest color is perceived as the greatest. Using this scale continuously provides more detail, but the eye has trouble distinguishing more than 5-6 levels, so you can also use these scales discretely for more clear distinctions.</p>
+<p>*Diverging <a href="Data:*" class="uri">Data:*</a> Data where both the low and high extremes are notable. Two colors indicate the extremes of the range with a neutral color in the middle. Be careful that your neutral color is distinguishable from your missing data! (Missing data is often gray or white.)</p>
+<p>*Qualitative <a href="Data:*" class="uri">Data:*</a> Aka Categorical Data. Data in different categories. Choose colors that are perceptually different but have approximately the same saturation so that categories seem distinct.</p>
+<p>With all three types of palettes, beware colorblindness. (For example, Red-Green diverging is a bad choice, because both extremes will look similar to those with Red-Green colorblindness.)</p>
+<p>If we view the <code>RColorBrewer</code> palettes again, we see that the first section of palettes is sequential, the second is categorical, and the third is diverging.</p>
+<pre class="r"><code>display.brewer.all()</code></pre>
+<p><img src="day-2_files/figure-html/unnamed-chunk-5-1.png" width="576" /></p>
+</div>
+<div id="brewer-vs.distiller" class="section level5">
+<h5>Brewer vs. Distiller</h5>
+<p>If we try to apply a color brewer scale to continuous data, we run into an error:</p>
+<pre class="r"><code>car_plot &lt;- ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point(aes(color = hp))</code></pre>
+<pre class="r"><code>car_plot +
+  scale_color_brewer(palette = &quot;YlOrBr&quot;)</code></pre>
+<p>“Error: Continuous value supplied to discrete scale”</p>
+<p>We’re trying to use discrete colors on continuous data, and R doesn’t know how to make those colors continuous. Luckily, we can change our color function slightly and distill these discrete colors into continuous colors. Instead of <code>scale_color_brewer()</code>, we use <code>scale_color_distiller()</code>.</p>
+<pre class="r"><code>car_plot +
+  scale_color_distiller(palette = &quot;YlOrBr&quot;)</code></pre>
+<p><img src="day-2_files/figure-html/unnamed-chunk-8-1.png" width="576" /></p>
+<p>Now, we have a continuous color scale for our continuous data.</p>
+</div>
+<div id="color-vs.fill" class="section level5">
+<h5>Color vs. Fill</h5>
+<p>If we try to apply our color scales to a boxplot or barchart, it looks like almost nothing happens!</p>
+<pre class="r"><code>teeth &lt;- ggplot(data = ToothGrowth, aes(x = supp, y = len)) +
+  geom_boxplot(aes(color = supp))
+
+teeth +
+  scale_color_brewer(palette = &quot;Set3&quot;)</code></pre>
+<p><img src="day-2_files/figure-html/unnamed-chunk-9-1.png" width="576" /></p>
+<p>Color works on points and lines. To fill in whole rectangles, we set the <code>fill</code> parameter instead, and we use <code>scale_fill_*()</code> instead of <code>scale_color_*()</code>.</p>
+<pre class="r"><code>teeth &lt;- ggplot(data = ToothGrowth, aes(x = supp, y = len)) +
+  geom_boxplot(aes(fill = supp))
+
+teeth +
+  scale_fill_brewer(palette = &quot;Set3&quot;)</code></pre>
+<p><img src="day-2_files/figure-html/unnamed-chunk-10-1.png" width="576" /></p>
+</div>
+</div>
+<div id="other-graphing-adventures" class="section level4">
+<h4>Other Graphing Adventures</h4>
+<p>Now, you know how to apply themes from <code>ggthemes</code> using <code>theme_*()</code> and palettes from <code>RColorBrewer</code> using <code>scale_*_*()</code>. What else do you need to complete last week’s challenge graph?</p>
+<pre class="r"><code>storm_plot &lt;- ggplot(data = storms, aes(x = wind, y = pressure)) +
+  geom_point(aes(color = status)) +
+  labs(
+    title = &quot;Pressure vs. Wind Speed of Atlantic Storms&quot;,
+    caption = &quot;Source: NOAA&quot;,
+    x = &quot;Maximum Sustained Wind Speed (knots)&quot;,
+    y = &quot;Air Pressure at Storm Center (millibars)&quot;,
+    color = &quot;Status&quot;
+  ) +
+  scale_color_manual(
+    labels = c(&quot;Hurricane&quot;,  &quot;Tropical Depression&quot;, &quot;Tropical Storm&quot;),
+    values = c(&quot;#6f18ad&quot;, &quot;#f051bb&quot;, &quot;#faf600&quot;)
+  ) +
+  theme(
+    text = element_text(family = &quot;Arial&quot;),
+    rect = element_blank(),
+    axis.line = element_line(color = &quot;gray40&quot;),
+    panel.grid = element_line(color = &quot;gray90&quot;),
+    legend.position = &quot;bottom&quot;
+  )
+
+storm_plot</code></pre>
+<p><img src="day-2_files/figure-html/Wind-Graph2-1.png" width="576" /></p>
+</div>
+<div id="manual-color-scales" class="section level4">
+<h4>Manual color scales</h4>
+<p>We can apply discrete color scales with <code>scale_color_brewer()</code> and continuous color scales with <code>scale_color_distiller()</code>. You can also design your own color scales manually with <code>scale_color_manual()</code>. You will need to specify a vector of color values to use:</p>
+<pre class="r"><code>myplot + 
+  scale_color_manual(
+    values = c(&quot;#6f18ad&quot;, &quot;#f051bb&quot;, &quot;#faf600&quot;)
+  )</code></pre>
+<p><img src="day-2_files/figure-html/unnamed-chunk-11-1.png" width="576" /></p>
+<pre class="r"><code>myplot</code></pre>
+<p><img src="day-2_files/figure-html/unnamed-chunk-11-2.png" width="576" /></p>
+<p>I usually specify colors using the Hex format, which use pairs of two digits to specify how much red, green, and blue to use in a color, always preceeded by a hash and written as a string (in quotes). For example, all green with no red or blue would be “#00FF00”. I encourage you all to <a href="https://hackernoon.com/hex-colors-how-do-they-work-d8cb935ac0f">learn more about Hex colors</a>, but for now let’s use a <a href="htmlcolorcodes.com/color-picker/">color picker tool</a> to choose fun colors. There are also a multitude of online <a href="https://learnui.design/tools/data-color-picker.html">color palette generators</a> to help you get creative with your palettes.</p>
+<p>This <code>scale_color_manual()</code> function also lets you rename the colors of your color scale. Specify these labels in the <code>labels</code> parameter:</p>
+<pre class="r"><code>myplot &lt;- myplot + 
+  scale_color_manual(
+    values = c(&quot;#6f18ad&quot;, &quot;#f051bb&quot;, &quot;#faf600&quot;),
+    labels = c(&quot;Hurricane&quot;,  &quot;Tropical Depression&quot;, &quot;Tropical Storm&quot;)
+  )
+
+myplot</code></pre>
+<p><img src="day-2_files/figure-html/unnamed-chunk-12-1.png" width="576" /></p>
+</div>
+<div id="plot-labels" class="section level4">
+<h4>Plot Labels</h4>
+<p>While we’re at it, let’s fix up our other plot labels as well. We can change many of these with the <code>labs()</code> function.</p>
+<pre class="r"><code>myplot &lt;- myplot + 
+  labs(
+    title = &quot;Pressure vs. Wind Speed of Atlantic Storms&quot;,
+    caption = &quot;Source: NOAA&quot;,
+    x = &quot;Maximum Sustained Wind Speed (knots)&quot;,
+    y = &quot;Air Pressure at Storm Center (millibars)&quot;,
+    color = &quot;Status&quot;
+  )
+
+myplot</code></pre>
+<p><img src="day-2_files/figure-html/unnamed-chunk-13-1.png" width="576" /></p>
+<p><code>title</code> gives a title, <code>caption</code> gives the citation at the bottom, and the <code>x</code>, <code>y</code>, and <code>color</code> parameters each rename a dimension/axis of data.</p>
+</div>
+<div id="themes" class="section level4">
+<h4>Themes</h4>
+<p>I changed a few different parameters of the <code>theme()</code> function in hopes that you would delve more into the theme documentation (<code>?theme</code>) and explore the many possibilities.</p>
+<pre class="r"><code>myplot &lt;- myplot +
+  theme(
+    text = element_text(family = &quot;Arial&quot;),
+    rect = element_blank(),
+    axis.line = element_line(color = &quot;gray40&quot;),
+    panel.grid = element_line(color = &quot;gray90&quot;),
+    legend.position = &quot;bottom&quot;
+  )
+
+myplot</code></pre>
+<p><img src="day-2_files/figure-html/unnamed-chunk-14-1.png" width="576" /></p>
+<p>And that’s the plot!</p>
+</div>
+</div>
+<div id="rmarkdown-themes-and-options" class="section level2">
+<h2>RMarkdown Themes and Options</h2>
+<p>Just like your plots are very customizable, your HTML outputs from knitting your RMarkdown file are customizable as well! All these options are specified in the YAML header at the top of the document. YAML is a recursive acronym which stands for “YAML Ain’t Markup Language”, and the YAML header at the very top of our RMarkdown document (between the three dashes —) sets metadata about our file and HTML output.</p>
+<p>For example:</p>
+<pre><code>output:
+  html_document:
+    fig_width: 6
+    fig_height: 7</code></pre>
+<p>This a standard figure width and height for all the figures in our HTML output. Try knitting your document to see.</p>
+<pre><code>output:
+  html_document:
+    theme: yeti</code></pre>
+<p>This sets a Bootstrap theme for the HTML page. My website uses the yeti theme. The full list is <a href="https://bookdown.org/yihui/rmarkdown/html-document.html#appearance-and-style">here</a>, so try playing with a few! (Knit again to see the new theme.)</p>
+<pre><code>output:
+  html_document:
+    code_folding: hide</code></pre>
+<p>This hides the code that gets output above your figures, and then allows the reader show and hide the code. You can also specify <code>show</code> to have the code automatically show with the option to hide.</p>
+<div id="chunk-names-and-options" class="section level4">
+<h4>Chunk Names and Options</h4>
+<p>In the header of a code chunk (the <code>{r}</code> part), we can name chunks and specify chunk options. Naming a chunk looks like this:</p>
+<p><code>{r Wind-Plot}</code></p>
+<p>When you knit your document, you can see which named chunk is knitting, so you can quickly locate any errors.</p>
+<p>We can also set options about how we want our code chunks to be run or displayed when we knit our RMarkdown document to HTML. We can set these chunk options for the whole document within <code>knitr::opts_chunk$set()</code> in the <code>{r setup}</code> chunk at the top of our file:</p>
+<pre class="r"><code>knitr::opts_chunk$set(
+  message = FALSE,
+  echo = TRUE
+)
+library(tidyverse)</code></pre>
+<p>We can also override those chunk options by specifying them locally for a chunk. For example, when I hide the code for Challenge Graphs, I specify <code>echo = FALSE</code>:</p>
+<p><code>{r Challenge-2, echo = FALSE}</code></p>
+<p>Here are some of the available chunk options:</p>
+<ul>
+<li>With <code>message</code>, we turn on and off messages from the code (<code>message = TRUE</code> and <code>message = FALSE</code>). I almost always use <code>message = FALSE</code>.</li>
+<li>With <code>echo</code>, we choose whether to display our code in the knit file (<code>echo = TRUE</code> and <code>echo = FALSE</code>). I usually enable code folding in the YAML header and choose <code>echo = TRUE</code>, but otherwise I would hide the code with <code>echo = FALSE</code>.</li>
+<li>With <code>eval</code>, we choose whether to run the code at all when we knit.</li>
+<li>With <code>include</code>, we run the code, but we choose whether to display it in the final document.</li>
+</ul>
+<p>There are a variety of available <a href="https://rmarkdown.rstudio.com/lesson-3.html">chunk options</a>. See the full table in the <a href="https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">RMarkdown reference</a>.</p>
+</div>
 </div>
 <div id="visual-cues" class="section level2">
 <h2>Visual Cues</h2>
-<ul>
-<li>Strongest/weakest cues</li>
-<li>Why stacked bar charts &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; pie charts</li>
-</ul>
-<p>Ranking visual cues, from position (strongest) to color hue (weakest): docs/day-1_files/figure-html/visual-cues.png (link not working rn) Source: Nathan Yau, <em>Data Points</em>, 2013</p>
+<p>Finally, I’d like to leave you with a note about strong and weak visual cues. Some cues, like position and length, are easy for the eye to interpret. Others, like color saturation and hue, are harder for distinguishing information.</p>
+<p>See the cues ranked on page 95 of this absolutely stunning data visualization textbook, <a href="http://flowingdata.com/data-points/DataPoints-Ch3.pdf">Data Points</a> by Nathan Yau (2013).</p>
+<p>Also note that angle is worse than length at conveying differences between proportions, so stacked bar charts are better than pie charts! Plenty of bloggers offer their <a href="http://www.storytellingwithdata.com/blog/2014/06/alternatives-to-pies">opinions on alternatives to pie charts</a>.</p>
+</div>
+<div id="challenges-for-next-week" class="section level2">
+<h2>Challenges for Next Week</h2>
+<p>Let’s apply what we just learned! Here is a graph to try to copy for next week:</p>
 </div>
 
 <div id="footer">
   <hr>
-  <p>Website created by Kathleen Hablutzel, NCSSM '19, Smith College SDS+CS '23.</p>
   <p>See the <a href="https://github.com/krhablutzel/srip-bootcamp">GitHub repo</a>.</p>
-  <p><b>Credit:</b> Content adapted from work by <a href="http://www.science.smith.edu/~bbaumer/w/">Ben Baumer</a> and <a href="http://www.science.smith.edu/~jcrouser/">R. Jordan Crouser</a> for Smith College's SDS 192 Introduction to Data Science course.</p>
+  <p><b>Credit:</b> Website created by Kathleen Hablutzel, NCSSM '19, Smith College SDS+CS '23.</p>
+  <p>Almost everything I share, I learned from Smith College's SDS 192 Introduction to Data Science course by <a href="http://www.science.smith.edu/~bbaumer/w/">Ben Baumer</a> and <a href="http://www.science.smith.edu/~jcrouser/">R. Jordan Crouser</a>.</p>
 </div>
 
 
+</div>
+</div>
 
 </div>
 
@@ -392,6 +692,32 @@ $(document).ready(function () {
 });
 </script>
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

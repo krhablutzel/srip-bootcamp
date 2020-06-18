@@ -12,7 +12,7 @@
 <meta name="author" content="Kathleen Hablutzel" />
 
 
-<title>Welcome to SRIP Data Science Bootcamp!</title>
+<title>Day 1 Code!</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -305,55 +305,60 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Welcome to SRIP Data Science Bootcamp!</h1>
+<h1 class="title toc-ignore">Day 1 Code!</h1>
 <h4 class="author">Kathleen Hablutzel</h4>
-<h4 class="date">6/6/2020</h4>
+<h4 class="date">6/11/2020</h4>
 
 </div>
 
 
-<p><img src="index_files/figure-html/Example_Plot-1.png" width="864" /></p>
-<div id="what-youll-learn" class="section level2">
-<h2>What You’ll Learn</h2>
-<div id="skills" class="section level4">
-<h4>Skills</h4>
-<ul>
-<li>Data Visualization</li>
-<li>Data Wrangling</li>
-</ul>
+<div id="r-markdown" class="section level2">
+<h2>R Markdown</h2>
+<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
+<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+<pre class="r"><code>summary(cars)</code></pre>
+<pre><code>##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00</code></pre>
 </div>
-<div id="tools" class="section level4">
-<h4>Tools</h4>
-<ul>
-<li>R, RStudio, Tidyverse Packages</li>
-<li>GitHub</li>
-</ul>
-<p>My goal is to expose you to the first half of a college-level Introduction to Data Science course. We’ll meet once a week to code together (Thursday nights at 8), and then I will provide additional resources if you’d like to delve deeper on each topic.</p>
-<p><em>Note: You are welcome at all five weeks of SRIP social activities even if your program is shorter than 5 weeks. I will have content for all 5 weeks of SRIP, but I will also provide a reasonable conclusion for those who want to stop after 3 weeks.</em></p>
-</div>
-</div>
-<div id="getting-started" class="section level2">
-<h2>Getting Started</h2>
-<p>Please take these steps before our first day:</p>
-<ul>
-<li><a href="https://cloud.r-project.org/">Download and install R</a></li>
-<li><a href="https://rstudio.com/products/rstudio/download/">Download and install RStudio</a><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></li>
-<li><a href="https://github.com/">Create a GitHub account</a></li>
-</ul>
-<p>Now, go into RStudio. In the console at the bottom, install the Tidyverse packages:</p>
-<pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
-<p>If you can run the following code successfully (in the console is fine), you’re ready to go!</p>
-<pre class="r"><code>library(tidyverse)
-ggplot(data = mtcars, aes(x = wt, y = mpg)) +
-  geom_point()</code></pre>
-<p><img src="index_files/figure-html/Example_Code-1.png" width="384" /></p>
-<p>If you run into any problems, send me a direct message on Slack and we’ll troubleshoot.</p>
-</div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>If you have a Chromebook, you’ll have to work from an RStudio server. Slack me and we’ll get you up and running.<a href="#fnref1">↩</a></p></li>
-</ol>
+<div id="including-plots" class="section level2">
+<h2>Including Plots</h2>
+<p>You can also embed plots, for example:</p>
+<p><img src="day-1-code_files/figure-html/pressure-1.png" width="576" /></p>
+<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+<pre class="r"><code>glimpse(mtcars)</code></pre>
+<pre><code>## Observations: 32
+## Variables: 11
+## $ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4…
+## $ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8…
+## $ disp &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140.8, 167.6, …
+## $ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205…
+## $ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92, 3.07…
+## $ wt   &lt;dbl&gt; 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.150, 3.440, …
+## $ qsec &lt;dbl&gt; 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.90, 18.30, …
+## $ vs   &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0…
+## $ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0…
+## $ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3…
+## $ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2, 2, 4…</code></pre>
+<pre class="r"><code>ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point(aes(color = cyl))</code></pre>
+<p><img src="day-1-code_files/figure-html/unnamed-chunk-2-1.png" width="576" /></p>
+<pre class="r"><code>ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot()</code></pre>
+<p><img src="day-1-code_files/figure-html/unnamed-chunk-3-1.png" width="576" /></p>
+<pre class="r"><code>library(ggthemes)
+
+ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  theme(
+    rect = element_rect(fill = &quot;blue&quot;)
+  )</code></pre>
+<p><img src="day-1-code_files/figure-html/unnamed-chunk-4-1.png" width="576" /></p>
+<pre class="r"><code>data()</code></pre>
 </div>
 
 <div id="footer">
