@@ -405,8 +405,8 @@ div.tocify {
 </ul>
 <div id="questions-from-last-week" class="section level4">
 <h4>Questions from Last Week</h4>
-<p><em>What editor theme am I using?</em> Under RStudio &gt; Preferences &gt; Appearance, you can explore different themes for your editor. I prefer the Cobalt theme for its inverted colors and slightly blue theme, but I encourage you to play around with different options and find a favorite! (Remember to click “Apply”)</p>
-<p><em>How do your graphs show up in the plot window?</em> We noticed last week that the default settings for chunk output are “Preview in Window” and “Chunk Output Inline.” I find both clunky, so I have my settings on “Preview in Viewer Pane” and “Chunk Output in Console.” You can change this under the gear at the top of your editor next to the Knit button, or you can go under RStudio &gt; Preferences &gt; RMarkdown, uncheck “Show chunk output inline for all R Markdown documents”, and change “Show ouput preview in:” to “Viewer Pane.” (Remember to click “Apply”)</p>
+<p><strong>What editor theme am I using?</strong> Under RStudio &gt; Preferences &gt; Appearance, you can explore different themes for your editor. I prefer the Cobalt theme for its inverted colors and slightly blue theme, but I encourage you to play around with different options and find a favorite! (Remember to click “Apply”)</p>
+<p><strong>How do your graphs show up in the plot window?</strong> We noticed last week that the default settings for chunk output are “Preview in Window” and “Chunk Output Inline.” I find both clunky, so I have my settings on “Preview in Viewer Pane” and “Chunk Output in Console.” You can change this under the gear at the top of your editor next to the Knit button, or you can go under RStudio &gt; Preferences &gt; RMarkdown, uncheck “Show chunk output inline for all R Markdown documents”, and change “Show ouput preview in:” to “Viewer Pane.” (Remember to click “Apply”)</p>
 </div>
 <div id="last-weeks-challenge" class="section level4">
 <h4>Last Week’s Challenge</h4>
@@ -474,9 +474,9 @@ display.brewer.all()</code></pre>
 <div id="types-of-color-palettes" class="section level5">
 <h5>Types of Color Palettes</h5>
 <p>If we go back to the <a href="colorbrewer2.org">ColorBrewer website</a>, we see that there are three types of palettes available: Sequential, Diverging, and Qualitative. Each type of color palette is designed for a specific kind of data.</p>
-<p>*Sequential <a href="Data:*" class="uri">Data:*</a> Data with an order. The darkest color is perceived as the greatest. Using this scale continuously provides more detail, but the eye has trouble distinguishing more than 5-6 levels, so you can also use these scales discretely for more clear distinctions.</p>
-<p>*Diverging <a href="Data:*" class="uri">Data:*</a> Data where both the low and high extremes are notable. Two colors indicate the extremes of the range with a neutral color in the middle. Be careful that your neutral color is distinguishable from your missing data! (Missing data is often gray or white.)</p>
-<p>*Qualitative <a href="Data:*" class="uri">Data:*</a> Aka Categorical Data. Data in different categories. Choose colors that are perceptually different but have approximately the same saturation so that categories seem distinct.</p>
+<p>**Sequential <a href="Data:**" class="uri">Data:**</a> Data with an order. The darkest color is perceived as the greatest. Using this scale continuously provides more detail, but the eye has trouble distinguishing more than 5-6 levels, so you can also use these scales discretely for more clear distinctions.</p>
+<p>**Diverging <a href="Data:**" class="uri">Data:**</a> Data where both the low and high extremes are notable. Two colors indicate the extremes of the range with a neutral color in the middle. Be careful that your neutral color is distinguishable from your missing data! (Missing data is often gray or white.)</p>
+<p>**Qualitative <a href="Data:**" class="uri">Data:**</a> Aka Categorical Data. Data in different categories. Choose colors that are perceptually different but have approximately the same saturation so that categories seem distinct.</p>
 <p>With all three types of palettes, beware colorblindness. (For example, Red-Green diverging is a bad choice, because both extremes will look similar to those with Red-Green colorblindness.)</p>
 <p>If we view the <code>RColorBrewer</code> palettes again, we see that the first section of palettes is sequential, the second is categorical, and the third is diverging.</p>
 <pre class="r"><code>display.brewer.all()</code></pre>
@@ -660,7 +660,7 @@ library(tidyverse)</code></pre>
 <div id="footer">
   <hr>
   <p>See the <a href="https://github.com/krhablutzel/srip-bootcamp">GitHub repo</a>.</p>
-  <p><b>Credit:</b> Website created by Kathleen Hablutzel, NCSSM '19, Smith College SDS+CS '23.</p>
+  <p><b>Credit:</b> Course and website by Kathleen Hablutzel, NCSSM '19, Smith College SDS+CS '23.</p>
   <p>Almost everything I share, I learned from Smith College's SDS 192 Introduction to Data Science course by <a href="http://www.science.smith.edu/~bbaumer/w/">Ben Baumer</a> and <a href="http://www.science.smith.edu/~jcrouser/">R. Jordan Crouser</a>.</p>
 </div>
 

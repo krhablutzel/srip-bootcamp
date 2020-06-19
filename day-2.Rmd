@@ -13,7 +13,8 @@ output:
 knitr::opts_chunk$set(
   message = FALSE,
   warning = FALSE,
-  echo = TRUE)
+  echo = TRUE
+)
 library(tidyverse)
 library(ggthemes)
 library(RColorBrewer)
@@ -37,9 +38,9 @@ Packages to install:
 
 #### Questions from Last Week
 
-*What editor theme am I using?* Under RStudio > Preferences > Appearance, you can explore different themes for your editor. I prefer the Cobalt theme for its inverted colors and slightly blue theme, but I encourage you to play around with different options and find a favorite! (Remember to click "Apply")
+**What editor theme am I using?** Under RStudio > Preferences > Appearance, you can explore different themes for your editor. I prefer the Cobalt theme for its inverted colors and slightly blue theme, but I encourage you to play around with different options and find a favorite! (Remember to click "Apply")
 
-*How do your graphs show up in the plot window?* We noticed last week that the default settings for chunk output are "Preview in Window" and "Chunk Output Inline." I find both clunky, so I have my settings on "Preview in Viewer Pane" and "Chunk Output in Console." You can change this under the gear at the top of your editor next to the Knit button, or you can go under RStudio > Preferences > RMarkdown, uncheck "Show chunk output inline for all R Markdown documents", and change "Show ouput preview in:" to "Viewer Pane." (Remember to click "Apply")
+**How do your graphs show up in the plot window?** We noticed last week that the default settings for chunk output are "Preview in Window" and "Chunk Output Inline." I find both clunky, so I have my settings on "Preview in Viewer Pane" and "Chunk Output in Console." You can change this under the gear at the top of your editor next to the Knit button, or you can go under RStudio > Preferences > RMarkdown, uncheck "Show chunk output inline for all R Markdown documents", and change "Show ouput preview in:" to "Viewer Pane." (Remember to click "Apply")
 
 #### Last Week's Challenge
 
@@ -126,11 +127,11 @@ myplot +
 
 If we go back to the [ColorBrewer website](colorbrewer2.org), we see that there are three types of palettes available: Sequential, Diverging, and Qualitative. Each type of color palette is designed for a specific kind of data.
 
-*Sequential Data:* Data with an order. The darkest color is perceived as the greatest. Using this scale continuously provides more detail, but the eye has trouble distinguishing more than 5-6 levels, so you can also use these scales discretely for more clear distinctions.
+**Sequential Data:** Data with an order. The darkest color is perceived as the greatest. Using this scale continuously provides more detail, but the eye has trouble distinguishing more than 5-6 levels, so you can also use these scales discretely for more clear distinctions.
 
-*Diverging Data:* Data where both the low and high extremes are notable. Two colors indicate the extremes of the range with a neutral color in the middle. Be careful that your neutral color is distinguishable from your missing data! (Missing data is often gray or white.)
+**Diverging Data:** Data where both the low and high extremes are notable. Two colors indicate the extremes of the range with a neutral color in the middle. Be careful that your neutral color is distinguishable from your missing data! (Missing data is often gray or white.)
 
-*Qualitative Data:* Aka Categorical Data. Data in different categories. Choose colors that are perceptually different but have approximately the same saturation so that categories seem distinct.
+**Qualitative Data:** Aka Categorical Data. Data in different categories. Choose colors that are perceptually different but have approximately the same saturation so that categories seem distinct.
 
 With all three types of palettes, beware colorblindness. (For example, Red-Green diverging is a bad choice, because both extremes will look similar to those with Red-Green colorblindness.)
 
@@ -390,7 +391,7 @@ star_plot
 
 Hint: I wonder if this theme looks similar to one we've seen before...
 
-```{r Challenge-2, echo = FALSE}
+```{r Challenge-2, echo = FALSE, fig.height=6}
 height_plot <- ggplot(data = starwars, aes(y = homeworld)) +
   geom_bar(fill = "#4F5810") +
   theme_solarized() +

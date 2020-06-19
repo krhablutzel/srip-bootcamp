@@ -16,15 +16,12 @@ knitr::opts_chunk$set(
 library(tidyverse)
 ```
 
-```{r Example_Plot, echo = FALSE} 
-housing <- read.csv("http://www.science.smith.edu/~jcrouser/SDS192/landdata-states.csv")
-
-home_plot <- ggplot(data = housing, aes(x = Home.Price.Index, y = State)) +
-  geom_point(aes(color = Date),
+```{r Data-Art, echo = FALSE} 
+data_art <- ggplot(data = midwest, aes(x = area, y = category)) +
+  geom_point(aes(color = percchildbelowpovert),
              alpha = 0.6,
              size = 1.5,
              position = position_jitter(width = 0, height = 0.25)) +
-  scale_y_discrete(name = "State Abbreviation") +
   scale_color_continuous(breaks = c(1975.25, 1994.25, 2013.25), # c() list of breaks
                          labels = c(1975, 1994, 2013),
                          low = "blue", high = "red") + # low and high colors
@@ -34,7 +31,7 @@ home_plot <- ggplot(data = housing, aes(x = Home.Price.Index, y = State)) +
         axis.ticks = element_blank(),
         legend.position = "none")
 
-home_plot
+data_art
 ```
 
 ## What You'll Learn
