@@ -514,8 +514,9 @@ teeth +
 <p><img src="day-2_files/figure-html/Fill-1.png" width="576" /></p>
 </div>
 </div>
-<div id="other-graphing-adventures" class="section level4">
-<h4>Other Graphing Adventures</h4>
+</div>
+<div id="unpacking-last-weeks-challenge-graph" class="section level2">
+<h2>Unpacking Last Week’s Challenge Graph</h2>
 <p>Now, you know how to apply themes from <code>ggthemes</code> using <code>theme_*()</code> and palettes from <code>RColorBrewer</code> using <code>scale_*_*()</code>. What else do you need to complete last week’s challenge graph?</p>
 <pre class="r"><code>storm_plot &lt;- ggplot(data = storms, aes(x = wind, y = pressure)) +
   geom_point(aes(color = status)) +
@@ -540,9 +541,8 @@ teeth +
 
 storm_plot</code></pre>
 <p><img src="day-2_files/figure-html/Wind-Graph2-1.png" width="576" /></p>
-</div>
 <div id="manual-color-scales" class="section level4">
-<h4>Manual color scales</h4>
+<h4>Manual Color Scales</h4>
 <p>We can apply discrete color scales with <code>scale_color_brewer()</code> and continuous color scales with <code>scale_color_distiller()</code>. You can also design your own color scales manually with <code>scale_color_manual()</code>. You will need to specify a vector of color values to use:</p>
 <pre class="r"><code>myplot + 
   scale_color_manual(
@@ -612,6 +612,12 @@ myplot</code></pre>
   html_document:
     code_folding: hide</code></pre>
 <p>This hides the code that gets output above your figures, and then allows the reader show and hide the code. You can also specify <code>show</code> to have the code automatically show with the option to hide.</p>
+<pre><code>output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true</code></pre>
+<p>This creates the floating table of contents for this page, automatically generating sections based on my headers. (Make different levels of headers in your text with different numbers of hashes, as seen in the <a href="https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">RMarkdown reference guide</a>.)</p>
 <div id="chunk-names-and-options" class="section level4">
 <h4>Chunk Names and Options</h4>
 <p>In the header of a code chunk (the <code>{r}</code> part), we can name chunks and specify chunk options. Naming a chunk looks like this:</p>
@@ -644,40 +650,9 @@ library(tidyverse)</code></pre>
 <div id="challenges-for-next-week" class="section level2">
 <h2>Challenges for Next Week</h2>
 <p>Let’s apply what we just learned! Here are two graphs using the <code>starwars</code> dataset to try to copy for next week:</p>
-<pre class="r"><code>star_plot &lt;- ggplot(data = starwars, aes(x = height, y = mass)) +
-  geom_point(aes(color = gender)) +
-  scale_color_brewer(palette = &quot;Set1&quot;) +
-  labs(
-    title = &quot;Mass vs. Height of Star Wars Characters by Species&quot;,
-    caption = &quot;Source: Star Wars API&quot;,
-    x = &quot;Height (cm)&quot;,
-    y = &quot;Weight (kg)&quot;,
-    color = &quot;Gender&quot;
-  ) +
-  theme(
-    text = element_text(family = &quot;Arial&quot;),
-    rect = element_blank(),
-    axis.line = element_line(color = &quot;gray40&quot;),
-    panel.grid = element_line(color = &quot;gray90&quot;),
-    legend.position = &quot;bottom&quot;
-  )
-
-star_plot</code></pre>
 <pre><code>## Warning: Removed 31 rows containing missing values (geom_point).</code></pre>
 <p><img src="day-2_files/figure-html/Challenge-1-1.png" width="576" /></p>
 <p>Hint: I wonder if this theme looks similar to one we’ve seen before…</p>
-<pre class="r"><code>height_plot &lt;- ggplot(data = starwars, aes(y = homeworld)) +
-  geom_bar(fill = &quot;#4F5810&quot;) +
-  theme_solarized() +
-  labs(
-    title = &quot;Number of Starwars Characters by Homeworld&quot;,
-    subtitle = &quot;As recorded in the starwars dplyr dataset&quot;,
-    caption = &quot;Source: Star Wars API&quot;,
-    x = &quot;Number of Characters&quot;,
-    y = &quot;Homeworld&quot;
-  )
-
-height_plot</code></pre>
 <p><img src="day-2_files/figure-html/Challenge-2-1.png" width="576" /></p>
 <p>Hint: Try a color picker tool, such as the one in PowerPoint, for the fills of this bar chart! Also, <a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">here’s</a> the ggplot2 documentation for bar charts.</p>
 <p>As always, please Slack me throughout the week with any questions! I’ll reveal the code for these challenges next week.</p>
@@ -740,7 +715,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2",
+      selectors: "h1,h2,h3,h4",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
