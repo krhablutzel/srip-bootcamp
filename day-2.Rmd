@@ -18,6 +18,8 @@ library(RColorBrewer)
 
 ## Getting Started
 
+Here is the [recording of today's lesson](https://ncssm.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=771513b5-8759-45a8-916d-abdf0014da70). (This is only accessible within the NCSSM organization.) You can also follow along with the code below.
+
 Today we will:
 
 * Add themes to plots (ggthemes)
@@ -71,7 +73,7 @@ Now that we've learned how to create chart elements with `geom_*()` (where * cou
 
 Let's store a plot we can add various colors onto:
 
-```{r}
+```{r Storm-Plot}
 myplot <- ggplot(data = storms, aes(x = wind, y = pressure)) +
   geom_point(aes(color = status))
 
@@ -82,7 +84,7 @@ myplot
 
 Themes are a quick way to get a great-looking plot. Download the `ggthemes` package, load it, and just add them on!
 
-```{r Adding_Themes}
+```{r Adding-Themes}
 library(ggthemes)
 
 myplot +
@@ -95,7 +97,7 @@ myplot +
 
 Choosing colors can be hard. We use [ColorBrewer color palettes](colorbrewer2.org) from the `RColorBrewer` package for ready-made user-friendly color palettes. Let's see what palettes are available:
 
-```{r}
+```{r See-Brewer}
 library(RColorBrewer)
 
 display.brewer.all()
@@ -105,14 +107,14 @@ display.brewer.all()
 
 We can add colors to our plots using the `scale_color_brewer()` function:
 
-```{r}
+```{r Brewer-Seq}
 myplot +
   scale_color_brewer(palette = "YlOrRd")
 ```
 
 This one is hard to distinguish. Let's try a palette designed for qualitative data.
 
-```{r}
+```{r Brewer-Cat}
 myplot +
   scale_color_brewer(palette = "Set1")
 ```
@@ -131,7 +133,7 @@ With all three types of palettes, beware colorblindness. (For example, Red-Green
 
 If we view the `RColorBrewer` palettes again, we see that the first section of palettes is sequential, the second is categorical, and the third is diverging.
 
-```{r}
+```{r See-Brewer-2}
 display.brewer.all()
 ```
 
@@ -139,13 +141,13 @@ display.brewer.all()
 
 If we try to apply a color brewer scale to continuous data, we run into an error:
 
-```{r}
+```{r Carplot}
 car_plot <- ggplot(data = mtcars, aes(x = wt, y = mpg)) +
   geom_point(aes(color = hp))
 ```
 
 
-```{r, eval = FALSE}
+```{r Error, eval = FALSE}
 car_plot +
   scale_color_brewer(palette = "YlOrBr")
 ```
@@ -154,7 +156,7 @@ car_plot +
 
 We're trying to use discrete colors on continuous data, and R doesn't know how to make those colors continuous. Luckily, we can change our color function slightly and distill these discrete colors into continuous colors. Instead of `scale_color_brewer()`, we use `scale_color_distiller()`.
 
-```{r}
+```{r Continuous}
 car_plot +
   scale_color_distiller(palette = "YlOrBr")
 ```
@@ -165,7 +167,7 @@ Now, we have a continuous color scale for our continuous data.
 
 If we try to apply our color scales to a boxplot or barchart, it looks like almost nothing happens!
 
-```{r}
+```{r Teeth}
 teeth <- ggplot(data = ToothGrowth, aes(x = supp, y = len)) +
   geom_boxplot(aes(color = supp))
 
@@ -175,7 +177,7 @@ teeth +
 
 Color works on points and lines. To fill in whole rectangles, we set the `fill` parameter instead, and we use `scale_fill_*()` instead of `scale_color_*()`.
 
-```{r}
+```{r Fill}
 teeth <- ggplot(data = ToothGrowth, aes(x = supp, y = len)) +
   geom_boxplot(aes(fill = supp))
 
@@ -216,7 +218,7 @@ storm_plot
 
 We can apply discrete color scales with `scale_color_brewer()` and continuous color scales with `scale_color_distiller()`. You can also design your own color scales manually with `scale_color_manual()`. You will need to specify a vector of color values to use:
 
-```{r}
+```{r Color-Manual}
 myplot + 
   scale_color_manual(
     values = c("#6f18ad", "#f051bb", "#faf600")
@@ -229,7 +231,7 @@ I usually specify colors using the Hex format, which use pairs of two digits to 
 
 This `scale_color_manual()` function also lets you rename the colors of your color scale. Specify these labels in the `labels` parameter:
 
-```{r}
+```{r Labels-Manual}
 myplot <- myplot + 
   scale_color_manual(
     values = c("#6f18ad", "#f051bb", "#faf600"),
@@ -243,7 +245,7 @@ myplot
 
 While we're at it, let's fix up our other plot labels as well. We can change many of these with the `labs()` function.
 
-```{r}
+```{r Labels}
 myplot <- myplot + 
   labs(
     title = "Pressure vs. Wind Speed of Atlantic Storms",
@@ -262,7 +264,7 @@ myplot
 
 I changed a few different parameters of the `theme()` function in hopes that you would delve more into the theme documentation (`?theme`) and explore the many possibilities.
 
-```{r}
+```{r Themes}
 myplot <- myplot +
   theme(
     text = element_text(family = "Arial"),
@@ -349,5 +351,47 @@ Also note that angle is worse than length at conveying differences between propo
 
 ## Challenges for Next Week
 
-Let's apply what we just learned! Here is a graph to try to copy for next week:
+Let's apply what we just learned! Here are two graphs using the `starwars` dataset to try to copy for next week:
 
+```{r Challenge-1, echo = "FALSE"}
+star_plot <- ggplot(data = starwars, aes(x = height, y = mass)) +
+  geom_point(aes(color = gender)) +
+  scale_color_brewer(palette = "Set1") +
+  labs(
+    title = "Mass vs. Height of Star Wars Characters by Species",
+    caption = "Source: Star Wars API",
+    x = "Height (cm)",
+    y = "Weight (kg)",
+    color = "Gender"
+  ) +
+  theme(
+    text = element_text(family = "Arial"),
+    rect = element_blank(),
+    axis.line = element_line(color = "gray40"),
+    panel.grid = element_line(color = "gray90"),
+    legend.position = "bottom"
+  )
+
+star_plot
+```
+
+Hint: I wonder if this theme looks similar to one we've seen before...
+
+```{r Challenge-2, echo = "FALSE"}
+height_plot <- ggplot(data = starwars, aes(y = homeworld)) +
+  geom_bar(fill = "#4F5810") +
+  theme_solarized() +
+  labs(
+    title = "Number of Starwars Characters by Homeworld",
+    subtitle = "As recorded in the starwars dplyr dataset",
+    caption = "Source: Star Wars API",
+    x = "Number of Characters",
+    y = "Homeworld"
+  )
+
+height_plot
+```
+
+Hint: Try a color picker tool, such as the one in PowerPoint, for the fills of this bar chart! Also, [here's](https://ggplot2.tidyverse.org/reference/geom_bar.html) the ggplot2 documentation for bar charts.
+
+As always, please Slack me throughout the week with any questions! I'll reveal the code for these challenges next week.

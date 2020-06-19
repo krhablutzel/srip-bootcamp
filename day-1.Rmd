@@ -17,7 +17,7 @@ library(tidyverse)
 
 If you haven't already, start downloading R and R Studio. See the instructions [here](index.html) under "Getting Started."
 
-After today's lesson, I'll post the video recording [here](https://ncssm.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=8bad9ba8-35c9-424d-a156-abd8000e0a2b). (This is only accessible within the NCSSM organization.) You can also follow along with the code below.
+Here is the [recording of today's lesson](https://ncssm.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=8bad9ba8-35c9-424d-a156-abd8000e0a2b). (This is only accessible within the NCSSM organization.) You can also follow along with the code below.
 
 #### Creating an RMarkdown Document
 
@@ -28,7 +28,7 @@ After today's lesson, I'll post the video recording [here](https://ncssm.hosted.
     + Produce reproducible reports where the code is right there
     + Export to HTML, PDF, MS Word (how I created website)
     
-```{r}
+```{r Summary}
 summary(cars)
 ```
 
@@ -46,7 +46,7 @@ Today we will:
 
 Plotting with base R is… not super fun. 
 
-```{r}
+```{r Base-R-Plot}
 plot(pressure)
 ```
 
@@ -58,7 +58,7 @@ The main packages are `ggplot2`, `dplyr`, `tidyr`, `readr`, `purrr`, `tibble`, `
 
 Let's load the tidyverse:
 
-```{r}
+```{r Load-Tidy}
 library(tidyverse)
 ```
 
@@ -68,7 +68,7 @@ In the bottom right panel, under the Packages tab, the `tidyverse` packages shou
 
 We are going to work with the `mtcars` data set. Let's take a look:
 
-```{r}
+```{r Glimpse}
 glimpse(mtcars)
 # View(mtcars)
 ```
@@ -84,7 +84,7 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) +
 
 Note: You map variables to aesthetics within `aes()` and set fixed visual cues outside `aes()`. If I want all my points to be blue, I use the color parameter outside `aes()`:
 
-```{r}
+```{r Fixed-Color}
 # adding color
 ggplot(data = mtcars, aes(x = wt, y = mpg)) +
   geom_point(color = "blue")
@@ -92,7 +92,7 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) +
 
 If I want to map color to a variable, I use the color parameter inside `aes()`:
 
-```{r}
+```{r Var-Color}
 # mapping a variable to color
 ggplot(data = mtcars, aes(x = wt, y = mpg)) +
   geom_point(aes(color = cyl))
@@ -102,13 +102,13 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) +
 
 If we look at the data again, we notice that it's all numbers:
 
-```{r}
+```{r Glimpse2}
 glimpse(mtcars)
 ```
 
 However, the number of cylinders in the car is always 4, 6, or 8. Let's use the `factor()` function to turn this into categorical data, so that we can make a boxplot.
 
-```{r Bar_Chart}
+```{r Bar-Chart}
 # a basic boxplot
 ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
   geom_boxplot()
@@ -118,13 +118,13 @@ ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
 
 The `data()` function will show you all your available data sets:
 
-```{r}
+```{r Data}
 data()
 ```
 
 The `iris` data set is a famous data set used in machine learning classes. Let's take a look at the documentation:
 
-```{r}
+```{r Iris}
 ?iris
 ```
 
@@ -142,7 +142,7 @@ Data is more than numbers.
     
 For example:
 
-```{r June_Weather}
+```{r June-Weather}
 library(ggthemes)
 
 june_weather <- airquality %>%
@@ -169,7 +169,7 @@ You'll need to dig into the `ggplot2` documentation, as well as the `storms` dat
 
 Graph to copy:
 
-```{r Wind_Graph, echo = FALSE}
+```{r Wind-Graph, echo = FALSE}
 storm_plot <- ggplot(data = storms, aes(x = wind, y = pressure)) +
   geom_point(aes(color = status)) +
   labs(
@@ -193,6 +193,5 @@ storm_plot <- ggplot(data = storms, aes(x = wind, y = pressure)) +
 
 storm_plot
 ```
-
 
 I encourage you to Slack me throughout the week as you get stuck. I'll reveal the code next week!

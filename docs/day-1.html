@@ -317,7 +317,7 @@ $(document).ready(function () {
 <div id="getting-started" class="section level4">
 <h4>Getting Started</h4>
 <p>If you haven’t already, start downloading R and R Studio. See the instructions <a href="index.html">here</a> under “Getting Started.”</p>
-<p>After today’s lesson, I’ll post the video recording <a href="https://ncssm.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=8bad9ba8-35c9-424d-a156-abd8000e0a2b">here</a>. (This is only accessible within the NCSSM organization.) You can also follow along with the code below.</p>
+<p>Here is the <a href="https://ncssm.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=8bad9ba8-35c9-424d-a156-abd8000e0a2b">recording of today’s lesson</a>. (This is only accessible within the NCSSM organization.) You can also follow along with the code below.</p>
 </div>
 <div id="creating-an-rmarkdown-document" class="section level4">
 <h4>Creating an RMarkdown Document</h4>
@@ -354,7 +354,7 @@ $(document).ready(function () {
 <h4>Introducing… the Tidyverse</h4>
 <p>Plotting with base R is… not super fun.</p>
 <pre class="r"><code>plot(pressure)</code></pre>
-<p><img src="day-1_files/figure-html/unnamed-chunk-2-1.png" width="576" /></p>
+<p><img src="day-1_files/figure-html/Base-R-Plot-1.png" width="576" /></p>
 <p>Instead, we plot with <code>ggplot2</code>, a popular open-source package. <code>ggplot2</code> is an implementation of Wilkinson’s <em>Grammar of Graphics</em>, which means that you combine plot building blocks to create your visualization.</p>
 <p><code>ggplot2</code> is part of the Tidyverse, a series of open-source R packages that “share an underlying design philosophy, grammar, and data structures”. (See the <a href="https://www.tidyverse.org/">website</a> and <a href="https://github.com/tidyverse/tidyverse">GitHub repository</a>.)</p>
 <p>The main packages are <code>ggplot2</code>, <code>dplyr</code>, <code>tidyr</code>, <code>readr</code>, <code>purrr</code>, <code>tibble</code>, <code>stringr</code>, and <code>forcats</code>, but we will mostly focus on <strong>ggplot2</strong> (for data visualization) and <strong>dplyr</strong> (for data wrangling).</p>
@@ -391,12 +391,12 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) +
 <pre class="r"><code># adding color
 ggplot(data = mtcars, aes(x = wt, y = mpg)) +
   geom_point(color = &quot;blue&quot;)</code></pre>
-<p><img src="day-1_files/figure-html/unnamed-chunk-5-1.png" width="576" /></p>
+<p><img src="day-1_files/figure-html/Fixed-Color-1.png" width="576" /></p>
 <p>If I want to map color to a variable, I use the color parameter inside <code>aes()</code>:</p>
 <pre class="r"><code># mapping a variable to color
 ggplot(data = mtcars, aes(x = wt, y = mpg)) +
   geom_point(aes(color = cyl))</code></pre>
-<p><img src="day-1_files/figure-html/unnamed-chunk-6-1.png" width="576" /></p>
+<p><img src="day-1_files/figure-html/Var-Color-1.png" width="576" /></p>
 </div>
 <div id="example-2-a-box-plot" class="section level4">
 <h4>Example 2: A Box Plot</h4>
@@ -419,7 +419,7 @@ ggplot(data = mtcars, aes(x = wt, y = mpg)) +
 <pre class="r"><code># a basic boxplot
 ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
   geom_boxplot()</code></pre>
-<p><img src="day-1_files/figure-html/Bar_Chart-1.png" width="576" /></p>
+<p><img src="day-1_files/figure-html/Bar-Chart-1.png" width="576" /></p>
 </div>
 <div id="about-available-data-sets" class="section level4">
 <h4>About Available Data Sets</h4>
@@ -461,13 +461,13 @@ june_plot &lt;- ggplot(data = june_weather, aes(x = Day, y =  Temp)) +
   theme(plot.title = element_text(size = 18))
 
 june_plot</code></pre>
-<p><img src="day-1_files/figure-html/June_Weather-1.png" width="576" /></p>
+<p><img src="day-1_files/figure-html/June-Weather-1.png" width="576" /></p>
 <div id="can-i-practice-more" class="section level4">
 <h4>Can I practice more?</h4>
 <p>Yes! So glad you asked. An awesome way to learn data visualization is through “copy the master” experiments, where you try to recreate an existing graph as closely as possible.</p>
 <p>You’ll need to dig into the <code>ggplot2</code> documentation, as well as the <code>storms</code> dataset. I recommend starting by looking at <code>labs()</code> and <code>theme()</code>, though we’ll cover themes more next week.</p>
 <p>Graph to copy:</p>
-<p><img src="day-1_files/figure-html/Wind_Graph-1.png" width="576" /></p>
+<p><img src="day-1_files/figure-html/Wind-Graph-1.png" width="576" /></p>
 <p>I encourage you to Slack me throughout the week as you get stuck. I’ll reveal the code next week!</p>
 </div>
 </div>

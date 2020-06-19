@@ -1,0 +1,97 @@
+---
+title: "Untitled"
+author: "Kathleen Hablutzel"
+date: "6/18/2020"
+output:
+  html_document:
+    code_folding: show
+    fig_width: 6
+    fig_height: 4
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE
+  )
+library(tidyverse)
+```
+
+```{r Example, eval = FALSE, fig.height = 1.5, fig.width = 3}
+
+```
+
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+```{r}
+library(ggthemes)
+
+myplot <- ggplot(data = storms, aes(x = wind, y = pressure)) +
+  geom_point(aes(color = status))
+
+myplot
+```
+
+```{r}
+library(RColorBrewer)
+display.brewer.all()
+```
+
+```{r}
+
+
+myplot +
+  scale_color_brewer(palette = "Set1")
+```
+
+```{r}
+myplot +
+  scale_color_brewer(palette = "YlOrBr")
+```
+
+
+```{r}
+car_plot <- ggplot(data = mtcars, aes(x = wt, y = mpg, color = hp)) +
+  geom_point()
+
+car_plot
+```
+
+```{r}
+car_plot +
+  scale_color_distiller(palette = "Purples")
+```
+
+```{r Teeth-Plot1}
+teeth <- ggplot(data = ToothGrowth, aes(x = supp, y = len, fill = supp)) +
+  geom_boxplot()
+
+teeth
+```
+
+```{r Teeth-Plot2}
+teeth +
+  scale_fill_brewer(palette = "Dark2")
+```
+

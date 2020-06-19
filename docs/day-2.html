@@ -390,6 +390,7 @@ div.tocify {
 
 <div id="getting-started" class="section level2">
 <h2>Getting Started</h2>
+<p>Here is the <a href="https://ncssm.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=771513b5-8759-45a8-916d-abdf0014da70">recording of today’s lesson</a>. (This is only accessible within the NCSSM organization.) You can also follow along with the code below.</p>
 <p>Today we will:</p>
 <ul>
 <li>Add themes to plots (ggthemes)</li>
@@ -443,7 +444,7 @@ storm_plot</code></pre>
   geom_point(aes(color = status))
 
 myplot</code></pre>
-<p><img src="day-2_files/figure-html/unnamed-chunk-1-1.png" width="576" /></p>
+<p><img src="day-2_files/figure-html/Storm-Plot-1.png" width="576" /></p>
 <div id="adding-themes" class="section level4">
 <h4>Adding Themes</h4>
 <p>Themes are a quick way to get a great-looking plot. Download the <code>ggthemes</code> package, load it, and just add them on!</p>
@@ -451,7 +452,7 @@ myplot</code></pre>
 
 myplot +
   theme_fivethirtyeight()</code></pre>
-<p><img src="day-2_files/figure-html/Adding_Themes-1.png" width="576" /></p>
+<p><img src="day-2_files/figure-html/Adding-Themes-1.png" width="576" /></p>
 <p><a href="https://jrnold.github.io/ggthemes/reference/index.html">See the documentation</a> for a list of available themes.</p>
 </div>
 <div id="color-palettes" class="section level4">
@@ -460,16 +461,16 @@ myplot +
 <pre class="r"><code>library(RColorBrewer)
 
 display.brewer.all()</code></pre>
-<p><img src="day-2_files/figure-html/unnamed-chunk-2-1.png" width="576" /></p>
+<p><img src="day-2_files/figure-html/See-Brewer-1.png" width="576" /></p>
 <p>(The Zoom option near the Plots tab will let you zoom in on the color palettes in a larger window.)</p>
 <p>We can add colors to our plots using the <code>scale_color_brewer()</code> function:</p>
 <pre class="r"><code>myplot +
   scale_color_brewer(palette = &quot;YlOrRd&quot;)</code></pre>
-<p><img src="day-2_files/figure-html/unnamed-chunk-3-1.png" width="576" /></p>
+<p><img src="day-2_files/figure-html/Brewer-Seq-1.png" width="576" /></p>
 <p>This one is hard to distinguish. Let’s try a palette designed for qualitative data.</p>
 <pre class="r"><code>myplot +
   scale_color_brewer(palette = &quot;Set1&quot;)</code></pre>
-<p><img src="day-2_files/figure-html/unnamed-chunk-4-1.png" width="576" /></p>
+<p><img src="day-2_files/figure-html/Brewer-Cat-1.png" width="576" /></p>
 <div id="types-of-color-palettes" class="section level5">
 <h5>Types of Color Palettes</h5>
 <p>If we go back to the <a href="colorbrewer2.org">ColorBrewer website</a>, we see that there are three types of palettes available: Sequential, Diverging, and Qualitative. Each type of color palette is designed for a specific kind of data.</p>
@@ -479,7 +480,7 @@ display.brewer.all()</code></pre>
 <p>With all three types of palettes, beware colorblindness. (For example, Red-Green diverging is a bad choice, because both extremes will look similar to those with Red-Green colorblindness.)</p>
 <p>If we view the <code>RColorBrewer</code> palettes again, we see that the first section of palettes is sequential, the second is categorical, and the third is diverging.</p>
 <pre class="r"><code>display.brewer.all()</code></pre>
-<p><img src="day-2_files/figure-html/unnamed-chunk-5-1.png" width="576" /></p>
+<p><img src="day-2_files/figure-html/See-Brewer-2-1.png" width="576" /></p>
 </div>
 <div id="brewer-vs.distiller" class="section level5">
 <h5>Brewer vs. Distiller</h5>
@@ -492,7 +493,7 @@ display.brewer.all()</code></pre>
 <p>We’re trying to use discrete colors on continuous data, and R doesn’t know how to make those colors continuous. Luckily, we can change our color function slightly and distill these discrete colors into continuous colors. Instead of <code>scale_color_brewer()</code>, we use <code>scale_color_distiller()</code>.</p>
 <pre class="r"><code>car_plot +
   scale_color_distiller(palette = &quot;YlOrBr&quot;)</code></pre>
-<p><img src="day-2_files/figure-html/unnamed-chunk-8-1.png" width="576" /></p>
+<p><img src="day-2_files/figure-html/Continuous-1.png" width="576" /></p>
 <p>Now, we have a continuous color scale for our continuous data.</p>
 </div>
 <div id="color-vs.fill" class="section level5">
@@ -503,14 +504,14 @@ display.brewer.all()</code></pre>
 
 teeth +
   scale_color_brewer(palette = &quot;Set3&quot;)</code></pre>
-<p><img src="day-2_files/figure-html/unnamed-chunk-9-1.png" width="576" /></p>
+<p><img src="day-2_files/figure-html/Teeth-1.png" width="576" /></p>
 <p>Color works on points and lines. To fill in whole rectangles, we set the <code>fill</code> parameter instead, and we use <code>scale_fill_*()</code> instead of <code>scale_color_*()</code>.</p>
 <pre class="r"><code>teeth &lt;- ggplot(data = ToothGrowth, aes(x = supp, y = len)) +
   geom_boxplot(aes(fill = supp))
 
 teeth +
   scale_fill_brewer(palette = &quot;Set3&quot;)</code></pre>
-<p><img src="day-2_files/figure-html/unnamed-chunk-10-1.png" width="576" /></p>
+<p><img src="day-2_files/figure-html/Fill-1.png" width="576" /></p>
 </div>
 </div>
 <div id="other-graphing-adventures" class="section level4">
@@ -547,9 +548,9 @@ storm_plot</code></pre>
   scale_color_manual(
     values = c(&quot;#6f18ad&quot;, &quot;#f051bb&quot;, &quot;#faf600&quot;)
   )</code></pre>
-<p><img src="day-2_files/figure-html/unnamed-chunk-11-1.png" width="576" /></p>
+<p><img src="day-2_files/figure-html/Color-Manual-1.png" width="576" /></p>
 <pre class="r"><code>myplot</code></pre>
-<p><img src="day-2_files/figure-html/unnamed-chunk-11-2.png" width="576" /></p>
+<p><img src="day-2_files/figure-html/Color-Manual-2.png" width="576" /></p>
 <p>I usually specify colors using the Hex format, which use pairs of two digits to specify how much red, green, and blue to use in a color, always preceeded by a hash and written as a string (in quotes). For example, all green with no red or blue would be “#00FF00”. I encourage you all to <a href="https://hackernoon.com/hex-colors-how-do-they-work-d8cb935ac0f">learn more about Hex colors</a>, but for now let’s use a <a href="htmlcolorcodes.com/color-picker/">color picker tool</a> to choose fun colors. There are also a multitude of online <a href="https://learnui.design/tools/data-color-picker.html">color palette generators</a> to help you get creative with your palettes.</p>
 <p>This <code>scale_color_manual()</code> function also lets you rename the colors of your color scale. Specify these labels in the <code>labels</code> parameter:</p>
 <pre class="r"><code>myplot &lt;- myplot + 
@@ -559,7 +560,7 @@ storm_plot</code></pre>
   )
 
 myplot</code></pre>
-<p><img src="day-2_files/figure-html/unnamed-chunk-12-1.png" width="576" /></p>
+<p><img src="day-2_files/figure-html/Labels-Manual-1.png" width="576" /></p>
 </div>
 <div id="plot-labels" class="section level4">
 <h4>Plot Labels</h4>
@@ -574,7 +575,7 @@ myplot</code></pre>
   )
 
 myplot</code></pre>
-<p><img src="day-2_files/figure-html/unnamed-chunk-13-1.png" width="576" /></p>
+<p><img src="day-2_files/figure-html/Labels-1.png" width="576" /></p>
 <p><code>title</code> gives a title, <code>caption</code> gives the citation at the bottom, and the <code>x</code>, <code>y</code>, and <code>color</code> parameters each rename a dimension/axis of data.</p>
 </div>
 <div id="themes" class="section level4">
@@ -590,7 +591,7 @@ myplot</code></pre>
   )
 
 myplot</code></pre>
-<p><img src="day-2_files/figure-html/unnamed-chunk-14-1.png" width="576" /></p>
+<p><img src="day-2_files/figure-html/Themes-1.png" width="576" /></p>
 <p>And that’s the plot!</p>
 </div>
 </div>
@@ -642,7 +643,44 @@ library(tidyverse)</code></pre>
 </div>
 <div id="challenges-for-next-week" class="section level2">
 <h2>Challenges for Next Week</h2>
-<p>Let’s apply what we just learned! Here is a graph to try to copy for next week:</p>
+<p>Let’s apply what we just learned! Here are two graphs using the <code>starwars</code> dataset to try to copy for next week:</p>
+<pre class="r"><code>star_plot &lt;- ggplot(data = starwars, aes(x = height, y = mass)) +
+  geom_point(aes(color = gender)) +
+  scale_color_brewer(palette = &quot;Set1&quot;) +
+  labs(
+    title = &quot;Mass vs. Height of Star Wars Characters by Species&quot;,
+    caption = &quot;Source: Star Wars API&quot;,
+    x = &quot;Height (cm)&quot;,
+    y = &quot;Weight (kg)&quot;,
+    color = &quot;Gender&quot;
+  ) +
+  theme(
+    text = element_text(family = &quot;Arial&quot;),
+    rect = element_blank(),
+    axis.line = element_line(color = &quot;gray40&quot;),
+    panel.grid = element_line(color = &quot;gray90&quot;),
+    legend.position = &quot;bottom&quot;
+  )
+
+star_plot</code></pre>
+<pre><code>## Warning: Removed 31 rows containing missing values (geom_point).</code></pre>
+<p><img src="day-2_files/figure-html/Challenge-1-1.png" width="576" /></p>
+<p>Hint: I wonder if this theme looks similar to one we’ve seen before…</p>
+<pre class="r"><code>height_plot &lt;- ggplot(data = starwars, aes(y = homeworld)) +
+  geom_bar(fill = &quot;#4F5810&quot;) +
+  theme_solarized() +
+  labs(
+    title = &quot;Number of Starwars Characters by Homeworld&quot;,
+    subtitle = &quot;As recorded in the starwars dplyr dataset&quot;,
+    caption = &quot;Source: Star Wars API&quot;,
+    x = &quot;Number of Characters&quot;,
+    y = &quot;Homeworld&quot;
+  )
+
+height_plot</code></pre>
+<p><img src="day-2_files/figure-html/Challenge-2-1.png" width="576" /></p>
+<p>Hint: Try a color picker tool, such as the one in PowerPoint, for the fills of this bar chart! Also, <a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">here’s</a> the ggplot2 documentation for bar charts.</p>
+<p>As always, please Slack me throughout the week with any questions! I’ll reveal the code for these challenges next week.</p>
 </div>
 
 <div id="footer">
