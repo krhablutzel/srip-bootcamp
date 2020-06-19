@@ -127,11 +127,11 @@ myplot +
 
 If we go back to the [ColorBrewer website](colorbrewer2.org), we see that there are three types of palettes available: Sequential, Diverging, and Qualitative. Each type of color palette is designed for a specific kind of data.
 
-**Sequential Data:** Data with an order. The darkest color is perceived as the greatest. Using this scale continuously provides more detail, but the eye has trouble distinguishing more than 5-6 levels, so you can also use these scales discretely for more clear distinctions.
+**Sequential Data: **Data with an order. The darkest color is perceived as the greatest. Using this scale continuously provides more detail, but the eye has trouble distinguishing more than 5-6 levels, so you can also use these scales discretely for more clear distinctions.
 
-**Diverging Data:** Data where both the low and high extremes are notable. Two colors indicate the extremes of the range with a neutral color in the middle. Be careful that your neutral color is distinguishable from your missing data! (Missing data is often gray or white.)
+**Diverging Data: **Data where both the low and high extremes are notable. Two colors indicate the extremes of the range with a neutral color in the middle. Be careful that your neutral color is distinguishable from your missing data! (Missing data is often gray or white.)
 
-**Qualitative Data:** Aka Categorical Data. Data in different categories. Choose colors that are perceptually different but have approximately the same saturation so that categories seem distinct.
+**Qualitative Data: **Aka Categorical Data. Data in different categories. Choose colors that are perceptually different but have approximately the same saturation so that categories seem distinct.
 
 With all three types of palettes, beware colorblindness. (For example, Red-Green diverging is a bad choice, because both extremes will look similar to those with Red-Green colorblindness.)
 
