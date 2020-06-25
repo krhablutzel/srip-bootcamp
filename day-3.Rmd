@@ -484,4 +484,10 @@ Let's apply what we just learned! For next week, try to find:
 * Are there any planes in the `flights` table that don't appear in the `planes` table?
 * Among the 100 most commonly used planes, what is the most common manufacturer? Most common model?
 
-Also, draw out some examples of untidy data on paper and practice drawing how to fix them with `pivot_wider()` and `pivot_longer`.
+Also, how would I fix these untidy datasets?
+
+(Coming soon - or make up your own!)
+
+Finally, if you're curious, you can check out Hadley Wickham's paper on [Tidy Data](https://vita.had.co.nz/papers/tidy-data.pdf).
+
+As always, please Slack me throughout the week with any questions! I'll reveal the code for these challenges next week.

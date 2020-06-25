@@ -14,9 +14,12 @@ navbar:
 output:
   html_document:
     theme: yeti
-    code_folding: show
+    toc: true
+    toc_depth: 4
+    toc_float: true
     fig_width: 6
     fig_height: 4
+    code_folding: show
     df_print: paged
     include:
       after_body: _footer.html

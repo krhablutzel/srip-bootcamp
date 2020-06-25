@@ -2,11 +2,7 @@
 title: 'Day 2: Adding Color in ggplot2'
 author: "Kathleen Hablutzel"
 date: "6/18/2020"
-output:
-  html_document:
-    toc: true
-    toc_depth: 4
-    toc_float: true
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
