@@ -9,11 +9,14 @@ navbar:
       href: day-1.html
     - text: "Day 2"
       href: day-2.html
+    - text: "Day 3"
+      href: day-3.html
 output:
   html_document:
     theme: yeti
     code_folding: show
     fig_width: 6
     fig_height: 4
+    df_print: paged
     include:
       after_body: _footer.html
