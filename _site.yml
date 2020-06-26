@@ -11,6 +11,8 @@ navbar:
       href: day-2.html
     - text: "Day 3"
       href: day-3.html
+    - text: "Day 4"
+      href: day-4.html
 output:
   html_document:
     theme: yeti

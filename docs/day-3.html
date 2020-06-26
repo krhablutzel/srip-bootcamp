@@ -400,6 +400,7 @@ div.tocify {
 <ul>
 <li>Learn the 5 key verbs of <code>dplyr</code></li>
 <li>Create pipelines with the pipe operator <code>%&gt;%</code></li>
+<li>Reorganize untidy data</li>
 <li>Join data tables</li>
 </ul>
 <p>You’ll need to install the <code>nycflights13</code> package for later in the lesson.</p>
@@ -867,23 +868,23 @@ flights %&gt;%
 <p>Also, how would I fix these untidy datasets?</p>
 <p>Lengths and albums of Bill Withers songs:</p>
 <pre class="r"><code>untidyA &lt;- tribble(
-  ~artist, ~song, ~info,
-  &quot;Bill Withers&quot;, &quot;Ain&#39;t No Sunshine&quot;, &quot;2:05&quot;,
-  &quot;Bill Withers&quot;, &quot;Ain&#39;t No Sunshine&quot;, &quot;Just As I Am&quot;,
-  &quot;Bill Withers&quot;, &quot;Lovely Day&quot;, &quot;4:15&quot;,
-  &quot;Bill Withers&quot;, &quot;Lovely Day&quot;, &quot;Menagerie&quot;,
-  &quot;Bill Withers&quot;, &quot;Lean on Me&quot;, &quot;4:19&quot;,
-  &quot;Bill Withers&quot;, &quot;Lean on Me&quot;, &quot;Still Bill&quot;,
-  &quot;Bill Withers&quot;, &quot;Use Me&quot;, &quot;3:48&quot;,
-  &quot;Bill Withers&quot;, &quot;Use Me&quot;, &quot;Still Bill&quot;,
-  &quot;Bill Withers&quot;, &quot;Grandma&#39;s Hands&quot;, &quot;2:01&quot;,
-  &quot;Bill Withers&quot;, &quot;Grandma&#39;s Hands&quot;, &quot;Just As I Am&quot;
+  ~artist, ~song, ~type, ~info,
+  &quot;Bill Withers&quot;, &quot;Ain&#39;t No Sunshine&quot;, &quot;Length&quot;, &quot;2:05&quot;,
+  &quot;Bill Withers&quot;, &quot;Ain&#39;t No Sunshine&quot;, &quot;Album&quot;, &quot;Just As I Am&quot;,
+  &quot;Bill Withers&quot;, &quot;Lovely Day&quot;, &quot;Length&quot;, &quot;4:15&quot;,
+  &quot;Bill Withers&quot;, &quot;Lovely Day&quot;, &quot;Album&quot;, &quot;Menagerie&quot;,
+  &quot;Bill Withers&quot;, &quot;Lean on Me&quot;, &quot;Length&quot;, &quot;4:19&quot;,
+  &quot;Bill Withers&quot;, &quot;Lean on Me&quot;, &quot;Album&quot;, &quot;Still Bill&quot;,
+  &quot;Bill Withers&quot;, &quot;Use Me&quot;, &quot;Length&quot;, &quot;3:48&quot;,
+  &quot;Bill Withers&quot;, &quot;Use Me&quot;, &quot;Album&quot;, &quot;Still Bill&quot;,
+  &quot;Bill Withers&quot;, &quot;Grandma&#39;s Hands&quot;, &quot;Length&quot;, &quot;2:01&quot;,
+  &quot;Bill Withers&quot;, &quot;Grandma&#39;s Hands&quot;, &quot;Album&quot;, &quot;Just As I Am&quot;
 )
 
 untidyA</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["artist"],"name":[1],"type":["chr"],"align":["left"]},{"label":["song"],"name":[2],"type":["chr"],"align":["left"]},{"label":["info"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"Bill Withers","2":"Ain't No Sunshine","3":"2:05"},{"1":"Bill Withers","2":"Ain't No Sunshine","3":"Just As I Am"},{"1":"Bill Withers","2":"Lovely Day","3":"4:15"},{"1":"Bill Withers","2":"Lovely Day","3":"Menagerie"},{"1":"Bill Withers","2":"Lean on Me","3":"4:19"},{"1":"Bill Withers","2":"Lean on Me","3":"Still Bill"},{"1":"Bill Withers","2":"Use Me","3":"3:48"},{"1":"Bill Withers","2":"Use Me","3":"Still Bill"},{"1":"Bill Withers","2":"Grandma's Hands","3":"2:01"},{"1":"Bill Withers","2":"Grandma's Hands","3":"Just As I Am"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["artist"],"name":[1],"type":["chr"],"align":["left"]},{"label":["song"],"name":[2],"type":["chr"],"align":["left"]},{"label":["type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["info"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"Bill Withers","2":"Ain't No Sunshine","3":"Length","4":"2:05"},{"1":"Bill Withers","2":"Ain't No Sunshine","3":"Album","4":"Just As I Am"},{"1":"Bill Withers","2":"Lovely Day","3":"Length","4":"4:15"},{"1":"Bill Withers","2":"Lovely Day","3":"Album","4":"Menagerie"},{"1":"Bill Withers","2":"Lean on Me","3":"Length","4":"4:19"},{"1":"Bill Withers","2":"Lean on Me","3":"Album","4":"Still Bill"},{"1":"Bill Withers","2":"Use Me","3":"Length","4":"3:48"},{"1":"Bill Withers","2":"Use Me","3":"Album","4":"Still Bill"},{"1":"Bill Withers","2":"Grandma's Hands","3":"Length","4":"2:01"},{"1":"Bill Withers","2":"Grandma's Hands","3":"Album","4":"Just As I Am"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Most popular songs on Spotify, for an eclectic mix of artists from Kathleen’s playlists:</p>

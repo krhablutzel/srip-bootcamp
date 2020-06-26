@@ -25,6 +25,7 @@ Today we will:
 
 * Learn the 5 key verbs of `dplyr`
 * Create pipelines with the pipe operator `%>%`
+* Reorganize untidy data
 * Join data tables
 
 You'll need to install the `nycflights13` package for later in the lesson.
@@ -490,17 +491,17 @@ Lengths and albums of Bill Withers songs:
 
 ```{r UntidyA}
 untidyA <- tribble(
-  ~artist, ~song, ~info,
-  "Bill Withers", "Ain't No Sunshine", "2:05",
-  "Bill Withers", "Ain't No Sunshine", "Just As I Am",
-  "Bill Withers", "Lovely Day", "4:15",
-  "Bill Withers", "Lovely Day", "Menagerie",
-  "Bill Withers", "Lean on Me", "4:19",
-  "Bill Withers", "Lean on Me", "Still Bill",
-  "Bill Withers", "Use Me", "3:48",
-  "Bill Withers", "Use Me", "Still Bill",
-  "Bill Withers", "Grandma's Hands", "2:01",
-  "Bill Withers", "Grandma's Hands", "Just As I Am"
+  ~artist, ~song, ~type, ~info,
+  "Bill Withers", "Ain't No Sunshine", "Length", "2:05",
+  "Bill Withers", "Ain't No Sunshine", "Album", "Just As I Am",
+  "Bill Withers", "Lovely Day", "Length", "4:15",
+  "Bill Withers", "Lovely Day", "Album", "Menagerie",
+  "Bill Withers", "Lean on Me", "Length", "4:19",
+  "Bill Withers", "Lean on Me", "Album", "Still Bill",
+  "Bill Withers", "Use Me", "Length", "3:48",
+  "Bill Withers", "Use Me", "Album", "Still Bill",
+  "Bill Withers", "Grandma's Hands", "Length", "2:01",
+  "Bill Withers", "Grandma's Hands", "Album", "Just As I Am"
 )
 
 untidyA
