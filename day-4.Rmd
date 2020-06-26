@@ -1,0 +1,14 @@
+---
+title: 'Day 4: Spatial Data'
+author: "Kathleen Hablutzel"
+date: "6/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## GitHub
+
+etc.

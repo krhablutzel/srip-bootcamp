@@ -1,0 +1,138 @@
+---
+title: "Day 3 Code"
+author: "Kathleen Hablutzel"
+date: "6/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+data # this is my comment
+```
+
+```{r}
+tall <- starwars %>%
+  filter(height > 80)
+```
+
+```{r}
+step1 <- filter(starwars, height > 80)
+
+step2 <- arrange(step1, height)
+
+final_result <- head(step2, 5)
+```
+
+```{r}
+final_result <- head(arrange(filter(starwars, height > 80), height), 5)
+```
+
+```{r}
+final_result <- starwars %>%
+  filter(height > 80) %>%
+  arrange(height) %>%
+  head(5)
+```
+
+Filter
+```{r}
+final_result <- starwars %>%
+  filter(height > 80,
+         species == "human")
+```
+
+Select
+```{r}
+smaller_table <- starwars %>%
+  select(-name, -height, -mass)
+```
+
+Arrange
+```{r}
+by_height <- starwars %>%
+  arrange(desc(height))
+```
+
+Mutate
+```{r}
+with_bmi <- starwars %>%
+  mutate(bmi = mass / height ** 2 / 100)
+
+with_bmi <- with_bmi %>%
+  mutate(height = height / 30)
+```
+
+```{r}
+char_count <- starwars %>%
+  summarize(num_characters = n(),
+            avg_height = mean(height),
+            min_birth = min(birth_year, na.rm = TRUE))
+```
+
+```{r}
+species_count <- starwars %>%
+  filter(!is.na(species)) %>%
+  group_by(species) %>%
+  summarize(num_characters = n(),
+            avg_height = mean(height),
+            min_birth = min(birth_year, na.rm = TRUE)) %>%
+  arrange(desc(num_characters)) %>%
+  head(5)
+```
+
+```{r Pivot-Longer1}
+untidy_wide <- tribble(
+  ~country, ~`2018`, ~`2019`,
+  "USA", 306.8, 328.2,
+  "Mexico", 126.2, 127.6,
+  "Canada", 37.06, 37.59
+)
+```
+
+```{r}
+tidy_longer <- untidy_wide %>%
+  pivot_longer(c(`2018`, `2019`), names_to = "year", values_to = "population")
+```
+
+```{r Pivot-Wider1}
+untidy_long <- tribble(
+  ~country, ~year, ~type, ~count,
+  "USA", 2018, "population", 306.8,
+  "USA", 2018, "births", 11.968,
+  "USA", 2019, "population", 328.2,
+  "USA", 2019, "births", 11.979,
+  "Mexico", 2018, "population", 126.2,
+  "Mexico", 2018, "births", 17.736,
+  "Mexico", 2019, "population", 127.6,
+  "Mexico", 2019, "births", 17.455,
+  "Canada", 2018, "population", 37.06, 
+  "Canada", 2018, "births", 10.376, 
+  "Canada", 2019, "population", 37.59,
+  "Canada", 2019, "births", 10.452
+)
+
+untidy_long
+```
+
+```{r}
+tidy_wider <- untidy_long %>%
+  pivot_wider(names_from = "type", values_from = "count")
+```
+
+```{r}
+flights_dest <- flights %>%
+  right_join(airports, by = c("dest" = "faa"))
+```
+
+```{r}
+flights_dest <- airports %>%
+  left_join(flights, by = c("faa" = "dest"))
+```
+
+```{r}
+flights_dest <- flights %>%
+  full_join(airports, by = c("dest" = "faa"))
+```

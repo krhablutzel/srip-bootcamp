@@ -19,7 +19,7 @@ library(RColorBrewer)
 
 ## Getting Started
 
-Here will be the recording of today's lesson. (This is only accessible within the NCSSM organization.) You can also follow along with the code below.
+Here is the [recording of today's lesson](https://ncssm.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=ac2ff434-0b2d-4b92-a209-abe600119b93). (This is only accessible within the NCSSM organization.) You can also follow along with the code below.
 
 Today we will:
 
@@ -486,7 +486,40 @@ Let's apply what we just learned! For next week, try to find:
 
 Also, how would I fix these untidy datasets?
 
-(Coming soon - or make up your own!)
+Lengths and albums of Bill Withers songs:
+
+```{r UntidyA}
+untidyA <- tribble(
+  ~artist, ~song, ~info,
+  "Bill Withers", "Ain't No Sunshine", "2:05",
+  "Bill Withers", "Ain't No Sunshine", "Just As I Am",
+  "Bill Withers", "Lovely Day", "4:15",
+  "Bill Withers", "Lovely Day", "Menagerie",
+  "Bill Withers", "Lean on Me", "4:19",
+  "Bill Withers", "Lean on Me", "Still Bill",
+  "Bill Withers", "Use Me", "3:48",
+  "Bill Withers", "Use Me", "Still Bill",
+  "Bill Withers", "Grandma's Hands", "2:01",
+  "Bill Withers", "Grandma's Hands", "Just As I Am"
+)
+
+untidyA
+```
+
+Most popular songs on Spotify, for an eclectic mix of artists from Kathleen's playlists:
+
+```{r UntidyB}
+untidyB <- tribble(
+  ~artist, ~`1`, ~`2`, ~`3`, ~`4`, ~`5`,
+  "Bill Withers", "Ain't No Sunshine", "Lovely Day", "Lean on Me", "Use Me", "Grandma's Hands",
+  "Led Zeppelin", "Stairway to Heaven", "Immigrant Song", "Whole Lotta Love", "Black Dog", "Good Times Bad Times",
+  "The Supremes", "You Can't Hurry Love", "Baby Love", "Stop! In The Name Of Love", "Where Did Our Love Go", "Come See About Me",
+  "Alessia Cara", "Scars To Your Beautiful", "Out Of Love", "Stay", "Ready", "I Choose",
+  "Hozier", "Take Me To Church", "The Bones", "Almost", "Cherry Wine", "Like Real People Do"
+)
+
+untidyB
+```
 
 Finally, if you're curious, you can check out Hadley Wickham's paper on [Tidy Data](https://vita.had.co.nz/papers/tidy-data.pdf).
 
