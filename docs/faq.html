@@ -12,7 +12,7 @@
 <meta name="author" content="Kathleen Hablutzel" />
 
 
-<title>Day 1: Introduction to RStudio &amp; the Tidyverse</title>
+<title>Frequently Asked Questions</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -369,6 +369,15 @@ div.tocify {
 <li>
   <a href="day-4.html">Day 4</a>
 </li>
+<li>
+  <a href="day-5.html">Day 5</a>
+</li>
+<li>
+  <a href="faq.html">FAQ</a>
+</li>
+<li>
+  <a href="resources.html">Further Resources</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -389,171 +398,15 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Day 1: Introduction to RStudio &amp; the Tidyverse</h1>
+<h1 class="title toc-ignore">Frequently Asked Questions</h1>
 <h4 class="author">Kathleen Hablutzel</h4>
-<h4 class="date">6/11/2020</h4>
+<h4 class="date">7/23/2020</h4>
 
 </div>
 
 
-<div id="welcome" class="section level2">
-<h2>Welcome!!!</h2>
-<div id="getting-started" class="section level4">
-<h4>Getting Started</h4>
-<p>If you haven’t already, start downloading R and R Studio. See the instructions <a href="index.html">here</a> under “Getting Started.”</p>
-<p>Here is the <a href="https://ncssm.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=8bad9ba8-35c9-424d-a156-abd8000e0a2b">recording of today’s lesson</a>. (This is only accessible within the NCSSM organization.) You can also follow along with the code below.</p>
-</div>
-<div id="creating-an-rmarkdown-document" class="section level4">
-<h4>Creating an RMarkdown Document</h4>
-<ul>
-<li>Write text and embed code chunks</li>
-<li>R is the <em>language</em> (in the console and in code chunks)</li>
-<li>RStudio is the <em>programming environment</em></li>
-<li>RMarkdown is a <em>markup language</em> for combining text with code
-<ul>
-<li>Produce reproducible reports where the code is right there</li>
-<li>Export to HTML, PDF, MS Word (how I created website)</li>
-</ul></li>
-</ul>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
-<p>See the RMarkdown <a href="https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">reference guide</a>.</p>
-</div>
-</div>
-<div id="data-visualizations-with-ggplot2" class="section level2">
-<h2>Data Visualizations with ggplot2</h2>
-<p>Today we will:</p>
-<ul>
-<li>Make a plot</li>
-<li>Add basic plot elements</li>
-<li>Look ahead at what’s next</li>
-</ul>
-<div id="introducing-the-tidyverse" class="section level4">
-<h4>Introducing… the Tidyverse</h4>
-<p>Plotting with base R is… not super fun.</p>
-<pre class="r"><code>plot(pressure)</code></pre>
-<p><img src="day-1_files/figure-html/Base-R-Plot-1.png" width="576" /></p>
-<p>Instead, we plot with <code>ggplot2</code>, a popular open-source package. <code>ggplot2</code> is an implementation of Wilkinson’s <em>Grammar of Graphics</em>, which means that you combine plot building blocks to create your visualization.</p>
-<p><code>ggplot2</code> is part of the Tidyverse, a series of open-source R packages that “share an underlying design philosophy, grammar, and data structures”. (See the <a href="https://www.tidyverse.org/">website</a> and <a href="https://github.com/tidyverse/tidyverse">GitHub repository</a>.)</p>
-<p>The main packages are <code>ggplot2</code>, <code>dplyr</code>, <code>tidyr</code>, <code>readr</code>, <code>purrr</code>, <code>tibble</code>, <code>stringr</code>, and <code>forcats</code>, but we will mostly focus on <strong>ggplot2</strong> (for data visualization) and <strong>dplyr</strong> (for data wrangling).</p>
-<p>Let’s load the tidyverse:</p>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<p>In the bottom right panel, under the Packages tab, the <code>tidyverse</code> packages should now be checked. In each file, you need to load packages before you use them.</p>
-</div>
-<div id="your-first-plot" class="section level4">
-<h4>Your First Plot</h4>
-<p>We are going to work with the <code>mtcars</code> data set. Let’s take a look:</p>
-<pre class="r"><code>glimpse(mtcars)</code></pre>
-<pre><code>## Observations: 32
-## Variables: 11
-## $ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4…
-## $ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8…
-## $ disp &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140.8, 167.6, …
-## $ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205…
-## $ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92, 3.07…
-## $ wt   &lt;dbl&gt; 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.150, 3.440, …
-## $ qsec &lt;dbl&gt; 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.90, 18.30, …
-## $ vs   &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0…
-## $ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0…
-## $ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3…
-## $ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2, 2, 4…</code></pre>
-<pre class="r"><code># View(mtcars)</code></pre>
-</div>
-<div id="example-1-a-scatterplot" class="section level4">
-<h4>Example 1: A Scatterplot</h4>
-<pre class="r"><code># a basic scatterplot
-ggplot(data = mtcars, aes(x = wt, y = mpg)) +
-  geom_point()</code></pre>
-<p><img src="day-1_files/figure-html/Scatterplot-1.png" width="576" /></p>
-<p>Note: You map variables to aesthetics within <code>aes()</code> and set fixed visual cues outside <code>aes()</code>. If I want all my points to be blue, I use the color parameter outside <code>aes()</code>:</p>
-<pre class="r"><code># adding color
-ggplot(data = mtcars, aes(x = wt, y = mpg)) +
-  geom_point(color = &quot;blue&quot;)</code></pre>
-<p><img src="day-1_files/figure-html/Fixed-Color-1.png" width="576" /></p>
-<p>If I want to map color to a variable, I use the color parameter inside <code>aes()</code>:</p>
-<pre class="r"><code># mapping a variable to color
-ggplot(data = mtcars, aes(x = wt, y = mpg)) +
-  geom_point(aes(color = cyl))</code></pre>
-<p><img src="day-1_files/figure-html/Var-Color-1.png" width="576" /></p>
-</div>
-<div id="example-2-a-box-plot" class="section level4">
-<h4>Example 2: A Box Plot</h4>
-<p>If we look at the data again, we notice that it’s all numbers:</p>
-<pre class="r"><code>glimpse(mtcars)</code></pre>
-<pre><code>## Observations: 32
-## Variables: 11
-## $ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4…
-## $ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8…
-## $ disp &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140.8, 167.6, …
-## $ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180, 205…
-## $ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92, 3.07…
-## $ wt   &lt;dbl&gt; 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.150, 3.440, …
-## $ qsec &lt;dbl&gt; 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.90, 18.30, …
-## $ vs   &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0…
-## $ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0…
-## $ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 3…
-## $ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2, 2, 4…</code></pre>
-<p>However, the number of cylinders in the car is always 4, 6, or 8. Let’s use the <code>factor()</code> function to turn this into categorical data, so that we can make a boxplot.</p>
-<pre class="r"><code># a basic boxplot
-ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
-  geom_boxplot()</code></pre>
-<p><img src="day-1_files/figure-html/Bar-Chart-1.png" width="576" /></p>
-</div>
-<div id="about-available-data-sets" class="section level4">
-<h4>About Available Data Sets</h4>
-<p>The <code>data()</code> function will show you all your available data sets:</p>
-<pre class="r"><code>data()</code></pre>
-<p>The <code>iris</code> data set is a famous data set used in machine learning classes. Let’s take a look at the documentation:</p>
-<pre class="r"><code>?iris</code></pre>
-<p>Now, look at the sources. This data comes from the work of a famous eugenicist, statistician, and geneticist, R.A. Fisher, and was published in a journal on eugenics. Many statisticians are currently pushing to use alternate data sets in their classrooms and <a href="https://www.change.org/p/american-statistical-association-rename-the-fisher-lecture-after-david-blackwell">remove Fisher’s name</a> from the prestigious <a href="https://en.wikipedia.org/wiki/R._A._Fisher_Lectureship">Fisher Lectureship</a>.</p>
-<p>Data is more than numbers.</p>
-</div>
-</div>
-<div id="where-are-we-going" class="section level2">
-<h2>Where are we going?</h2>
-<ul>
-<li>Adding Color and Themes
-<ul>
-<li>Make those plots look awesome</li>
-</ul></li>
-<li>Data Wrangling
-<ul>
-<li>Find cool patterns</li>
-<li>Sort your data</li>
-</ul></li>
-</ul>
-<p>For example:</p>
-<pre class="r"><code>library(ggthemes)
-
-june_weather &lt;- airquality %&gt;%
-  filter(Month == 6) %&gt;% # only June weather
-  select(Day, Temp) # only columns we need
-
-june_plot &lt;- ggplot(data = june_weather, aes(x = Day, y =  Temp)) +
-  geom_point() + # make our points purple
-  geom_line() + # add a line
-  labs(title = &quot;Temperatures in NY, June 1973&quot;,
-       x = &quot;Day&quot;,
-       y = &quot;Temperature (°F)&quot;) +
-  theme_fivethirtyeight() +
-  theme(plot.title = element_text(size = 18))
-
-june_plot</code></pre>
-<p><img src="day-1_files/figure-html/June-Weather-1.png" width="576" /></p>
-<div id="can-i-practice-more" class="section level4">
-<h4>Can I practice more?</h4>
-<p>Yes! So glad you asked. An awesome way to learn data visualization is through “copy the master” experiments, where you try to recreate an existing graph as closely as possible.</p>
-<p>You’ll need to dig into the <code>ggplot2</code> documentation, as well as the <code>storms</code> dataset. I recommend starting by looking at <code>labs()</code> and <code>theme()</code>, though we’ll cover themes more next week.</p>
-<p>Graph to copy:</p>
-<p><img src="day-1_files/figure-html/Wind-Graph-1.png" width="576" /></p>
-<p>I encourage you to Slack me throughout the week as you get stuck. I’ll reveal the code next week!</p>
-</div>
+<div id="page-under-construction" class="section level2">
+<h2>Page Under Construction</h2>
 </div>
 
 <div id="footer">

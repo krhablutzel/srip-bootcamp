@@ -369,6 +369,15 @@ div.tocify {
 <li>
   <a href="day-4.html">Day 4</a>
 </li>
+<li>
+  <a href="day-5.html">Day 5</a>
+</li>
+<li>
+  <a href="faq.html">FAQ</a>
+</li>
+<li>
+  <a href="resources.html">Further Resources</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -391,11 +400,61 @@ div.tocify {
 
 <h1 class="title toc-ignore">Day 4: Spatial Data</h1>
 <h4 class="author">Kathleen Hablutzel</h4>
-<h4 class="date">6/25/2020</h4>
+<h4 class="date">7/9/2020</h4>
 
 </div>
 
 
+<div id="getting-started" class="section level2">
+<h2>Getting Started</h2>
+<div id="last-weeks-challenges" class="section level4">
+<h4>Last Week’s Challenges</h4>
+<p>Last week, I challenged you to find assorted information about the relational data in <code>nycflights13</code> and fix a couple untidy data sets. Here are the solutions:</p>
+<pre class="r"><code># What is the average departure delay for each origin airport?
+# What is the average arrival delay for each destination airport?
+# Find all the flights that flew over 400 miles. What were their destinations?
+# Which airport was the most common destination? (What is its name?)
+# Are there any planes in the `flights` table that don&#39;t appear in the `planes` table?
+# Among the 100 most commonly used planes, what is the most common manufacturer? Most common model?</code></pre>
+<p>Lengths and albums of Bill Withers songs:</p>
+<pre class="r"><code>untidyA &lt;- tribble(
+  ~artist, ~song, ~type, ~info,
+  &quot;Bill Withers&quot;, &quot;Ain&#39;t No Sunshine&quot;, &quot;Length&quot;, &quot;2:05&quot;,
+  &quot;Bill Withers&quot;, &quot;Ain&#39;t No Sunshine&quot;, &quot;Album&quot;, &quot;Just As I Am&quot;,
+  &quot;Bill Withers&quot;, &quot;Lovely Day&quot;, &quot;Length&quot;, &quot;4:15&quot;,
+  &quot;Bill Withers&quot;, &quot;Lovely Day&quot;, &quot;Album&quot;, &quot;Menagerie&quot;,
+  &quot;Bill Withers&quot;, &quot;Lean on Me&quot;, &quot;Length&quot;, &quot;4:19&quot;,
+  &quot;Bill Withers&quot;, &quot;Lean on Me&quot;, &quot;Album&quot;, &quot;Still Bill&quot;,
+  &quot;Bill Withers&quot;, &quot;Use Me&quot;, &quot;Length&quot;, &quot;3:48&quot;,
+  &quot;Bill Withers&quot;, &quot;Use Me&quot;, &quot;Album&quot;, &quot;Still Bill&quot;,
+  &quot;Bill Withers&quot;, &quot;Grandma&#39;s Hands&quot;, &quot;Length&quot;, &quot;2:01&quot;,
+  &quot;Bill Withers&quot;, &quot;Grandma&#39;s Hands&quot;, &quot;Album&quot;, &quot;Just As I Am&quot;
+)
+
+untidyA</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["artist"],"name":[1],"type":["chr"],"align":["left"]},{"label":["song"],"name":[2],"type":["chr"],"align":["left"]},{"label":["type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["info"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"Bill Withers","2":"Ain't No Sunshine","3":"Length","4":"2:05"},{"1":"Bill Withers","2":"Ain't No Sunshine","3":"Album","4":"Just As I Am"},{"1":"Bill Withers","2":"Lovely Day","3":"Length","4":"4:15"},{"1":"Bill Withers","2":"Lovely Day","3":"Album","4":"Menagerie"},{"1":"Bill Withers","2":"Lean on Me","3":"Length","4":"4:19"},{"1":"Bill Withers","2":"Lean on Me","3":"Album","4":"Still Bill"},{"1":"Bill Withers","2":"Use Me","3":"Length","4":"3:48"},{"1":"Bill Withers","2":"Use Me","3":"Album","4":"Still Bill"},{"1":"Bill Withers","2":"Grandma's Hands","3":"Length","4":"2:01"},{"1":"Bill Withers","2":"Grandma's Hands","3":"Album","4":"Just As I Am"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Most popular songs on Spotify, for an eclectic mix of artists from Kathleen’s playlists:</p>
+<pre class="r"><code>untidyB &lt;- tribble(
+  ~artist, ~`1`, ~`2`, ~`3`, ~`4`, ~`5`,
+  &quot;Bill Withers&quot;, &quot;Ain&#39;t No Sunshine&quot;, &quot;Lovely Day&quot;, &quot;Lean on Me&quot;, &quot;Use Me&quot;, &quot;Grandma&#39;s Hands&quot;,
+  &quot;Led Zeppelin&quot;, &quot;Stairway to Heaven&quot;, &quot;Immigrant Song&quot;, &quot;Whole Lotta Love&quot;, &quot;Black Dog&quot;, &quot;Good Times Bad Times&quot;,
+  &quot;The Supremes&quot;, &quot;You Can&#39;t Hurry Love&quot;, &quot;Baby Love&quot;, &quot;Stop! In The Name Of Love&quot;, &quot;Where Did Our Love Go&quot;, &quot;Come See About Me&quot;,
+  &quot;Alessia Cara&quot;, &quot;Scars To Your Beautiful&quot;, &quot;Out Of Love&quot;, &quot;Stay&quot;, &quot;Ready&quot;, &quot;I Choose&quot;,
+  &quot;Hozier&quot;, &quot;Take Me To Church&quot;, &quot;The Bones&quot;, &quot;Almost&quot;, &quot;Cherry Wine&quot;, &quot;Like Real People Do&quot;
+)
+
+untidyB</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["artist"],"name":[1],"type":["chr"],"align":["left"]},{"label":["1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["2"],"name":[3],"type":["chr"],"align":["left"]},{"label":["3"],"name":[4],"type":["chr"],"align":["left"]},{"label":["4"],"name":[5],"type":["chr"],"align":["left"]},{"label":["5"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"Bill Withers","2":"Ain't No Sunshine","3":"Lovely Day","4":"Lean on Me","5":"Use Me","6":"Grandma's Hands"},{"1":"Led Zeppelin","2":"Stairway to Heaven","3":"Immigrant Song","4":"Whole Lotta Love","5":"Black Dog","6":"Good Times Bad Times"},{"1":"The Supremes","2":"You Can't Hurry Love","3":"Baby Love","4":"Stop! In The Name Of Love","5":"Where Did Our Love Go","6":"Come See About Me"},{"1":"Alessia Cara","2":"Scars To Your Beautiful","3":"Out Of Love","4":"Stay","5":"Ready","6":"I Choose"},{"1":"Hozier","2":"Take Me To Church","3":"The Bones","4":"Almost","5":"Cherry Wine","6":"Like Real People Do"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
 <div id="github" class="section level2">
 <h2>GitHub</h2>
 <p>etc.</p>

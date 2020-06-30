@@ -12,11 +12,11 @@
 <meta name="author" content="Kathleen Hablutzel" />
 
 
-<title>Untitled</title>
+<title>Further Resources</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -109,33 +109,33 @@ summary {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 51px;
+  padding-top: 45px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .dropdown-submenu {
   position: relative;
@@ -369,6 +369,15 @@ div.tocify {
 <li>
   <a href="day-4.html">Day 4</a>
 </li>
+<li>
+  <a href="day-5.html">Day 5</a>
+</li>
+<li>
+  <a href="faq.html">FAQ</a>
+</li>
+<li>
+  <a href="resources.html">Further Resources</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -389,63 +398,15 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Untitled</h1>
+<h1 class="title toc-ignore">Further Resources</h1>
 <h4 class="author">Kathleen Hablutzel</h4>
-<h4 class="date">6/18/2020</h4>
+<h4 class="date">7/23/2020</h4>
 
 </div>
 
 
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
-</div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="day-2-code_files/figure-html/pressure-1.png" width="576" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
-<pre class="r"><code>library(ggthemes)
-
-myplot &lt;- ggplot(data = storms, aes(x = wind, y = pressure)) +
-  geom_point(aes(color = status))
-
-myplot</code></pre>
-<p><img src="day-2-code_files/figure-html/unnamed-chunk-1-1.png" width="576" /></p>
-<pre class="r"><code>library(RColorBrewer)
-display.brewer.all()</code></pre>
-<p><img src="day-2-code_files/figure-html/unnamed-chunk-2-1.png" width="576" /></p>
-<pre class="r"><code>myplot +
-  scale_color_brewer(palette = &quot;Set1&quot;)</code></pre>
-<p><img src="day-2-code_files/figure-html/unnamed-chunk-3-1.png" width="576" /></p>
-<pre class="r"><code>myplot +
-  scale_color_brewer(palette = &quot;YlOrBr&quot;)</code></pre>
-<p><img src="day-2-code_files/figure-html/unnamed-chunk-4-1.png" width="576" /></p>
-<pre class="r"><code>car_plot &lt;- ggplot(data = mtcars, aes(x = wt, y = mpg, color = hp)) +
-  geom_point()
-
-car_plot</code></pre>
-<p><img src="day-2-code_files/figure-html/unnamed-chunk-5-1.png" width="576" /></p>
-<pre class="r"><code>car_plot +
-  scale_color_distiller(palette = &quot;Purples&quot;)</code></pre>
-<p><img src="day-2-code_files/figure-html/unnamed-chunk-6-1.png" width="576" /></p>
-<pre class="r"><code>teeth &lt;- ggplot(data = ToothGrowth, aes(x = supp, y = len, fill = supp)) +
-  geom_boxplot()
-
-teeth</code></pre>
-<p><img src="day-2-code_files/figure-html/Teeth-Plot1-1.png" width="576" /></p>
-<pre class="r"><code>teeth +
-  scale_fill_brewer(palette = &quot;Dark2&quot;)</code></pre>
-<p><img src="day-2-code_files/figure-html/Teeth-Plot2-1.png" width="576" /></p>
+<div id="page-under-construction" class="section level2">
+<h2>Page Under Construction</h2>
 </div>
 
 <div id="footer">

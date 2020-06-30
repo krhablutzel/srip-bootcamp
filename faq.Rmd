@@ -1,0 +1,17 @@
+---
+title: "Frequently Asked Questions"
+author: "Kathleen Hablutzel"
+date: "7/23/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  echo = TRUE
+)
+library(tidyverse)
+```
+
+## Page Under Construction

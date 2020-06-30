@@ -13,6 +13,12 @@ navbar:
       href: day-3.html
     - text: "Day 4"
       href: day-4.html
+    - text: "Day 5"
+      href: day-5.html
+    - text: "FAQ"
+      href: faq.html
+    - text: "Further Resources"
+      href: resources.html
 output:
   html_document:
     theme: yeti

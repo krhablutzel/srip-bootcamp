@@ -1,13 +1,70 @@
 ---
 title: 'Day 4: Spatial Data'
 author: "Kathleen Hablutzel"
-date: "6/25/2020"
+date: "7/9/2020"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  echo = TRUE
+)
+library(tidyverse)
+library(nycflights13)
 ```
+
+## Getting Started
+
+#### Last Week's Challenges
+
+Last week, I challenged you to find assorted information about the relational data in `nycflights13` and fix a couple untidy data sets. Here are the solutions:
+
+```{r Challenge-Solutions}
+# What is the average departure delay for each origin airport?
+# What is the average arrival delay for each destination airport?
+# Find all the flights that flew over 400 miles. What were their destinations?
+# Which airport was the most common destination? (What is its name?)
+# Are there any planes in the `flights` table that don't appear in the `planes` table?
+# Among the 100 most commonly used planes, what is the most common manufacturer? Most common model?
+```
+
+Lengths and albums of Bill Withers songs:
+
+```{r UntidyA}
+untidyA <- tribble(
+  ~artist, ~song, ~type, ~info,
+  "Bill Withers", "Ain't No Sunshine", "Length", "2:05",
+  "Bill Withers", "Ain't No Sunshine", "Album", "Just As I Am",
+  "Bill Withers", "Lovely Day", "Length", "4:15",
+  "Bill Withers", "Lovely Day", "Album", "Menagerie",
+  "Bill Withers", "Lean on Me", "Length", "4:19",
+  "Bill Withers", "Lean on Me", "Album", "Still Bill",
+  "Bill Withers", "Use Me", "Length", "3:48",
+  "Bill Withers", "Use Me", "Album", "Still Bill",
+  "Bill Withers", "Grandma's Hands", "Length", "2:01",
+  "Bill Withers", "Grandma's Hands", "Album", "Just As I Am"
+)
+
+untidyA
+```
+
+Most popular songs on Spotify, for an eclectic mix of artists from Kathleen's playlists:
+
+```{r UntidyB}
+untidyB <- tribble(
+  ~artist, ~`1`, ~`2`, ~`3`, ~`4`, ~`5`,
+  "Bill Withers", "Ain't No Sunshine", "Lovely Day", "Lean on Me", "Use Me", "Grandma's Hands",
+  "Led Zeppelin", "Stairway to Heaven", "Immigrant Song", "Whole Lotta Love", "Black Dog", "Good Times Bad Times",
+  "The Supremes", "You Can't Hurry Love", "Baby Love", "Stop! In The Name Of Love", "Where Did Our Love Go", "Come See About Me",
+  "Alessia Cara", "Scars To Your Beautiful", "Out Of Love", "Stay", "Ready", "I Choose",
+  "Hozier", "Take Me To Church", "The Bones", "Almost", "Cherry Wine", "Like Real People Do"
+)
+
+untidyB
+```
+
 
 ## GitHub
 
