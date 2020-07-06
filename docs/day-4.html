@@ -405,6 +405,9 @@ div.tocify {
 </div>
 
 
+<div id="page-under-construction" class="section level2">
+<h2>Page Under Construction</h2>
+</div>
 <div id="getting-started" class="section level2">
 <h2>Getting Started</h2>
 <div id="last-weeks-challenges" class="section level4">
@@ -443,7 +446,7 @@ common_dest &lt;- flights %&gt;%
   summarize(num_flights = n()) %&gt;%
   arrange(desc(num_flights)) %&gt;%
   head(1) %&gt;%
-  left_join(airports, by = c(&quot;dest&quot; = &quot;faa&quot;))
+  left_join(airports, by = c(&quot;dest&quot; = &quot;faa&quot;)) # find airport information
 
 # Are there any planes in the `flights` table that don&#39;t appear in the `planes` table?
 missing_planes &lt;- flights %&gt;%
@@ -477,10 +480,10 @@ common_model &lt;- common_planes %&gt;%
   group_by(model) %&gt;%
   summarize(num_flown = n()) %&gt;%
   arrange(desc(num_flown)) %&gt;%
-  head(1) %&gt;%
-  left_join(planes, by = c(&quot;model&quot; = &quot;model&quot;)) # what do we know about this model?</code></pre>
-<p>Lengths and albums of Bill Withers songs:</p>
-<pre class="r"><code>untidyA &lt;- tribble(
+  head(1)
+
+# untidy data: lengths and albums of Bill Withers songs
+untidyA &lt;- tribble(
   ~artist, ~song, ~type, ~info,
   &quot;Bill Withers&quot;, &quot;Ain&#39;t No Sunshine&quot;, &quot;Length&quot;, &quot;2:05&quot;,
   &quot;Bill Withers&quot;, &quot;Ain&#39;t No Sunshine&quot;, &quot;Album&quot;, &quot;Just As I Am&quot;,
@@ -494,14 +497,12 @@ common_model &lt;- common_planes %&gt;%
   &quot;Bill Withers&quot;, &quot;Grandma&#39;s Hands&quot;, &quot;Album&quot;, &quot;Just As I Am&quot;
 )
 
-untidyA</code></pre>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["artist"],"name":[1],"type":["chr"],"align":["left"]},{"label":["song"],"name":[2],"type":["chr"],"align":["left"]},{"label":["type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["info"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"Bill Withers","2":"Ain't No Sunshine","3":"Length","4":"2:05"},{"1":"Bill Withers","2":"Ain't No Sunshine","3":"Album","4":"Just As I Am"},{"1":"Bill Withers","2":"Lovely Day","3":"Length","4":"4:15"},{"1":"Bill Withers","2":"Lovely Day","3":"Album","4":"Menagerie"},{"1":"Bill Withers","2":"Lean on Me","3":"Length","4":"4:19"},{"1":"Bill Withers","2":"Lean on Me","3":"Album","4":"Still Bill"},{"1":"Bill Withers","2":"Use Me","3":"Length","4":"3:48"},{"1":"Bill Withers","2":"Use Me","3":"Album","4":"Still Bill"},{"1":"Bill Withers","2":"Grandma's Hands","3":"Length","4":"2:01"},{"1":"Bill Withers","2":"Grandma's Hands","3":"Album","4":"Just As I Am"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-<p>Most popular songs on Spotify, for an eclectic mix of artists from Kathleen’s playlists:</p>
-<pre class="r"><code>untidyB &lt;- tribble(
+# tidy version: pivot wider (There are multiple rows per observation/song.)
+tidyA &lt;- untidyA %&gt;%
+  pivot_wider(names_from = &quot;type&quot;, values_from = &quot;info&quot;)
+
+# untidy data: most popular songs on Spotify, for an eclectic mix of artists from Kathleen&#39;s playlists
+untidyB &lt;- tribble(
   ~artist, ~`1`, ~`2`, ~`3`, ~`4`, ~`5`,
   &quot;Bill Withers&quot;, &quot;Ain&#39;t No Sunshine&quot;, &quot;Lovely Day&quot;, &quot;Lean on Me&quot;, &quot;Use Me&quot;, &quot;Grandma&#39;s Hands&quot;,
   &quot;Led Zeppelin&quot;, &quot;Stairway to Heaven&quot;, &quot;Immigrant Song&quot;, &quot;Whole Lotta Love&quot;, &quot;Black Dog&quot;, &quot;Good Times Bad Times&quot;,
@@ -510,12 +511,9 @@ untidyA</code></pre>
   &quot;Hozier&quot;, &quot;Take Me To Church&quot;, &quot;The Bones&quot;, &quot;Almost&quot;, &quot;Cherry Wine&quot;, &quot;Like Real People Do&quot;
 )
 
-untidyB</code></pre>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["artist"],"name":[1],"type":["chr"],"align":["left"]},{"label":["1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["2"],"name":[3],"type":["chr"],"align":["left"]},{"label":["3"],"name":[4],"type":["chr"],"align":["left"]},{"label":["4"],"name":[5],"type":["chr"],"align":["left"]},{"label":["5"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"Bill Withers","2":"Ain't No Sunshine","3":"Lovely Day","4":"Lean on Me","5":"Use Me","6":"Grandma's Hands"},{"1":"Led Zeppelin","2":"Stairway to Heaven","3":"Immigrant Song","4":"Whole Lotta Love","5":"Black Dog","6":"Good Times Bad Times"},{"1":"The Supremes","2":"You Can't Hurry Love","3":"Baby Love","4":"Stop! In The Name Of Love","5":"Where Did Our Love Go","6":"Come See About Me"},{"1":"Alessia Cara","2":"Scars To Your Beautiful","3":"Out Of Love","4":"Stay","5":"Ready","6":"I Choose"},{"1":"Hozier","2":"Take Me To Church","3":"The Bones","4":"Almost","5":"Cherry Wine","6":"Like Real People Do"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
+# tidy version: pivot longer (The column names 1-5 are a variable, rank.)
+tidyB &lt;- untidyB %&gt;%
+  pivot_longer(c(`1`, `2`, `3`, `4`, `5`), names_to = &quot;rank&quot;, values_to = &quot;title&quot;)</code></pre>
 </div>
 </div>
 <div id="github" class="section level2">
