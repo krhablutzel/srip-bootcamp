@@ -15,6 +15,8 @@ library(tidyverse)
 library(nycflights13)
 ```
 
+## Page Under Construction
+
 ## Getting Started
 
 #### Last Week's Challenges
@@ -23,16 +25,75 @@ Last week, I challenged you to find assorted information about the relational da
 
 ```{r Challenge-Solutions}
 # What is the average departure delay for each origin airport?
+dep_delay <- flights %>%
+  group_by(origin) %>%
+  summarize(avg_dep_delay = mean(dep_delay, na.rm = TRUE))
+
 # What is the average arrival delay for each destination airport?
+arr_delay <- flights %>%
+  group_by(dest) %>%
+  summarize(avg_arr_delay = mean(arr_delay, na.rm = TRUE))
+
 # Find all the flights that flew over 400 miles. What were their destinations?
+# Version 1:
+long_distance_A <- flights %>%
+  filter(distance > 400) %>%
+  group_by(dest) %>%
+  summarize() %>% # if we don't calculate new columns, we just have the unique destinations 
+  left_join(airports, by = c("dest" = "faa")) %>% # to find names
+  select(dest, name)
+
+# Version 2:
+long_distance_B <- flights %>%
+  filter(distance > 400) %>%
+  select(dest) %>%
+  unique() %>% # removes duplicate entries
+  left_join(airports, by = c("dest" = "faa")) %>% # to find names
+  select(dest, name)
+  
 # Which airport was the most common destination? (What is its name?)
+common_dest <- flights %>%
+  group_by(dest) %>%
+  summarize(num_flights = n()) %>%
+  arrange(desc(num_flights)) %>%
+  head(1) %>%
+  left_join(airports, by = c("dest" = "faa")) # find airport information
+
 # Are there any planes in the `flights` table that don't appear in the `planes` table?
+missing_planes <- flights %>%
+  filter(!is.na(tailnum)) %>% # remove flights with missing tail numbers
+  group_by(tailnum) %>%
+  summarize() %>% # unique tailnums
+  left_join(planes, by = c("tailnum" = "tailnum")) %>%
+  filter(is.na(type)) %>%
+  nrow() # count how many missing planes
+
 # Among the 100 most commonly used planes, what is the most common manufacturer? Most common model?
-```
+# 100 most commonly used planes
+common_planes <- flights %>%
+  filter(!is.na(tailnum)) %>% # remove flights with missing tail numbers
+  group_by(tailnum) %>%
+  summarize(num_flights = n()) %>%
+  arrange(desc(num_flights)) %>%
+  head(100)
 
-Lengths and albums of Bill Withers songs:
+# most common manufacturer
+common_manufacturer <- common_planes %>%
+  left_join(planes, by = c("tailnum" = "tailnum")) %>% # get manufacturer data
+  group_by(manufacturer) %>%
+  summarize(num_made = n()) %>%
+  arrange(desc(num_made)) %>%
+  head(1)
 
-```{r UntidyA}
+# most common model
+common_model <- common_planes %>%
+  left_join(planes, by = c("tailnum" = "tailnum")) %>% # get manufacturer data
+  group_by(model) %>%
+  summarize(num_flown = n()) %>%
+  arrange(desc(num_flown)) %>%
+  head(1)
+
+# untidy data: lengths and albums of Bill Withers songs
 untidyA <- tribble(
   ~artist, ~song, ~type, ~info,
   "Bill Withers", "Ain't No Sunshine", "Length", "2:05",
@@ -47,12 +108,11 @@ untidyA <- tribble(
   "Bill Withers", "Grandma's Hands", "Album", "Just As I Am"
 )
 
-untidyA
-```
+# tidy version: pivot wider (There are multiple rows per observation/song.)
+tidyA <- untidyA %>%
+  pivot_wider(names_from = "type", values_from = "info")
 
-Most popular songs on Spotify, for an eclectic mix of artists from Kathleen's playlists:
-
-```{r UntidyB}
+# untidy data: most popular songs on Spotify, for an eclectic mix of artists from Kathleen's playlists
 untidyB <- tribble(
   ~artist, ~`1`, ~`2`, ~`3`, ~`4`, ~`5`,
   "Bill Withers", "Ain't No Sunshine", "Lovely Day", "Lean on Me", "Use Me", "Grandma's Hands",
@@ -62,7 +122,9 @@ untidyB <- tribble(
   "Hozier", "Take Me To Church", "The Bones", "Almost", "Cherry Wine", "Like Real People Do"
 )
 
-untidyB
+# tidy version: pivot longer (The column names 1-5 are a variable, rank.)
+tidyB <- untidyB %>%
+  pivot_longer(c(`1`, `2`, `3`, `4`, `5`), names_to = "rank", values_to = "title")
 ```
 
 

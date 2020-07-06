@@ -12,7 +12,7 @@
 <meta name="author" content="Kathleen Hablutzel" />
 
 
-<title>Day 4: Spatial Data</title>
+<title>Day 1: Introduction to RStudio &amp; the Tidyverse</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -398,129 +398,171 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Day 4: Spatial Data</h1>
+<h1 class="title toc-ignore">Day 1: Introduction to RStudio &amp; the Tidyverse</h1>
 <h4 class="author">Kathleen Hablutzel</h4>
-<h4 class="date">7/9/2020</h4>
+<h4 class="date">6/11/2020</h4>
 
 </div>
 
 
-<div id="getting-started" class="section level2">
-<h2>Getting Started</h2>
-<div id="last-weeks-challenges" class="section level4">
-<h4>Last Week’s Challenges</h4>
-<p>Last week, I challenged you to find assorted information about the relational data in <code>nycflights13</code> and fix a couple untidy data sets. Here are the solutions:</p>
-<pre class="r"><code># What is the average departure delay for each origin airport?
-dep_delay &lt;- flights %&gt;%
-  group_by(origin) %&gt;%
-  summarize(avg_dep_delay = mean(dep_delay, na.rm = TRUE))
-
-# What is the average arrival delay for each destination airport?
-arr_delay &lt;- flights %&gt;%
-  group_by(dest) %&gt;%
-  summarize(avg_arr_delay = mean(arr_delay, na.rm = TRUE))
-
-# Find all the flights that flew over 400 miles. What were their destinations?
-# Version 1:
-long_distance_A &lt;- flights %&gt;%
-  filter(distance &gt; 400) %&gt;%
-  group_by(dest) %&gt;%
-  summarize() %&gt;% # if we don&#39;t calculate new columns, we just have the unique destinations 
-  left_join(airports, by = c(&quot;dest&quot; = &quot;faa&quot;)) %&gt;% # to find names
-  select(dest, name)
-
-# Version 2:
-long_distance_B &lt;- flights %&gt;%
-  filter(distance &gt; 400) %&gt;%
-  select(dest) %&gt;%
-  unique() %&gt;% # removes duplicate entries
-  left_join(airports, by = c(&quot;dest&quot; = &quot;faa&quot;)) %&gt;% # to find names
-  select(dest, name)
-  
-# Which airport was the most common destination? (What is its name?)
-common_dest &lt;- flights %&gt;%
-  group_by(dest) %&gt;%
-  summarize(num_flights = n()) %&gt;%
-  arrange(desc(num_flights)) %&gt;%
-  head(1) %&gt;%
-  left_join(airports, by = c(&quot;dest&quot; = &quot;faa&quot;))
-
-# Are there any planes in the `flights` table that don&#39;t appear in the `planes` table?
-missing_planes &lt;- flights %&gt;%
-  filter(!is.na(tailnum)) %&gt;% # remove flights with missing tail numbers
-  group_by(tailnum) %&gt;%
-  summarize() %&gt;% # unique tailnums
-  left_join(planes, by = c(&quot;tailnum&quot; = &quot;tailnum&quot;)) %&gt;%
-  filter(is.na(type)) %&gt;%
-  nrow() # count how many missing planes
-
-# Among the 100 most commonly used planes, what is the most common manufacturer? Most common model?
-# 100 most commonly used planes
-common_planes &lt;- flights %&gt;%
-  filter(!is.na(tailnum)) %&gt;% # remove flights with missing tail numbers
-  group_by(tailnum) %&gt;%
-  summarize(num_flights = n()) %&gt;%
-  arrange(desc(num_flights)) %&gt;%
-  head(100)
-
-# most common manufacturer
-common_manufacturer &lt;- common_planes %&gt;%
-  left_join(planes, by = c(&quot;tailnum&quot; = &quot;tailnum&quot;)) %&gt;% # get manufacturer data
-  group_by(manufacturer) %&gt;%
-  summarize(num_made = n()) %&gt;%
-  arrange(desc(num_made)) %&gt;%
-  head(1)
-
-# most common model
-common_model &lt;- common_planes %&gt;%
-  left_join(planes, by = c(&quot;tailnum&quot; = &quot;tailnum&quot;)) %&gt;% # get manufacturer data
-  group_by(model) %&gt;%
-  summarize(num_flown = n()) %&gt;%
-  arrange(desc(num_flown)) %&gt;%
-  head(1) %&gt;%
-  left_join(planes, by = c(&quot;model&quot; = &quot;model&quot;)) # what do we know about this model?</code></pre>
-<p>Lengths and albums of Bill Withers songs:</p>
-<pre class="r"><code>untidyA &lt;- tribble(
-  ~artist, ~song, ~type, ~info,
-  &quot;Bill Withers&quot;, &quot;Ain&#39;t No Sunshine&quot;, &quot;Length&quot;, &quot;2:05&quot;,
-  &quot;Bill Withers&quot;, &quot;Ain&#39;t No Sunshine&quot;, &quot;Album&quot;, &quot;Just As I Am&quot;,
-  &quot;Bill Withers&quot;, &quot;Lovely Day&quot;, &quot;Length&quot;, &quot;4:15&quot;,
-  &quot;Bill Withers&quot;, &quot;Lovely Day&quot;, &quot;Album&quot;, &quot;Menagerie&quot;,
-  &quot;Bill Withers&quot;, &quot;Lean on Me&quot;, &quot;Length&quot;, &quot;4:19&quot;,
-  &quot;Bill Withers&quot;, &quot;Lean on Me&quot;, &quot;Album&quot;, &quot;Still Bill&quot;,
-  &quot;Bill Withers&quot;, &quot;Use Me&quot;, &quot;Length&quot;, &quot;3:48&quot;,
-  &quot;Bill Withers&quot;, &quot;Use Me&quot;, &quot;Album&quot;, &quot;Still Bill&quot;,
-  &quot;Bill Withers&quot;, &quot;Grandma&#39;s Hands&quot;, &quot;Length&quot;, &quot;2:01&quot;,
-  &quot;Bill Withers&quot;, &quot;Grandma&#39;s Hands&quot;, &quot;Album&quot;, &quot;Just As I Am&quot;
-)
-
-untidyA</code></pre>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["artist"],"name":[1],"type":["chr"],"align":["left"]},{"label":["song"],"name":[2],"type":["chr"],"align":["left"]},{"label":["type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["info"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"Bill Withers","2":"Ain't No Sunshine","3":"Length","4":"2:05"},{"1":"Bill Withers","2":"Ain't No Sunshine","3":"Album","4":"Just As I Am"},{"1":"Bill Withers","2":"Lovely Day","3":"Length","4":"4:15"},{"1":"Bill Withers","2":"Lovely Day","3":"Album","4":"Menagerie"},{"1":"Bill Withers","2":"Lean on Me","3":"Length","4":"4:19"},{"1":"Bill Withers","2":"Lean on Me","3":"Album","4":"Still Bill"},{"1":"Bill Withers","2":"Use Me","3":"Length","4":"3:48"},{"1":"Bill Withers","2":"Use Me","3":"Album","4":"Still Bill"},{"1":"Bill Withers","2":"Grandma's Hands","3":"Length","4":"2:01"},{"1":"Bill Withers","2":"Grandma's Hands","3":"Album","4":"Just As I Am"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div id="welcome" class="section level2">
+<h2>Welcome!!!</h2>
+<div id="getting-started" class="section level4">
+<h4>Getting Started</h4>
+<p>If you haven’t already, start downloading R and R Studio. See the instructions <a href="index.html">here</a> under “Getting Started.”</p>
+<p>Here is the <a href="https://ncssm.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=8bad9ba8-35c9-424d-a156-abd8000e0a2b">recording of today’s lesson</a>. (This is only accessible within the NCSSM organization.) You can also follow along with the code below.</p>
 </div>
-<p>Most popular songs on Spotify, for an eclectic mix of artists from Kathleen’s playlists:</p>
-<pre class="r"><code>untidyB &lt;- tribble(
-  ~artist, ~`1`, ~`2`, ~`3`, ~`4`, ~`5`,
-  &quot;Bill Withers&quot;, &quot;Ain&#39;t No Sunshine&quot;, &quot;Lovely Day&quot;, &quot;Lean on Me&quot;, &quot;Use Me&quot;, &quot;Grandma&#39;s Hands&quot;,
-  &quot;Led Zeppelin&quot;, &quot;Stairway to Heaven&quot;, &quot;Immigrant Song&quot;, &quot;Whole Lotta Love&quot;, &quot;Black Dog&quot;, &quot;Good Times Bad Times&quot;,
-  &quot;The Supremes&quot;, &quot;You Can&#39;t Hurry Love&quot;, &quot;Baby Love&quot;, &quot;Stop! In The Name Of Love&quot;, &quot;Where Did Our Love Go&quot;, &quot;Come See About Me&quot;,
-  &quot;Alessia Cara&quot;, &quot;Scars To Your Beautiful&quot;, &quot;Out Of Love&quot;, &quot;Stay&quot;, &quot;Ready&quot;, &quot;I Choose&quot;,
-  &quot;Hozier&quot;, &quot;Take Me To Church&quot;, &quot;The Bones&quot;, &quot;Almost&quot;, &quot;Cherry Wine&quot;, &quot;Like Real People Do&quot;
-)
-
-untidyB</code></pre>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["artist"],"name":[1],"type":["chr"],"align":["left"]},{"label":["1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["2"],"name":[3],"type":["chr"],"align":["left"]},{"label":["3"],"name":[4],"type":["chr"],"align":["left"]},{"label":["4"],"name":[5],"type":["chr"],"align":["left"]},{"label":["5"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"Bill Withers","2":"Ain't No Sunshine","3":"Lovely Day","4":"Lean on Me","5":"Use Me","6":"Grandma's Hands"},{"1":"Led Zeppelin","2":"Stairway to Heaven","3":"Immigrant Song","4":"Whole Lotta Love","5":"Black Dog","6":"Good Times Bad Times"},{"1":"The Supremes","2":"You Can't Hurry Love","3":"Baby Love","4":"Stop! In The Name Of Love","5":"Where Did Our Love Go","6":"Come See About Me"},{"1":"Alessia Cara","2":"Scars To Your Beautiful","3":"Out Of Love","4":"Stay","5":"Ready","6":"I Choose"},{"1":"Hozier","2":"Take Me To Church","3":"The Bones","4":"Almost","5":"Cherry Wine","6":"Like Real People Do"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div id="creating-an-rmarkdown-document" class="section level4">
+<h4>Creating an RMarkdown Document</h4>
+<ul>
+<li>Write text and embed code chunks</li>
+<li>R is the <em>language</em> (in the console and in code chunks)</li>
+<li>RStudio is the <em>programming environment</em></li>
+<li>RMarkdown is a <em>markup language</em> for combining text with code
+<ul>
+<li>Produce reproducible reports where the code is right there</li>
+<li>Export to HTML, PDF, MS Word (how I created website)</li>
+</ul></li>
+</ul>
+<pre class="r"><code>summary(cars)</code></pre>
+<pre><code>##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00</code></pre>
+<p>See the RMarkdown <a href="https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">reference guide</a>.</p>
 </div>
 </div>
+<div id="data-visualizations-with-ggplot2" class="section level2">
+<h2>Data Visualizations with ggplot2</h2>
+<p>Today we will:</p>
+<ul>
+<li>Make a plot</li>
+<li>Add basic plot elements</li>
+<li>Look ahead at what’s next</li>
+</ul>
+<div id="introducing-the-tidyverse" class="section level4">
+<h4>Introducing… the Tidyverse</h4>
+<p>Plotting with base R is… not super fun.</p>
+<pre class="r"><code>plot(pressure)</code></pre>
+<p><img src="day-1_files/figure-html/Base-R-Plot-1.png" width="576" /></p>
+<p>Instead, we plot with <code>ggplot2</code>, a popular open-source package. <code>ggplot2</code> is an implementation of Wilkinson’s <em>Grammar of Graphics</em>, which means that you combine plot building blocks to create your visualization.</p>
+<p><code>ggplot2</code> is part of the Tidyverse, a series of open-source R packages that “share an underlying design philosophy, grammar, and data structures”. (See the <a href="https://www.tidyverse.org/">website</a> and <a href="https://github.com/tidyverse/tidyverse">GitHub repository</a>.)</p>
+<p>The main packages are <code>ggplot2</code>, <code>dplyr</code>, <code>tidyr</code>, <code>readr</code>, <code>purrr</code>, <code>tibble</code>, <code>stringr</code>, and <code>forcats</code>, but we will mostly focus on <strong>ggplot2</strong> (for data visualization) and <strong>dplyr</strong> (for data wrangling).</p>
+<p>Let’s load the tidyverse:</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<p>In the bottom right panel, under the Packages tab, the <code>tidyverse</code> packages should now be checked. In each file, you need to load packages before you use them.</p>
 </div>
-<div id="github" class="section level2">
-<h2>GitHub</h2>
-<p>etc.</p>
+<div id="your-first-plot" class="section level4">
+<h4>Your First Plot</h4>
+<p>We are going to work with the <code>mtcars</code> data set. Let’s take a look:</p>
+<pre class="r"><code>glimpse(mtcars)</code></pre>
+<pre><code>## Observations: 32
+## Variables: 11
+## $ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4,…
+## $ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8,…
+## $ disp &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0…
+## $ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, …
+## $ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69,…
+## $ wt   &lt;dbl&gt; 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570…
+## $ qsec &lt;dbl&gt; 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84…
+## $ vs   &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0,…
+## $ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3,…
+## $ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4,…</code></pre>
+<pre class="r"><code># View(mtcars)</code></pre>
+</div>
+<div id="example-1-a-scatterplot" class="section level4">
+<h4>Example 1: A Scatterplot</h4>
+<pre class="r"><code># a basic scatterplot
+ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point()</code></pre>
+<p><img src="day-1_files/figure-html/Scatterplot-1.png" width="576" /></p>
+<p>Note: You map variables to aesthetics within <code>aes()</code> and set fixed visual cues outside <code>aes()</code>. If I want all my points to be blue, I use the color parameter outside <code>aes()</code>:</p>
+<pre class="r"><code># adding color
+ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = &quot;blue&quot;)</code></pre>
+<p><img src="day-1_files/figure-html/Fixed-Color-1.png" width="576" /></p>
+<p>If I want to map color to a variable, I use the color parameter inside <code>aes()</code>:</p>
+<pre class="r"><code># mapping a variable to color
+ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point(aes(color = cyl))</code></pre>
+<p><img src="day-1_files/figure-html/Var-Color-1.png" width="576" /></p>
+</div>
+<div id="example-2-a-box-plot" class="section level4">
+<h4>Example 2: A Box Plot</h4>
+<p>If we look at the data again, we notice that it’s all numbers:</p>
+<pre class="r"><code>glimpse(mtcars)</code></pre>
+<pre><code>## Observations: 32
+## Variables: 11
+## $ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4,…
+## $ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8,…
+## $ disp &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0…
+## $ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, …
+## $ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69,…
+## $ wt   &lt;dbl&gt; 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570…
+## $ qsec &lt;dbl&gt; 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84…
+## $ vs   &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0,…
+## $ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3,…
+## $ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4,…</code></pre>
+<p>However, the number of cylinders in the car is always 4, 6, or 8. Let’s use the <code>factor()</code> function to turn this into categorical data, so that we can make a boxplot.</p>
+<pre class="r"><code># a basic boxplot
+ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot()</code></pre>
+<p><img src="day-1_files/figure-html/Bar-Chart-1.png" width="576" /></p>
+</div>
+<div id="about-available-data-sets" class="section level4">
+<h4>About Available Data Sets</h4>
+<p>The <code>data()</code> function will show you all your available data sets:</p>
+<pre class="r"><code>data()</code></pre>
+<p>The <code>iris</code> data set is a famous data set used in machine learning classes. Let’s take a look at the documentation:</p>
+<pre class="r"><code>?iris</code></pre>
+<p>Now, look at the sources. This data comes from the work of a famous eugenicist, statistician, and geneticist, R.A. Fisher, and was published in a journal on eugenics. Many statisticians are currently pushing to use alternate data sets in their classrooms and <a href="https://www.change.org/p/american-statistical-association-rename-the-fisher-lecture-after-david-blackwell">remove Fisher’s name</a> from the prestigious <a href="https://en.wikipedia.org/wiki/R._A._Fisher_Lectureship">Fisher Lectureship</a>.</p>
+<p>Data is more than numbers.</p>
+</div>
+</div>
+<div id="where-are-we-going" class="section level2">
+<h2>Where are we going?</h2>
+<ul>
+<li>Adding Color and Themes
+<ul>
+<li>Make those plots look awesome</li>
+</ul></li>
+<li>Data Wrangling
+<ul>
+<li>Find cool patterns</li>
+<li>Sort your data</li>
+</ul></li>
+</ul>
+<p>For example:</p>
+<pre class="r"><code>library(ggthemes)
+
+june_weather &lt;- airquality %&gt;%
+  filter(Month == 6) %&gt;% # only June weather
+  select(Day, Temp) # only columns we need
+
+june_plot &lt;- ggplot(data = june_weather, aes(x = Day, y =  Temp)) +
+  geom_point() + # make our points purple
+  geom_line() + # add a line
+  labs(title = &quot;Temperatures in NY, June 1973&quot;,
+       x = &quot;Day&quot;,
+       y = &quot;Temperature (°F)&quot;) +
+  theme_fivethirtyeight() +
+  theme(plot.title = element_text(size = 18))
+
+june_plot</code></pre>
+<p><img src="day-1_files/figure-html/June-Weather-1.png" width="576" /></p>
+<div id="can-i-practice-more" class="section level4">
+<h4>Can I practice more?</h4>
+<p>Yes! So glad you asked. An awesome way to learn data visualization is through “copy the master” experiments, where you try to recreate an existing graph as closely as possible.</p>
+<p>You’ll need to dig into the <code>ggplot2</code> documentation, as well as the <code>storms</code> dataset. I recommend starting by looking at <code>labs()</code> and <code>theme()</code>, though we’ll cover themes more next week.</p>
+<p>Graph to copy:</p>
+<p><img src="day-1_files/figure-html/Wind-Graph-1.png" width="576" /></p>
+<p>I encourage you to Slack me throughout the week as you get stuck. I’ll reveal the code next week!</p>
+</div>
 </div>
 
 <div id="footer">
