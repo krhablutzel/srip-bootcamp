@@ -29,7 +29,7 @@ Today we will:
 * Create interactive maps using `leaflet`
 * Learn version control with GitHub
 
-You'll need to install the `sf` and `leaflet` packages for later in the lesson.
+You'll need to install the `sf` and `leaflet` packages for later in the lesson. The `sf` package has multiple external dependencies, so pay close attention to any error messages during your install.
 
 #### Notes Moving Forward
 
@@ -41,13 +41,179 @@ You'll need to install the `sf` and `leaflet` packages for later in the lesson.
 
 #### Last Week's Challenges
 
-Last week, I challenged you to find assorted information about the relational data in `nycflights13` and fix a couple untidy data sets. The solutions are  long enough that I have moved the solutions to the [bottom of this page](https://krhablutzel.github.io/srip-bootcamp/day-4.html#solutions_for_last_week).
+Last week, I challenged you to find assorted information about the relational data in `nycflights13` and fix a couple untidy data sets. The solutions are long enough that I have moved the solutions to the [bottom of this page](https://krhablutzel.github.io/srip-bootcamp/day-4.html#solutions_for_last_week).
 
-## Static Maps with `sf`
+## Spatial Data with `sf`
 
+`sf` stands for *simple features*. Computers use *features* to represent real-world objects that have both spatial and non-spatial attributes. For example, North Carolina counties have *geometries*, such as county borders, and non-spatial *attributes*, such as names and populations. 
 
+Let's load some spatial data. Unzip this [shapefile of NC counties](https://opendata.arcgis.com/datasets/34acbf4a26784f189c9528c1cf317193_0.zip?outSR=%7B%22latestWkid%22%3A3857%2C%22wkid%22%3A102100%7D) from the [NC Department of Environmental Quality](http://data-ncdenr.opendata.arcgis.com/datasets/nc-counties?geometry=-87.818%2C33.597%2C-72.020%2C36.739), and place the folder wherever you store your data for this course. Let's read in the shapefiles using `read_sf()`:
+
+```{r Load-Counties}
+library(sf)
+
+# load county shapefiles
+counties <- read_sf("./data/NC_counties-shp")
+```
+
+Note that I am loading the entire folder of files, not a particular file within the folder.
+
+Let's take a look at this data. We have exactly 100 counties, with lots of attributes such as `CO_NAME` and `ACRES`. The last column, `geometry`, always contains the spatial information for any spatial dataset.
+
+```{r See-Counties, eval = FALSE}
+View(counties)
+```
+
+Thus, any spatial dataset will have two types of columns: a *geometry* column for the spatial data of a feature, and *attribute* columns for other information about each feature. In this dataset, the geometries are all `POLYGON`.
+
+```{r See-Class}
+# what class is the geometry column?
+counties %>%
+  pull(geometry) %>% # pulls the geometry column from the dataframe
+  class()
+```
+
+See the [simple feature documentation](https://r-spatial.github.io/sf/articles/sf1.html#simple-feature-geometry-types) for more geometry types, including `POINT` and `LINESTRING`.
+
+## Static Maps with `ggplot2`
+
+Let's start exploring this spatial data. If we use the `geom_sf()` function, `ggplot2` automatically knows to map `x` and `y` to the `geometry` column!
+
+```{r Static-Plot}
+ggplot(data = counties, aes(fill = ACRES)) + 
+  geom_sf()
+```
+
+Then, we can alter our plot in the same way as any other ggplot.
+
+```{r Static-Plot2}
+library(viridis)
+
+ggplot(data = counties, aes(fill = ACRES)) + 
+  geom_sf() +
+  scale_fill_viridis() + # from the viridis package
+  labs(title = "Area within NC County Borders",
+       fill = "Acres") + # rename legend
+  theme(
+    rect = element_blank(), # remove background axes
+    axis.text = element_blank(), # remove axes
+    axis.ticks = element_blank()
+  )
+```
+
+You can even layer multiple datasets of spatial features onto one map. Let's download the [NC Congressional District borders shapefile](https://www.ncleg.gov/Files/GIS/Plans_Main/Congress_2019/HB1029%203rd%20Edition%20-%20Shapefile.zip) from the NC General Assembly [redistricting website](https://www.ncleg.gov/Redistricting). Again, unzip the file and place it wherever you store your data.
+
+```{r Congressional-Districts}
+nc_cd <- read_sf("./data/HB1029 3rd Edition - Shapefile")
+```
+
+If you have trouble reading in the data, you might need to replace the spaces with a dash or underscore. (This is why spaces in filenames are bad practice!)
+
+```{r CD-Map}
+# just the congressional district data
+ggplot(data = nc_cd) + 
+  geom_sf() +
+  geom_sf_label(aes(label = DISTRICT)) # place labels in each district
+```
+
+When you overlay your shapefiles, make sure the map projections match. If not, you can transform one dataset to match another's projection.
+
+```{r Check-Projection}
+# county data projection
+st_crs(counties) # number 3857: Pseudo-Mercator
+
+# congressional district projection
+st_crs(nc_cd) # 32119: NAD83 / North Carolina
+
+# transform CDs to match counties
+nc_cd <- nc_cd %>%
+  st_transform(3857)
+```
+
+We transformed the Congressional Districts' [NAD83 / North Carolina](https://epsg.io/32119) projection into the counties' [Pseudo-Mercator](https://epsg.io/3857) projection. Now, we can overlay the maps successfully:
+
+```{r Overlay-Map}
+ggplot() + 
+  geom_sf(data = counties, aes(fill = ACRES)) +
+  geom_sf(data = nc_cd,
+          fill = NA,
+          color = "red")
+```
+
+For most audiences, a static map is sufficient to display your spatial information. However, if you want to make something more interactive, you can use the `leaflet` package.
 
 ## Interactive Maps with `leaflet`
+
+[Leaflet](https://leafletjs.com/) is an "open-source JavaScript library for mobile-friendly interactive maps." The [`leaflet` package for R](https://rstudio.github.io/leaflet/) integrates Leaflet with R.
+
+Leaflet only works with data in the [World Geodetic System 1984](https://epsg.io/4326) projection, number 4326, so let's transform our data:
+
+```{r Transform}
+counties_4326 <- counties %>%
+  st_transform(4326)
+
+nc_cd_4326 <- nc_cd %>%
+  st_transform(4326)
+```
+
+Our base leaflet map is just the map information:
+
+```{r Base-Leaflet-Map}
+library(leaflet)
+
+leaflet() %>%
+  addTiles()
+```
+
+Then, we use the pipe to add layers of information:
+
+```{r Leaflet-Map}
+leaflet() %>%
+  addTiles() %>% # base map
+  addPolygons(data = counties_4326, # county outlines
+              color = "blue",
+              fillOpacity = 0.7) %>%
+  addPolygons(data = nc_cd_4326, # congressional district outlines
+              color = "red",
+              fillOpacity = 0,
+              label = ~DISTRICT) # hover over district to see number
+
+```
+
+```{r Color Palette}
+library(RColorBrewer)
+
+pal <- colorNumeric(
+  palette = "Purples",
+  domain = counties_4326$ACRES)
+```
+
+```{r Leaflet-Map-2}
+NC <- leaflet() %>%
+  addTiles() %>% # base map
+  addPolygons(data = counties_4326, # county outlines
+              color = ~pal(ACRES),
+              fillOpacity = 0.8) %>%
+  addPolygons(data = nc_cd_4326, # congressional district outlines
+              color = "red",
+              fillOpacity = 0,
+              popup = ~DISTRICT) # click on district to see number
+```
+
+```{r}
+ncssm <- tribble(
+  ~lat, ~lon, ~name,
+  36.018038, -78.920288, "Durham",
+  35.731852, -81.686701, "Morganton"
+)
+```
+
+```{r}
+NC %>%
+  addMarkers(data = ncssm,
+             popup = ~name)
+```
+
 
 ## GitHub
 
