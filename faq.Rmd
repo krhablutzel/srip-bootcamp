@@ -14,4 +14,105 @@ knitr::opts_chunk$set(
 library(tidyverse)
 ```
 
-## Page Under Construction
+## Loading Data From Spreadsheets
+
+#### *How do I load my data from Excel?*
+
+Make sure you have the `tidyverse` packages installed. Load the `readxl` package (`library(readxl)`), and then use the `read_excel()` function. *(See below on finding the path to your data.)*
+
+```{r Load-Data1, eval = FALSE}
+my_data <- read_excel("~/Desktop/SRIP/My_Data.xlsx")
+```
+
+For an Excel file with multiple sheets, specify the `sheet` parameter:
+
+```{r Load-Data2, eval = FALSE}
+my_data2 <- read_excel("~/Desktop/SRIP/My_Data.xlsx", sheet = "Sheet2")
+```
+
+#### *How do I load my data from a csv?*
+
+```{r Load-Data3, eval = FALSE}
+my_data <- read_csv("~/Desktop/SRIP/My_Data.csv")
+```
+
+#### *How do I tell R to find my file of data?*
+
+The first argument in the `read_excel()` or `read_csv()` function should be the path to your file. In the example above, my data is stored in the SRIP folder on my desktop at the **absolute path** `"~/Desktop/SRIP/My_Data.csv"`. An absolute path is the exact location of the data file on your computer.
+
+```{r Load-Data4, eval = FALSE}
+my_data <- read_csv("~/Desktop/SRIP/My_Data.csv")
+```
+
+Another option is a **relative path**, where you find your data file relative to the folder where you've saved your R code. See this guide to [navigating your file system](https://scriptingosx.com/2017/08/navigating-the-file-system/). Also see this [Mac-specific](https://support.apple.com/guide/terminal/specify-files-and-folders-apd3cf6fe02-3ec8-48f1-951f-866e52955fc8/mac) or [Windows- and Linux-specific](https://www.computerhope.com/issues/ch001708.htm) guide to file paths on your system.
+
+Here are some examples of relative vs. absolute paths:
+
+```{r Load-Data5, eval = FALSE}
+# data in the same folder, SRIP
+my_data <- read_csv("./My_Data.csv") # relative
+my_data <- read_csv("~/Desktop/SRIP/My_Data.csv") # absolute
+
+# data in a folder, Data, within the SRIP folder
+my_data <- read_csv("./Data/My_Data.csv") # relative
+my_data <- read_csv("~/Desktop/SRIP/Data/My_Data.csv") # absolute
+
+# data in SRIP's parent folder, Desktop
+my_data <- read_csv("../My_Data.csv") # relative
+my_data <- read_csv("~/Desktop/My_Data.csv") # absolute
+
+# data in another folder, DesktopData within the parent folder Desktop
+my_data <- read_csv("../DesktopData/My_Data.csv") # relative
+my_data <- read_csv("~/Desktop/DesktopData/My_Data.csv") # absolute
+```
+
+In short, `.` is the same folder, `..` is its parent folder, and you can string together as many `..` and folder names as you need to get from one folder to another.
+
+**Note:** *When you are collaborating on a project, it's best practice to work within a project folder and navigate using relative paths. Absolute paths break on different users' computers.*
+
+## Averages By Groups
+
+#### *If I have multiple measurements for each month, how do I find the average of those measurements for each month?*
+
+Let's say I have measurements for each day in a month over several months. I want the average of those daily values for each month:
+
+```{r Averages}
+# see the first ten rows of this data
+airquality %>%
+  head(10)
+```
+
+I would `group_by()` my month column, and then use the `summarize()` function to find the average daily temperature within each month:
+
+```{r Averages2}
+# calculate average temperature for each month
+avg_temps_by_month <- airquality %>%
+  group_by(Month) %>%
+  summarize(avg_daily_temp = mean(Temp, na.rm = TRUE))
+```
+
+See the [Data Wrangling lesson](https://krhablutzel.github.io/srip-bootcamp/day-3.html) (Day 3) for more!
+
+## Missing Data
+
+#### *What is the difference between NA, NaN, and a blank cell?*
+
+* `NA` stands for Not Available. We use NA for truly missing data.
+
+* `NaN` stands for Not a Number. It is usually the result of dividing by 0.
+
+* A **blank cell**, especially in column of strings, is usually an [empty string](https://en.wikipedia.org/wiki/Empty_string) (""). R distinguishes between empty and missing, so an empty string isn't missing data.
+
+#### *What format should I use for missing data?*
+
+Try to use `NA`, but R also treats `NaN` as missing. Here is one way to [replace empty strings with `NA`](https://stackoverflow.com/questions/51449243/how-to-replace-empty-string-with-na-in-r-dataframe/51449740).
+
+#### *What values get ignored when I specify `na.rm = TRUE` in my calculation?*
+
+When you specify `na.rm = TRUE` in some calculation, such as `mean()` or `min()`, both `NA` and `NaN` values get ignored! Similarly, the `is.na()` function returns `TRUE` for both `NA` and `NaN`. (There's another function, `is.nan()`, that distinguishes between the two. It returns `TRUE` for `NaN` and `FALSE` for `NA`.)
+
+## Statistics
+
+#### *How do I calculate p-values?*
+
+Well, that depends on what hypothesis you're testing. Before you get to *p*-values, there's a whole process of forming hypotheses and identifying which type of statistical test to perform. *p*-values are widely misunderstood and misused, so I recommend learning the statistics relevant to your problem before you jump into calculating *p*-values. See [this explanation of Hypothesis Testing](https://stattrek.com/hypothesis-test/hypothesis-testing.aspx) or the [Wikipedia page](https://en.wikipedia.org/wiki/Statistical_hypothesis_testing) to start. For a more in-depth explanation, see Chapter 11 of [Learning Statistics with R](https://learningstatisticswithr.com/lsr-0.6.pdf) on hypothesis testing, or ask a friend who has taken AP Statistics.

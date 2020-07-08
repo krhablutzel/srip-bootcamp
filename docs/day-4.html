@@ -410,9 +410,42 @@ div.tocify {
 </div>
 <div id="getting-started" class="section level2">
 <h2>Getting Started</h2>
+<p>Here is the recording of today’s lesson (<em>coming soon</em>). (This is only accessible within the NCSSM organization.) You can also follow along with the code below.</p>
+<p>Today we will:</p>
+<ul>
+<li>Create static maps using <code>sf</code> and <code>ggplot2</code></li>
+<li>Create interactive maps using <code>leaflet</code></li>
+<li>Learn version control with GitHub</li>
+</ul>
+<p>You’ll need to install the <code>sf</code> and <code>leaflet</code> packages for later in the lesson.</p>
+<div id="notes-moving-forward" class="section level4">
+<h4>Notes Moving Forward</h4>
+<p><strong>Schedule:</strong> Next week will be our last week of content. We will cover assorted R programming concepts, such as functions and iteration, and we might need to push our GitHub lesson to next week if we spend too long mapping.</p>
+<p><strong>Resources:</strong> I am compiling a list of further R references and resources, as well as an FAQ from student questions throughout this course.</p>
+<p><strong>Guarantee:</strong> This website will stay on my GitHub as long as my GitHub exists, so this course will be available for years to come. I might <em>slightly</em> rearrange content so this website becomes a self-explanatory course, and I will convert the lessons to YouTube videos (with all student information removed) so the lectures will be available as well.</p>
+</div>
 <div id="last-weeks-challenges" class="section level4">
 <h4>Last Week’s Challenges</h4>
-<p>Last week, I challenged you to find assorted information about the relational data in <code>nycflights13</code> and fix a couple untidy data sets. Here are the solutions:</p>
+<p>Last week, I challenged you to find assorted information about the relational data in <code>nycflights13</code> and fix a couple untidy data sets. The solutions are long enough that I have moved the solutions to the <a href="https://krhablutzel.github.io/srip-bootcamp/day-4.html#solutions_for_last_week">bottom of this page</a>.</p>
+</div>
+</div>
+<div id="static-maps-with-sf" class="section level2">
+<h2>Static Maps with <code>sf</code></h2>
+</div>
+<div id="interactive-maps-with-leaflet" class="section level2">
+<h2>Interactive Maps with <code>leaflet</code></h2>
+</div>
+<div id="github" class="section level2">
+<h2>GitHub</h2>
+<p>What is Git? Terminal or GitHub Desktop straight from RStudio</p>
+</div>
+<div id="challenges-for-next-week" class="section level2">
+<h2>Challenges for Next Week</h2>
+<p>Let’s apply what we just learned! For next week, try to</p>
+<p>As always, please Slack me throughout the week with any questions! I’ll reveal the code for these challenges next week.</p>
+<div id="solutions-for-last-week" class="section level4">
+<h4>Solutions For Last Week</h4>
+<p>Finally, here are the solutions to last week’s challenges:</p>
 <pre class="r"><code># What is the average departure delay for each origin airport?
 dep_delay &lt;- flights %&gt;%
   group_by(origin) %&gt;%
@@ -515,10 +548,6 @@ untidyB &lt;- tribble(
 tidyB &lt;- untidyB %&gt;%
   pivot_longer(c(`1`, `2`, `3`, `4`, `5`), names_to = &quot;rank&quot;, values_to = &quot;title&quot;)</code></pre>
 </div>
-</div>
-<div id="github" class="section level2">
-<h2>GitHub</h2>
-<p>etc.</p>
 </div>
 
 <div id="footer">

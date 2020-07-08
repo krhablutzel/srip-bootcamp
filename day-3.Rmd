@@ -25,7 +25,7 @@ Today we will:
 
 * Learn the 5 key verbs of `dplyr`
 * Create pipelines with the pipe operator `%>%`
-* Reorganize untidy data
+* Reorganize untidy data with `tidyr`
 * Join data tables
 
 You'll need to install the `nycflights13` package for later in the lesson.
@@ -338,7 +338,7 @@ Let's pivot topics now to discuss organizing data. The easiest type of data to u
 
 ![](http://r4ds.had.co.nz/images/tidy-1.png)
 
-Unfortunately, much of the data you encounter will be untidy. How do we tidy up our data? If one variable is spread across multiple columns, we use `pivot_longer()`, and if one observation is scattered across multiple rows, we use `pivot_wider()`.
+Unfortunately, much of the data you encounter will be untidy. How do we tidy up our data? We use the `tidyr` package. If one variable is spread across multiple columns, we use `pivot_longer()`, and if one observation is scattered across multiple rows, we use `pivot_wider()`.
 
 #### pivot_longer()
 

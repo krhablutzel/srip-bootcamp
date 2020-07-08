@@ -13,15 +13,57 @@ knitr::opts_chunk$set(
 )
 library(tidyverse)
 library(nycflights13)
+library(sf)
+library(leaflet)
 ```
 
 ## Page Under Construction
 
 ## Getting Started
 
+Here is the recording of today's lesson (*coming soon*). (This is only accessible within the NCSSM organization.) You can also follow along with the code below.
+
+Today we will:
+
+* Create static maps using `sf` and `ggplot2`
+* Create interactive maps using `leaflet`
+* Learn version control with GitHub
+
+You'll need to install the `sf` and `leaflet` packages for later in the lesson.
+
+#### Notes Moving Forward
+
+**Schedule:** Next week will be our last week of content. We will cover assorted R programming concepts, such as functions and iteration, and we might need to push our GitHub lesson to next week if we spend too long mapping.
+
+**Resources:** I am compiling a list of further R references and resources, as well as an FAQ from student questions throughout this course.
+
+**Guarantee:** This website will stay on my GitHub as long as my GitHub exists, so this course will be available for years to come. I might *slightly* rearrange content so this website becomes a self-explanatory course, and I will convert the lessons to YouTube videos (with all student information removed) so the lectures will be available as well.
+
 #### Last Week's Challenges
 
-Last week, I challenged you to find assorted information about the relational data in `nycflights13` and fix a couple untidy data sets. Here are the solutions:
+Last week, I challenged you to find assorted information about the relational data in `nycflights13` and fix a couple untidy data sets. The solutions are  long enough that I have moved the solutions to the [bottom of this page](https://krhablutzel.github.io/srip-bootcamp/day-4.html#solutions_for_last_week).
+
+## Static Maps with `sf`
+
+
+
+## Interactive Maps with `leaflet`
+
+## GitHub
+
+What is Git?
+Terminal or GitHub Desktop
+straight from RStudio
+
+## Challenges for Next Week
+
+Let's apply what we just learned! For next week, try to
+
+As always, please Slack me throughout the week with any questions! I'll reveal the code for these challenges next week.
+
+#### Solutions For Last Week
+
+Finally, here are the solutions to last week's challenges:
 
 ```{r Challenge-Solutions}
 # What is the average departure delay for each origin airport?
@@ -126,8 +168,3 @@ untidyB <- tribble(
 tidyB <- untidyB %>%
   pivot_longer(c(`1`, `2`, `3`, `4`, `5`), names_to = "rank", values_to = "title")
 ```
-
-
-## GitHub
-
-etc.

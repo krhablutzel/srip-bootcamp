@@ -14,4 +14,74 @@ knitr::opts_chunk$set(
 library(tidyverse)
 ```
 
-## Page Under Construction
+## Cheatsheets
+
+* [Data Visualization cheatsheet](https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf) (`ggplot2`)
+
+* [Data Wrangling cheatsheet](https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) (`dplyr` and `tidyr`)
+
+* [Data Transformation cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) (`dplyr`)
+
+* [Spatial Manipulation cheatsheet](https://d33wubrfki0l68.cloudfront.net/bad9d4b4657437c66290b2a3ce76eb7aa007e0b7/fd881/assets/img/sf.png) (`sf`)
+
+* [`leaflet` cheatsheet](https://d33wubrfki0l68.cloudfront.net/1267e8f809560bdbad86d15763be08302a471fb5/138a1/wp-content/uploads/2015/01/leaflet-cheatsheet-1.png)
+
+* [R Markdown Reference Guide](https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
+
+* [Other Cheatsheets](https://rstudio.com/resources/cheatsheets/)
+
+## Textbooks
+
+* [R for Data Science](https://r4ds.had.co.nz/)
+
+* [Learning Statistics with R](https://learningstatisticswithr.com/)
+
+* [R Markdown](https://bookdown.org/yihui/rmarkdown/html-document.html)
+
+* [Tidyverse Style Guide](https://style.tidyverse.org/index.html)
+
+* [Data Points Ch. 3](http://flowingdata.com/data-points/DataPoints-Ch3.pdf)
+
+## Documentation
+
+* [`ggplot2`](https://ggplot2.tidyverse.org/)
+
+* [`dplyr`](https://dplyr.tidyverse.org/)
+
+* [`tidyr`](https://tidyr.tidyverse.org/)
+
+* [`sf`](https://r-spatial.github.io/sf/articles/sf1.html)
+
+* [`leaflet`](https://rstudio.github.io/leaflet/)
+
+## GitHub and Git
+
+* [Installing Git](https://r-bio.github.io/git-installation/)
+
+* [Introduction to Git](https://www.freecodecamp.org/news/what-is-git-and-how-to-use-it-c341b049ae61/)
+
+* [Another Git Tutorial](https://github.com/bcgov/bcgov-data-science-resources/wiki/Tutorial:-Intro-to-Git-&-GitHub-for-the-R-User)
+
+* [Using Git with RStudio](https://r-bio.github.io/intro-git-rstudio/)
+
+## Statistics
+
+* [Learning Statistics with R](https://learningstatisticswithr.com/)
+
+* [MIT OpenCourseWare Intro Probability & Statistics](https://ocw.mit.edu/courses/mathematics/18-05-introduction-to-probability-and-statistics-spring-2014/index.htm)
+
+* [Khan Academy AP Statistics](https://www.khanacademy.org/math/ap-statistics)
+
+* [What Statistical Test Should I Use?](https://stats.idre.ucla.edu/spss/whatstat/what-statistical-analysis-should-i-usestatistical-analyses-using-spss/)
+
+## Other Resources
+
+* [ColorBrewer 2.0](colorbrewer2.org)
+
+* [RMarkdown Website Guide](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html)
+
+* [Netlify](https://bookdown.org/yihui/blogdown/netlify.html)
+
+* [Websites with GitHub Pages and R Markdown](https://resources.github.com/whitepapers/github-and-rstudio/) *(How I made this website!)*
+
+* [Shiny Apps](https://shiny.rstudio.com/tutorial/)

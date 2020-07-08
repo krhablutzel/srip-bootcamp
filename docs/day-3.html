@@ -412,7 +412,7 @@ div.tocify {
 <ul>
 <li>Learn the 5 key verbs of <code>dplyr</code></li>
 <li>Create pipelines with the pipe operator <code>%&gt;%</code></li>
-<li>Reorganize untidy data</li>
+<li>Reorganize untidy data with <code>tidyr</code></li>
 <li>Join data tables</li>
 </ul>
 <p>You’ll need to install the <code>nycflights13</code> package for later in the lesson.</p>
@@ -727,7 +727,7 @@ f_common_species</code></pre>
 <img src="http://r4ds.had.co.nz/images/tidy-1.png" />
 
 </div>
-<p>Unfortunately, much of the data you encounter will be untidy. How do we tidy up our data? If one variable is spread across multiple columns, we use <code>pivot_longer()</code>, and if one observation is scattered across multiple rows, we use <code>pivot_wider()</code>.</p>
+<p>Unfortunately, much of the data you encounter will be untidy. How do we tidy up our data? We use the <code>tidyr</code> package. If one variable is spread across multiple columns, we use <code>pivot_longer()</code>, and if one observation is scattered across multiple rows, we use <code>pivot_wider()</code>.</p>
 <div id="pivot_longer" class="section level4">
 <h4>pivot_longer()</h4>
 <p>We use <code>pivot_longer()</code> when one variable is spread across multiple columns. For example, the following table of country populations uses multiple columns for the year variable:</p>

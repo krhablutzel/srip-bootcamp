@@ -405,8 +405,90 @@ div.tocify {
 </div>
 
 
-<div id="page-under-construction" class="section level2">
-<h2>Page Under Construction</h2>
+<div id="loading-data-from-spreadsheets" class="section level2">
+<h2>Loading Data From Spreadsheets</h2>
+<div id="how-do-i-load-my-data-from-excel" class="section level4">
+<h4><em>How do I load my data from Excel?</em></h4>
+<p>Make sure you have the <code>tidyverse</code> packages installed. Load the <code>readxl</code> package (<code>library(readxl)</code>), and then use the <code>read_excel()</code> function. <em>(See below on finding the path to your data.)</em></p>
+<pre class="r"><code>my_data &lt;- read_excel(&quot;~/Desktop/SRIP/My_Data.xlsx&quot;)</code></pre>
+<p>For an Excel file with multiple sheets, specify the <code>sheet</code> parameter:</p>
+<pre class="r"><code>my_data2 &lt;- read_excel(&quot;~/Desktop/SRIP/My_Data.xlsx&quot;, sheet = &quot;Sheet2&quot;)</code></pre>
+</div>
+<div id="how-do-i-load-my-data-from-a-csv" class="section level4">
+<h4><em>How do I load my data from a csv?</em></h4>
+<pre class="r"><code>my_data &lt;- read_csv(&quot;~/Desktop/SRIP/My_Data.csv&quot;)</code></pre>
+</div>
+<div id="how-do-i-tell-r-to-find-my-file-of-data" class="section level4">
+<h4><em>How do I tell R to find my file of data?</em></h4>
+<p>The first argument in the <code>read_excel()</code> or <code>read_csv()</code> function should be the path to your file. In the example above, my data is stored in the SRIP folder on my desktop at the <strong>absolute path</strong> <code>&quot;~/Desktop/SRIP/My_Data.csv&quot;</code>. An absolute path is the exact location of the data file on your computer.</p>
+<pre class="r"><code>my_data &lt;- read_csv(&quot;~/Desktop/SRIP/My_Data.csv&quot;)</code></pre>
+<p>Another option is a <strong>relative path</strong>, where you find your data file relative to the folder where you’ve saved your R code. See this guide to <a href="https://scriptingosx.com/2017/08/navigating-the-file-system/">navigating your file system</a>. Also see this <a href="https://support.apple.com/guide/terminal/specify-files-and-folders-apd3cf6fe02-3ec8-48f1-951f-866e52955fc8/mac">Mac-specific</a> or <a href="https://www.computerhope.com/issues/ch001708.htm">Windows- and Linux-specific</a> guide to file paths on your system.</p>
+<p>Here are some examples of relative vs. absolute paths:</p>
+<pre class="r"><code># data in the same folder, SRIP
+my_data &lt;- read_csv(&quot;./My_Data.csv&quot;) # relative
+my_data &lt;- read_csv(&quot;~/Desktop/SRIP/My_Data.csv&quot;) # absolute
+
+# data in a folder, Data, within the SRIP folder
+my_data &lt;- read_csv(&quot;./Data/My_Data.csv&quot;) # relative
+my_data &lt;- read_csv(&quot;~/Desktop/SRIP/Data/My_Data.csv&quot;) # absolute
+
+# data in SRIP&#39;s parent folder, Desktop
+my_data &lt;- read_csv(&quot;../My_Data.csv&quot;) # relative
+my_data &lt;- read_csv(&quot;~/Desktop/My_Data.csv&quot;) # absolute
+
+# data in another folder, DesktopData within the parent folder Desktop
+my_data &lt;- read_csv(&quot;../DesktopData/My_Data.csv&quot;) # relative
+my_data &lt;- read_csv(&quot;~/Desktop/DesktopData/My_Data.csv&quot;) # absolute</code></pre>
+<p>In short, <code>.</code> is the same folder, <code>..</code> is its parent folder, and you can string together as many <code>..</code> and folder names as you need to get from one folder to another.</p>
+<p><strong>Note:</strong> <em>When you are collaborating on a project, it’s best practice to work within a project folder and navigate using relative paths. Absolute paths break on different users’ computers.</em></p>
+</div>
+</div>
+<div id="averages-by-groups" class="section level2">
+<h2>Averages By Groups</h2>
+<div id="if-i-have-multiple-measurements-for-each-month-how-do-i-find-the-average-of-those-measurements-for-each-month" class="section level4">
+<h4><em>If I have multiple measurements for each month, how do I find the average of those measurements for each month?</em></h4>
+<p>Let’s say I have measurements for each day in a month over several months. I want the average of those daily values for each month:</p>
+<pre class="r"><code># see the first ten rows of this data
+airquality %&gt;%
+  head(10)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Ozone"],"name":[1],"type":["int"],"align":["right"]},{"label":["Solar.R"],"name":[2],"type":["int"],"align":["right"]},{"label":["Wind"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Temp"],"name":[4],"type":["int"],"align":["right"]},{"label":["Month"],"name":[5],"type":["int"],"align":["right"]},{"label":["Day"],"name":[6],"type":["int"],"align":["right"]}],"data":[{"1":"41","2":"190","3":"7.4","4":"67","5":"5","6":"1","_rn_":"1"},{"1":"36","2":"118","3":"8.0","4":"72","5":"5","6":"2","_rn_":"2"},{"1":"12","2":"149","3":"12.6","4":"74","5":"5","6":"3","_rn_":"3"},{"1":"18","2":"313","3":"11.5","4":"62","5":"5","6":"4","_rn_":"4"},{"1":"NA","2":"NA","3":"14.3","4":"56","5":"5","6":"5","_rn_":"5"},{"1":"28","2":"NA","3":"14.9","4":"66","5":"5","6":"6","_rn_":"6"},{"1":"23","2":"299","3":"8.6","4":"65","5":"5","6":"7","_rn_":"7"},{"1":"19","2":"99","3":"13.8","4":"59","5":"5","6":"8","_rn_":"8"},{"1":"8","2":"19","3":"20.1","4":"61","5":"5","6":"9","_rn_":"9"},{"1":"NA","2":"194","3":"8.6","4":"69","5":"5","6":"10","_rn_":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>I would <code>group_by()</code> my month column, and then use the <code>summarize()</code> function to find the average daily temperature within each month:</p>
+<pre class="r"><code># calculate average temperature for each month
+avg_temps_by_month &lt;- airquality %&gt;%
+  group_by(Month) %&gt;%
+  summarize(avg_daily_temp = mean(Temp, na.rm = TRUE))</code></pre>
+<p>See the <a href="https://krhablutzel.github.io/srip-bootcamp/day-3.html">Data Wrangling lesson</a> (Day 3) for more!</p>
+</div>
+</div>
+<div id="missing-data" class="section level2">
+<h2>Missing Data</h2>
+<div id="what-is-the-difference-between-na-nan-and-a-blank-cell" class="section level4">
+<h4><em>What is the difference between NA, NaN, and a blank cell?</em></h4>
+<ul>
+<li><p><code>NA</code> stands for Not Available. We use NA for truly missing data.</p></li>
+<li><p><code>NaN</code> stands for Not a Number. It is usually the result of dividing by 0.</p></li>
+<li><p>A <strong>blank cell</strong>, especially in column of strings, is usually an <a href="https://en.wikipedia.org/wiki/Empty_string">empty string</a> (“”). R distinguishes between empty and missing, so an empty string isn’t missing data.</p></li>
+</ul>
+</div>
+<div id="what-format-should-i-use-for-missing-data" class="section level4">
+<h4><em>What format should I use for missing data?</em></h4>
+<p>Try to use <code>NA</code>, but R also treats <code>NaN</code> as missing. Here is one way to <a href="https://stackoverflow.com/questions/51449243/how-to-replace-empty-string-with-na-in-r-dataframe/51449740">replace empty strings with <code>NA</code></a>.</p>
+</div>
+<div id="what-values-get-ignored-when-i-specify-na.rm-true-in-my-calculation" class="section level4">
+<h4><em>What values get ignored when I specify <code>na.rm = TRUE</code> in my calculation?</em></h4>
+<p>When you specify <code>na.rm = TRUE</code> in some calculation, such as <code>mean()</code> or <code>min()</code>, both <code>NA</code> and <code>NaN</code> values get ignored! Similarly, the <code>is.na()</code> function returns <code>TRUE</code> for both <code>NA</code> and <code>NaN</code>. (There’s another function, <code>is.nan()</code>, that distinguishes between the two. It returns <code>TRUE</code> for <code>NaN</code> and <code>FALSE</code> for <code>NA</code>.)</p>
+</div>
+</div>
+<div id="statistics" class="section level2">
+<h2>Statistics</h2>
+<div id="how-do-i-calculate-p-values" class="section level4">
+<h4><em>How do I calculate p-values?</em></h4>
+<p>Well, that depends on what hypothesis you’re testing. Before you get to <em>p</em>-values, there’s a whole process of forming hypotheses and identifying which type of statistical test to perform. <em>p</em>-values are widely misunderstood and misused, so I recommend learning the statistics relevant to your problem before you jump into calculating <em>p</em>-values. See <a href="https://stattrek.com/hypothesis-test/hypothesis-testing.aspx">this explanation of Hypothesis Testing</a> or the <a href="https://en.wikipedia.org/wiki/Statistical_hypothesis_testing">Wikipedia page</a> to start. For a more in-depth explanation, see Chapter 11 of <a href="https://learningstatisticswithr.com/lsr-0.6.pdf">Learning Statistics with R</a> on hypothesis testing, or ask a friend who has taken AP Statistics.</p>
+</div>
 </div>
 
 <div id="footer">
