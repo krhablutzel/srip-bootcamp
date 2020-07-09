@@ -33,7 +33,7 @@ plot(pressure)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
-```{r}
+```{r, eval = FALSE}
 glimpse(mtcars)
 ```
 
@@ -58,7 +58,7 @@ ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
   )
 ```
 
-```{r}
+```{r, eval = FALSE}
 data()
 ```
 

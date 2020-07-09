@@ -68,9 +68,12 @@ In the bottom right panel, under the Packages tab, the `tidyverse` packages shou
 
 We are going to work with the `mtcars` data set. Let's take a look:
 
-```{r Glimpse}
+```{r Glimpse, eval = FALSE}
+# a summary in the console
 glimpse(mtcars)
-# View(mtcars)
+
+# the whole dataset in a new tab
+View(mtcars)
 ```
 
 
@@ -118,13 +121,13 @@ ggplot(data = mtcars, aes(x = factor(cyl), y = mpg)) +
 
 The `data()` function will show you all your available data sets:
 
-```{r Data}
+```{r Data, eval = FALSE}
 data()
 ```
 
 The `iris` data set is a famous data set used in machine learning classes. Let's take a look at the documentation:
 
-```{r Iris}
+```{r Iris, eval = FALSE}
 ?iris
 ```
 

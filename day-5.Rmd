@@ -14,5 +14,10 @@ knitr::opts_chunk$set(
 library(tidyverse)
 ```
 
-## Page Under Construction
+# Page Under Construction
 
+## GitHub
+
+What is Git?
+Terminal or GitHub Desktop
+straight from RStudio

@@ -17,8 +17,6 @@ library(sf)
 library(leaflet)
 ```
 
-## Page Under Construction
-
 ## Getting Started
 
 Here is the recording of today's lesson (*coming soon*). (This is only accessible within the NCSSM organization.) You can also follow along with the code below.
@@ -27,7 +25,6 @@ Today we will:
 
 * Create static maps using `sf` and `ggplot2`
 * Create interactive maps using `leaflet`
-* Learn version control with GitHub
 
 You'll need to install the `sf` and `leaflet` packages for later in the lesson. The `sf` package has multiple external dependencies, so pay close attention to any error messages during your install.
 
@@ -214,16 +211,41 @@ NC %>%
              popup = ~name)
 ```
 
+## Computations with Spatial Data
 
-## GitHub
+Under construction (sorry)
 
-What is Git?
-Terminal or GitHub Desktop
-straight from RStudio
+```{r, eval = FALSE, include = FALSE}
+counties %>%
+  st_area()
+```
+
+returned vector, so add to data frame
+
+```{r, eval = FALSE, include = FALSE}
+counties <- counties %>%
+  mutate(area = st_area(geometry))
+```
+
+```{r, eval = FALSE, include = FALSE}
+counties <- counties %>%
+  mutate(area_acres = st_area(geometry) / 4046.86)
+```
+
+
+```{r, eval = FALSE, include = FALSE}
+library(units)
+
+counties %>%
+  mutate(hectares = st_area() %>%
+                    set_units(ha)) # doesn't support acres
+```
+
+See documentation for [units](https://r-spatial.github.io/sf/articles/sf1.html#units)
 
 ## Challenges for Next Week
 
-Let's apply what we just learned! For next week, try to
+Let's apply what we just learned! For next week, try to copy these maps: (coming soon)
 
 As always, please Slack me throughout the week with any questions! I'll reveal the code for these challenges next week.
 
