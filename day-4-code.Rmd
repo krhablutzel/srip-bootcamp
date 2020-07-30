@@ -1,0 +1,107 @@
+---
+title: "Day 4 Maps!"
+author: "Kathleen Hablutzel"
+date: "7/9/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(sf)
+```
+
+```{r}
+counties <- read_sf("./data/NC_counties-shp")
+```
+
+```{r}
+glimpse(counties)
+```
+
+```{r}
+library(RColorBrewer)
+
+ggplot(data = counties, aes(fill = ACRES)) +
+  geom_sf() +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    rect = element_blank()
+  ) +
+  labs(
+    title = "North Carolina Counties",
+    fill = "Acres"
+  ) +
+  scale_fill_distiller(palette = "Purples")
+```
+
+```{r}
+# leaflet
+library(leaflet)
+
+leaflet(data = counties) %>%
+  addTiles() %>%
+  addPolygons()
+```
+
+
+```{r}
+st_crs(counties)
+```
+
+```{r}
+counties_4326 <- counties %>%
+  st_transform(4326)
+```
+
+```{r}
+st_crs(counties_4326)
+```
+
+```{r}
+# leaflet
+library(leaflet)
+
+leaflet(data = counties_4326) %>%
+  addTiles() %>%
+  addPolygons()
+```
+
+```{r}
+ncssm <- tribble(
+  ~lat, ~lon, ~name,
+  36.02, -78.92, "Durham",
+  35.73, -81.69, "Morganton"
+)
+```
+
+```{r}
+leaflet() %>%
+  addTiles() %>%
+  addPolygons(data = counties_4326,
+              label = ~CO_NAME) %>%
+  addMarkers(data = ncssm,
+             popup = ~name)
+```
+
+```{r}
+library(RColorBrewer)
+
+pal <- colorNumeric(
+  palette = "Purples",
+  domain = counties_4326$ACRES
+)
+```
+
+```{r}
+leaflet() %>%
+  addTiles() %>%
+  addPolygons(data = counties_4326,
+              label = ~CO_NAME,
+              color = ~pal(ACRES),
+              fillOpacity = 0.8) %>%
+  addMarkers(data = ncssm,
+             popup = ~name)
+```
+

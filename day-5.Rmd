@@ -18,6 +18,8 @@ library(tidyverse)
 
 ## GitHub
 
+https://happygitwithr.com/
+
 What is Git?
 Terminal or GitHub Desktop
 straight from RStudio

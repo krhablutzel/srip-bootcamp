@@ -402,3 +402,7 @@ Deleted branch add-theme-and-navbar (was 6c00726).
 [33mfc2c9bf[m Add page for day 1[m
 [33md5e2c3e[m Initial commit[m
 [K[?1l>]0;~/Desktop/SRIP/srip-bootcampKathleens-MBP:srip-bootcamp krh$ 
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+[KKathleens-MBP:srip-bootcamp krh$ [KKathleens-MBP:srip-bootcamp krh$ [KKathleens-MBP:srip-bootcamp krh$ [KKathleens-MBP:srip-bootcamp krh$ [KKathleens-MBP:srip-bootcamp krh$ [KKathleens-MBP:srip-bootcamp krh$ [KKathleens-MBP:srip-bootcamp krh$ 

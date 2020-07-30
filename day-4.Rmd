@@ -30,7 +30,7 @@ You'll need to install the `sf` and `leaflet` packages for later in the lesson. 
 
 #### Notes Moving Forward
 
-**Schedule:** Next week will be our last week of content. We will cover assorted R programming concepts, such as functions and iteration, and we might need to push our GitHub lesson to next week if we spend too long mapping.
+**Schedule:** Next week will be our last week of content. We will cover version control with GitHub and assorted R programming concepts, such as functions and iteration.
 
 **Resources:** I am compiling a list of further R references and resources, as well as an FAQ from student questions throughout this course.
 
@@ -232,7 +232,6 @@ counties <- counties %>%
   mutate(area_acres = st_area(geometry) / 4046.86)
 ```
 
-
 ```{r, eval = FALSE, include = FALSE}
 library(units)
 
@@ -242,6 +241,19 @@ counties %>%
 ```
 
 See documentation for [units](https://r-spatial.github.io/sf/articles/sf1.html#units)
+
+Spatial computations
+```{r, eval = FALSE}
+nc_cd_4 <- nc_cd %>%
+  filter(DISTRICT == "4")
+
+
+cd_4 <- counties %>%
+  filter(st_within(geometry, nc_cd, sparse = FALSE) |
+           st_intersects(geometry, nc_cd, sparse = FALSE))
+```
+
+See cheatsheet
 
 ## Challenges for Next Week
 

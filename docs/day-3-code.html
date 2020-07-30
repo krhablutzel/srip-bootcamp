@@ -585,7 +585,7 @@ div.tocify {
 ##     }
 ##     invisible(names)
 ## }
-## &lt;bytecode: 0x1094b1190&gt;
+## &lt;bytecode: 0x109ad6d20&gt;
 ## &lt;environment: namespace:utils&gt;</code></pre>
 <pre class="r"><code>tall &lt;- starwars %&gt;%
   filter(height &gt; 80)</code></pre>
@@ -627,6 +627,72 @@ with_bmi &lt;- with_bmi %&gt;%
             min_birth = min(birth_year, na.rm = TRUE)) %&gt;%
   arrange(desc(num_characters)) %&gt;%
   head(5)</code></pre>
+<pre><code>## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf
+
+## Warning in min(birth_year, na.rm = TRUE): no non-missing arguments to min;
+## returning Inf</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre class="r"><code>untidy_wide &lt;- tribble(
   ~country, ~`2018`, ~`2019`,
   &quot;USA&quot;, 306.8, 328.2,
@@ -668,7 +734,7 @@ untidy_long</code></pre>
 
 <div id="footer">
   <hr>
-  <p>See the <a href="https://github.com/krhablutzel/srip-bootcamp">GitHub repo</a>.</p>
+  <p>See the <a href="https://github.com/krhablutzel/srip-bootcamp">GitHub repo</a>, or check out my <a href="https://krhablutzel.github.io">personal website</a>.</p>
   <p><b>Credit:</b> Course and website by Kathleen Hablutzel, NCSSM '19, Smith College SDS+CS '23.</p>
   <p>Almost everything I share, I learned from Smith College's SDS 192 Introduction to Data Science course by <a href="http://www.science.smith.edu/~bbaumer/w/">Ben Baumer</a> and <a href="http://www.science.smith.edu/~jcrouser/">R. Jordan Crouser</a>.</p>
 </div>
