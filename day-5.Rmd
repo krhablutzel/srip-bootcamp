@@ -14,12 +14,11 @@ knitr::opts_chunk$set(
 library(tidyverse)
 ```
 
-# Page Under Construction
 
 ## GitHub
 
-https://happygitwithr.com/
+See [this week's recording](https://ncssm.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=99d735ef-7937-459b-b570-abfb0012b321) for today's lesson. (This is only accessible within the NCSSM organization.)
 
-What is Git?
-Terminal or GitHub Desktop
-straight from RStudio
+Also, check out this resource:
+
+https://happygitwithr.com/

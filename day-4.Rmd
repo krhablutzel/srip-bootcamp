@@ -19,7 +19,7 @@ library(leaflet)
 
 ## Getting Started
 
-Here is the recording of today's lesson (*coming soon*). (This is only accessible within the NCSSM organization.) You can also follow along with the code below.
+Here is the [recording of today's lesson](https://ncssm.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=62144a79-8940-4b34-a961-abf400133bf9). (This is only accessible within the NCSSM organization.) You can also follow along with the code below.
 
 Today we will:
 
