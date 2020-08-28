@@ -40,6 +40,8 @@ data_art
 
 - Data Visualization
 - Data Wrangling
+- Spatial Analysis
+- Verson Control with Git and GitHub
 
 #### Tools
 - R, RStudio, Tidyverse Packages
@@ -47,7 +49,9 @@ data_art
 
 My goal is to expose you to the first half of a college-level Introduction to Data Science course. We'll meet once a week to code together (Thursday nights at 8), and then I will provide additional resources if you'd like to delve deeper on each topic.
 
-*Note: You are welcome at all five weeks of SRIP social activities even if your program is shorter than 5 weeks. I will have content for all 5 weeks of SRIP, but I will also provide a reasonable conclusion for those who want to stop after 3 weeks.*
+## Note to Future Students
+
+**I taught this course to rising high school seniors in the 2020 Summer Research & Innovation Program at NCSSM. It is designed to serve as an introduction to data science and R programming over a series of 5 lectures and lessons. If you have any comments, questions, suggestions, etc. in the future, I recommend visiting my [personal website](https://krhablutzel.github.io/contact.html) for my most up-to-date contact information.**
 
 ## Getting Started
 
